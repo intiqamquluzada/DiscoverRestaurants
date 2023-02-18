@@ -81,16 +81,16 @@
                     <div class="topbar-item topbar-item-left">
                         <ul class="social-list">
                             <li>
-                                <a href="https://www.facebook.com/" target="_blank"><i class="flaticon-facebook"></i></a>
+                                <a href="{% static 'https://www.facebook.com/' %}" target="_blank"><i class="flaticon-facebook"></i></a>
                             </li>
                             <li>
-                                <a href="https://www.instagram.com/" target="_blank"><i class="flaticon-instagram"></i></a>
+                                <a href="{% static 'https://www.instagram.com/' %}" target="_blank"><i class="flaticon-instagram"></i></a>
                             </li>
                             <li>
-                                <a href="https://twitter.com/" target="_blank"><i class="flaticon-twitter"></i></a>
+                                <a href="{% static 'https://twitter.com/' %}" target="_blank"><i class="flaticon-twitter"></i></a>
                             </li>
                             <li>
-                                <a href="https://linkedin.com/" target="_blank"><i class="flaticon-linkedin"></i></a>
+                                <a href="{% static 'https://linkedin.com/' %}" target="_blank"><i class="flaticon-linkedin"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -259,10 +259,10 @@
                                 </div>
     
                                  <div class="navbar-option-item">
-                                    <a href="authentication.html" class="btn btn-primary">Giriş <i class="flaticon-right-arrow"></i></a>
+                                    <a href="{% url 'accounts:login_user' %}" class="btn btn-primary">Giriş <i class="flaticon-right-arrow"></i></a>
                                 </div> &nbsp; &nbsp; &nbsp; &nbsp;
                                  <div class="navbar-option-item">
-                                    <a href="authentication.html" class="btn btn-warning">Sahibkar kimi giriş <i class="flaticon-right-arrow"></i></a>
+                                    <a href="{% url 'accounts:login_owner' %}" class="btn btn-warning">Sahibkar kimi giriş <i class="flaticon-right-arrow"></i></a>
                                 </div>
                             </div>
                         </nav>

@@ -253,10 +253,10 @@
                                 </div>
 
                                  <div class="navbar-option-item">
-                                    <a href="authentication.html" class="btn btn-primary">Giriş <i class="flaticon-right-arrow"></i></a>
+                                    <a href="{% url 'accounts:login_user' %}" class="btn btn-primary">Giriş <i class="flaticon-right-arrow"></i></a>
                                 </div> &nbsp; &nbsp; &nbsp; &nbsp;
                                  <div class="navbar-option-item">
-                                    <a href="authentication.html" class="btn btn-warning">Sahibkar kimi giriş <i class="flaticon-right-arrow"></i></a>
+                                    <a href="{% url 'accounts:login_owner' %}" class="btn btn-warning">Sahibkar kimi giriş <i class="flaticon-right-arrow"></i></a>
                                 </div>
                             </div>
                         </nav>

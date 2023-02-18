@@ -11,31 +11,34 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
         <title>Traip - Travel & Tour Booking HTML Template</title>
-        <link rel="icon" href="assets/images/favicon.png" type="image/png" sizes="16x16">
+        <link rel="icon" href="{% static 'assets/images/favicon.png' %}" type="image/png" sizes="16x16">
 
         <!-- bootstrap css -->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" type="text/css" media="all" />
         <!-- animate css -->
-        <link rel="stylesheet" href="assets/css/animate.min.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}" type="text/css" media="all" />
         <!-- owl carousel css -->
-        <link rel="stylesheet" href="assets/css/owl.carousel.min.css"  type="text/css" media="all" />
-        <link rel="stylesheet" href="assets/css/owl.theme.default.min.css"  type="text/css" media="all" />
+        <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}"  type="text/css" media="all" />
+        <link rel="stylesheet" href="{% static 'assets/css/owl.theme.default.min.css' %}"  type="text/css" media="all" />
         <!-- meanmenu css -->
-        <link rel="stylesheet" href="assets/css/meanmenu.min.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="{% static 'assets/css/meanmenu.min.css' %}" type="text/css" media="all" />
         <!-- jquery ui css -->
-        <link rel="stylesheet" href="assets/css/jquery-ui.min.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="{% static 'assets/css/jquery-ui.min.css' %}" type="text/css" media="all" />
         <!-- selectize css -->
-        <link rel="stylesheet" href="assets/css/selectize.min.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="{% static 'assets/css/selectize.min.css' %}" type="text/css" media="all" />
         <!-- magnific popup css -->
-        <link rel="stylesheet" href="assets/css/magnific-popup.min.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.min.css' %}" type="text/css" media="all" />
         <!-- icofont css -->
-        <link rel='stylesheet' href='assets/css/icofont.min.css' type="text/css" media="all" />
+        <link rel='stylesheet' href="{% static 'assets/css/icofont.min.css' %}" type="text/css" media="all" />
         <!-- flaticon css -->
-        <link rel='stylesheet' href='assets/css/flaticon.css' type="text/css" media="all" />
+        <link rel='stylesheet' href="{% static 'assets/css/flaticon.css' %}" type="text/css" media="all" />
         <!-- style css -->
-        <link rel="stylesheet" href="assets/css/style.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" type="text/css" media="all" />
         <!-- responsive css -->
-        <link rel="stylesheet" href="assets/css/responsive.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}" type="text/css" media="all" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     </head>
 
     <body>
@@ -57,64 +60,7 @@
         </div>
         <!-- .end preloader -->
         <!-- Topbar -->
-        <div class="topbar">
-            <div class="container position-relative z-index-1">
-                <div class="row align-items-center">
-                    <div class="topbar-item topbar-item-left">
-                        <ul class="social-list">
-                            <li>
-                                <a href="https://www.facebook.com/" target="_blank"><i class="flaticon-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.instagram.com/" target="_blank"><i class="flaticon-instagram"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/" target="_blank"><i class="flaticon-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://linkedin.com/" target="_blank"><i class="flaticon-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="topbar-item justify-content-end">
-                        <ul class="topbar-action">
-                            <li>
-                                <i class="flaticon-mail"></i>
-                                <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#7b131e1717143b0f091a120b55181416"><span class="__cf_email__" data-cfemail="e9818c858586a99d9b888099c78a8684">[email&#160;protected]</span></a>
-                            </li>
-                            <li>
-                                <i class="flaticon-telephone"></i>
-                                <a href="tel:+44-5346-338">+44 5346 338</a>
-                            </li>
-                            <li>
-                                <i class="flaticon-address"></i>
-                                3 Edgar Buildings, England, BA1 2FJ.
-                            </li>
-                        </ul>
-                        <div class="dropdown language-option"> <!-- "language-option" class is used for language switcher -->
-                            <button class="dropdown-toggle" type="button" id="language1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="flaticon-worldwide"></i>
-                                <span class="lang-name"></span>  <!-- "lang-name" class is used for language switcher -->
-                            </button>
-                            <div class="dropdown-menu language-dropdown-menu" aria-labelledby="language1">  <!-- "language-dropdown-menu" class is used for language switcher -->
-                                <a class="dropdown-item" href="#">
-                                    <img src="assets/images/uk.png" alt="flag">
-                                    English
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <img src="assets/images/china.png" alt="flag">
-                                    简体中文
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <img src="assets/images/uae.png" alt="flag">
-                                    العربيّة
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <!-- Topbar -->
         <!-- Navbar -->
         <div class="fixed-top">
@@ -122,8 +68,8 @@
                 <div class="container">
                     <div class="mobile-nav">
                         <a href="index.html" class="mobile-brand">
-                            <img src="assets/images/logo.png" alt="logo" class="logo default-logo">
-                            <img src="assets/images/logo-default-color.png" alt="logo" class="sticky-logo">
+                            <img src="{% static 'assets/images/logo.png' %}" alt="logo" class="logo default-logo">
+                            <img src="{% static 'assets/images/logo-default-color.png' %}" alt="logo" class="sticky-logo">
                         </a>
                         <div class="navbar-option">
                             <div class="navbar-option-item">
@@ -135,28 +81,7 @@
                                         <!-- "mobile-option-dropdown" class is used for all options -->
                                         <div class="mobile-option-dropdown">
                                             <ul class="navbar-option-list">
-                                                <li>
-                                                    <div class="navbar-language dropdown language-option"> <!-- "language-option" class is used for language switcher -->
-                                                        <button class="dropdown-toggle" type="button" id="language2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="flaticon-worldwide"></i>
-                                                            <span class="lang-name"></span>  <!-- "lang-name" class is used for language switcher -->
-                                                        </button>
-                                                        <div class="dropdown-menu language-dropdown-menu" aria-labelledby="language2">  <!-- "language-dropdown-menu" class is used for language switcher -->
-                                                            <a class="dropdown-item" href="#">
-                                                                <img src="assets/images/uk.png" alt="flag">
-                                                                English
-                                                            </a>
-                                                            <a class="dropdown-item" href="#">
-                                                                <img src="assets/images/china.png" alt="flag">
-                                                                简体中文
-                                                            </a>
-                                                            <a class="dropdown-item" href="#">
-                                                                <img src="assets/images/uae.png" alt="flag">
-                                                                العربيّة
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </li>
+
                                                 <li>
                                                     <a href="#" class="page-search-btn">
                                                         <i class="flaticon-searching"></i>
@@ -181,20 +106,7 @@
                                                 <i class="flaticon-worldwide"></i>
                                                 <span class="lang-name"></span>  <!-- "lang-name" class is used for language switcher -->
                                             </button>
-                                            <div class="dropdown-menu language-dropdown-menu" aria-labelledby="language3">  <!-- "language-dropdown-menu" class is used for language switcher -->
-                                                <a class="dropdown-item" href="#">
-                                                    <img src="assets/images/uk.png" alt="flag">
-                                                    English
-                                                </a>
-                                                <a class="dropdown-item" href="#">
-                                                    <img src="assets/images/china.png" alt="flag">
-                                                    简体中文
-                                                </a>
-                                                <a class="dropdown-item" href="#">
-                                                    <img src="assets/images/uae.png" alt="flag">
-                                                    العربيّة
-                                                </a>
-                                            </div>
+
                                         </div>
                                     </li>
                                     <li class="d-none d-md-inline-block">
@@ -227,175 +139,77 @@
                     <div class="container">
                         <nav class="navbar navbar-expand-md navbar-light">
                             <a class="navbar-brand" href="index.html">
-                                <img src="assets/images/logo.png" alt="logo" class="logo default-logo">
-                                <img src="assets/images/logo-default-color.png" alt="logo" class="sticky-logo">
+                                <img src="{% static 'assets/images/logo.png' %}" alt="logo" class="logo default-logo">
+                                <img src="{% static 'assets/images/logo-default-color.png' %}" alt="logo" class="sticky-logo">
                             </a>
-                            <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+                            <div class="collapse navbar-collapse mean-menu " id="navbarSupportedContent">
                                 <ul class="navbar-nav mx-auto">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link dropdown-toggle">Home</a>
-                                        <ul class="dropdown-menu">
-                                            <li class="nav-item">
-                                                <a href="index.html" class="nav-link">Home Demo 1</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="index-2.html" class="nav-link">Home Demo 2</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="index-3.html" class="nav-link">Home Demo 3</a>
-                                            </li>
-                                        </ul>
+                                        <a href="{% url 'booking:home' %}" class="nav-link  active">Ana səhifə</a>
+
                                     </li>
+
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link dropdown-toggle active">Pages</a>
-                                        <ul class="dropdown-menu">
-                                            <li class="nav-item">
-                                                <a href="about-us.html" class="nav-link">About Us</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="faqs.html" class="nav-link">FAQ's</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="get-in-touch.html" class="nav-link">Get In Touch</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="#" class="nav-link dropdown-toggle active">Products</a>
-                                                <ul class="dropdown-menu">
-                                                    <li class="nav-item">
-                                                        <a href="products.html" class="nav-link">Products</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="single-product.html" class="nav-link">Single Product</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="cart.html" class="nav-link">Cart</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="checkout.html" class="nav-link active">Checkout</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="wishlist.html" class="nav-link">Wishlist</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="#" class="nav-link dropdown-toggle">Hotels</a>
-                                                <ul class="dropdown-menu">
-                                                    <li class="nav-item">
-                                                        <a href="hotels.html" class="nav-link">Hotels</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="single-hotel.html" class="nav-link">Single Hotel</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="team.html" class="nav-link">Our Team</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="who-we-are.html" class="nav-link">Who We Are</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="#" class="nav-link dropdown-toggle">Users</a>
-                                                <ul class="dropdown-menu">
-                                                    <li class="nav-item">
-                                                        <a href="authentication.html" class="nav-link">Authentication</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="forget-password.html" class="nav-link">Forget Password</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="my-account.html" class="nav-link">My Account</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="my-orders.html" class="nav-link">My Orders</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="my-addresses.html" class="nav-link">My Addresses</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="nav-item">
+                                        <a href="{% url 'booking:list' %}" class="nav-link">Restoranlar</a>
+
+                                            <!-- <li class="nav-item">
                                                 <a href="#" class="nav-link dropdown-toggle">Others</a>
-                                                <ul class="dropdown-menu">
-                                                    <li class="nav-item">
-                                                        <a href="404.html" class="nav-link">404 Error Page</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="coming-soon-page.html" class="nav-link">Coming Soon</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="terms-conditions.html" class="nav-link">Terms & Conditions</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="privacy-policy.html" class="nav-link">Privacy Policy</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="search-page.html" class="nav-link">Search Page</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
+
+
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link dropdown-toggle">Destinations</a>
-                                        <ul class="dropdown-menu">
-                                            <li class="nav-item">
-                                                <a href="destination.html" class="nav-link">Destinations</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="single-destination.html" class="nav-link">Single Destination</a>
-                                            </li>
-                                        </ul>
+                                        <a href="#" class="nav-link ">Rezervasiya</a>
+
                                     </li>
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                         <a href="#" class="nav-link dropdown-toggle">Tours</a>
                                         <ul class="dropdown-menu">
                                             <li class="nav-item">
-                                                <a href="tour.html" class="nav-link">Tours</a>
+                                                <a href="list.html" class="nav-link">Tours</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="single-tour.html" class="nav-link">Single Tour</a>
+                                                <a href="single-list.html" class="nav-link">Single Tour</a>
                                             </li>
                                         </ul>
-                                    </li>
+                                    </li> -->
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link dropdown-toggle">Blogs</a>
-                                        <ul class="dropdown-menu">
-                                            <li class="nav-item">
-                                                <a href="blog.html" class="nav-link">Blogs Two Column</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="blogs-full.html" class="nav-link">Blogs Full</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="single-blog.html" class="nav-link">Single Blog</a>
-                                            </li>
-                                        </ul>
+                                        <a href="{% url 'booking:blog' %}" class="nav-link ">Blog</a>
+
                                     </li>
+
                                     <li class="nav-item">
-                                        <a href="contact.html" class="nav-link">Contact</a>
+                                        <a href="{% url 'booking:contact' %}" class="nav-link">Əlaqə</a>
                                     </li>
                                 </ul>
                             </div>
                             <div class="navbar-option">
                                 <div class="navbar-option-item">
                                     <ul class="navbar-option-list">
+<!--                                        <li>-->
+<!--                                            <a href="#" class="page-search-btn">-->
+<!--                                                <i class="flaticon-searching"></i>-->
+<!--                                            </a>-->
+<!--                                        </li>-->
                                         <li>
-                                            <a href="#" class="page-search-btn">
-                                                <i class="flaticon-searching"></i>
+                                            <a href="{% url 'booking:reserved' %}">
+                                                <i class="flaticon-shopping-bag"></i>
+                                                <span class="option-badge">2</span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="cart.html">
-                                                <i class="flaticon-shopping-bag"></i>
+                                          <li>
+                                            <a href="{% url 'booking:saved' %}">
+                                                <i class="fa-solid fa-bookmark"></i>
                                                 <span class="option-badge">2</span>
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="navbar-option-item">
-                                    <a href="authentication.html" class="btn main-btn main-btn-arrow">Registration <i class="flaticon-right-arrow"></i></a>
+
+                                 <div class="navbar-option-item">
+                                    <a href="{% url 'accounts:login_user' %}" class="btn btn-primary">Giriş <i class="flaticon-right-arrow"></i></a>
+                                </div> &nbsp; &nbsp; &nbsp; &nbsp;
+                                 <div class="navbar-option-item">
+                                    <a href="{% url 'accounts:login_owner' %}" class="btn btn-warning">Sahibkar kimi giriş <i class="flaticon-right-arrow"></i></a>
                                 </div>
                             </div>
                         </nav>
@@ -425,7 +239,7 @@
         <section class="checkout-section pt-100 pb-70 position-relative">
             <div class="map-shapes">
                 <div class="map-shape map-shape-2 map-shape-vertical-center">
-                    <img src="assets/images/shapes/map-2.png" alt="shape">
+                    <img src="{% static 'assets/images/shapes/map-2.png' %}" alt="shape">
                 </div>
             </div>
             <div class="container">
@@ -550,7 +364,7 @@
                                         <div class="cart-total-item-info">
                                             <div class="product-table-thumb">
                                                 <div class="cart-product-number">2</div>
-                                                <img src="assets/images/products/product-1.jpg" alt="product">
+                                                <img src="{% static 'assets/images/products/product-1.jpg' %}" alt="product">
                                             </div>
                                             <h4>Travel Shoe</h4>
                                         </div>
@@ -560,7 +374,7 @@
                                         <div class="cart-total-item-info">
                                             <div class="product-table-thumb">
                                                 <div class="cart-product-number">1</div>
-                                                <img src="assets/images/products/product-2.jpg" alt="product">
+                                                <img src="{% static 'assets/images/products/product-2.jpg' %}" alt="product">
                                             </div>
                                             <h4>Travel Bag</h4>
                                         </div>
@@ -651,7 +465,7 @@
                         <div class="col-sm-6 col-md-6 col-lg-3">
                             <div class="footer-content-item">
                                 <div class="footer-logo">
-                                    <a href="index.html"><img src="assets/images/logo-black.png" alt="logo"></a>
+                                    <a href="index.html"><img src="{% static 'assets/images/logo-black.png' %}" alt="logo"></a>
                                 </div>
                                 <ul class="footer-details footer-address">
                                     <li>
@@ -726,15 +540,15 @@
                                     <ul class="footer-gallery">
                                         <li>
                                             <a href="https://www.instagram.com/">
-                                            <img src="assets/images/instafeed/instafeed-1.jpg" alt="insta"></a>
+                                            <img src="{% static 'assets/images/instafeed/instafeed-1.jpg' %}" alt="insta"></a>
                                         </li>
                                         <li>
                                             <a href="https://www.instagram.com/">
-                                            <img src="assets/images/instafeed/instafeed-2.jpg" alt="insta"></a>
+                                            <img src="{% static 'assets/images/instafeed/instafeed-2.jpg' %}" alt="insta"></a>
                                         </li>
                                         <li>
                                             <a href="https://www.instagram.com/">
-                                            <img src="assets/images/instafeed/instafeed-3.jpg" alt="insta"></a>
+                                            <img src="{% static 'assets/images/instafeed/instafeed-3.jpg' %}" alt="insta"></a>
                                         </li>
                                         <li>
                                             <a href="https://www.instagram.com/">
@@ -793,7 +607,7 @@
                     <div class="topbar-sidebar-header">
                         <div class="topbar-sidebar-brand">
                             <a href="index.html">
-                                <img src="assets/images/logo-default-color.png" alt="logo">
+                                <img src="{% static 'assets/images/logo-default-color.png' %}" alt="logo">
                             </a>
                         </div>
                         <div class="topbar-sidebar-close">
@@ -846,7 +660,7 @@
                     <i class="flaticon-close"></i>
                 </div>
                 <div class="searchbar-form">
-                    <img src="assets/images/logo.png" alt="logo">
+                    <img src="{% static 'assets/images/logo.png' %}" alt="logo">
                     <form>
                         <div class="form-group">
                             <input type="text" placeholder="Search*" class="form-control" required>
@@ -868,26 +682,26 @@
 
 
         <!-- essential js -->
-        <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.6.0.min.js"></script>
-        <script src="assets/js/bootstrap.bundle.min.js"></script>
+        <script data-cfasync="false" src="{% static '../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js' %}"></script><script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+        <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
         <!-- jquery ui js -->
-        <script src="assets/js/jquery-ui.js"></script>
+        <script src="{% static 'assets/js/jquery-ui.js' %}"></script>
         <!-- selectize js -->
-        <script src="assets/js/selectize.min.js"></script>
+        <script src="{% static 'assets/js/selectize.min.js' %}"></script>
         <!-- magnific popup js -->
-        <script src="assets/js/jquery.magnific-popup.min.js"></script>
+        <script src="{% static 'assets/js/jquery.magnific-popup.min.js' %}"></script>
         <!-- owl carousel js -->
-        <script src="assets/js/owl.carousel.min.js"></script>
+        <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
         <!-- form ajazchimp js -->
-        <script src="assets/js/jquery.ajaxchimp.min.js"></script>
+        <script src="{% static 'assets/js/jquery.ajaxchimp.min.js' %}"></script>
         <!-- form validator js  -->
-        <script src="assets/js/form-validator.min.js"></script>
+        <script src="{% static 'assets/js/form-validator.min.js' %}"></script>
         <!-- contact form js -->
-        <script src="assets/js/contact-form-script.js"></script>
+        <script src="{% static 'assets/js/contact-form-script.js' %}"></script>
         <!-- meanmenu js -->
-        <script src="assets/js/jquery.meanmenu.min.js"></script>
+        <script src="{% static 'assets/js/jquery.meanmenu.min.js' %}"></script>
         <!-- main js -->
-        <script src="assets/js/script.js"></script>
+        <script src="{% static 'assets/js/script.js' %}"></script>
     </body>
 
 <!-- Mirrored from templates.envytheme.com/traip/default/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Feb 2023 21:32:01 GMT -->

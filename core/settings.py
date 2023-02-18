@@ -29,6 +29,7 @@ INSTALLED_APPS = [
 
     #main apps
     'booking',
+    'accounts',
 
 
     #third-party apps

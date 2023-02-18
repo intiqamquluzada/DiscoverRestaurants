@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Restaurants, CooperationCompanies, Countries, Cities
 import requests
 import json
+from django.shortcuts import render, get_object_or_404, redirect
 
 api_key = "5117dbe9476548a6834433afd9b63554"
 
@@ -133,9 +134,20 @@ def save_restaurants(request):
 
     return render(request, "wishlist.html", context)
 
+
 def reserved_view(request):
     context = {
 
     }
 
     return render(request, "reservation.html", context)
+
+
+def restaurant_detail_view(request, slug):
+    restaurant = get_object_or_404(Restaurants, slug=slug)
+
+    context = {
+
+    }
+
+    return render(request, "restaurant-detail.html", context)

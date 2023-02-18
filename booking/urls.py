@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home_view, about_view, list_view, blog_view, contact_view, save_restaurants, reserved_view
+from .views import home_view, about_view, list_view, blog_view, contact_view, save_restaurants, reserved_view, restaurant_detail_view
 
 
 app_name = "booking"
@@ -11,4 +11,5 @@ urlpatterns = [
     path('contact/', contact_view, name='contact'),
     path('saved/', save_restaurants, name='saved'),
     path('reserved/', reserved_view, name='reserved'),
+    path('restaurant/detail/<slug>/', restaurant_detail_view, name='restaurant_detail')
 ]
