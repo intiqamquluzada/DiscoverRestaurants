@@ -244,13 +244,13 @@
 <!--                                            </a>-->
 <!--                                        </li>-->
                                         <li>
-                                            <a href="cart.html">
+                                            <a href="{% url 'booking:reserved' %}">
                                                 <i class="flaticon-shopping-bag"></i>
                                                 <span class="option-badge">2</span>
                                             </a>
                                         </li>
                                           <li>
-                                            <a href="cart.html">
+                                            <a href="{% url 'booking:saved' %}">
                                                 <i class="fa-solid fa-bookmark"></i>
                                                 <span class="option-badge">2</span>
                                             </a>
@@ -259,10 +259,10 @@
                                 </div>
     
                                  <div class="navbar-option-item">
-                                    <a href="authentication.html" class="btn main-btn main-btn-arrow">Giriş <i class="flaticon-right-arrow"></i></a>
+                                    <a href="authentication.html" class="btn btn-primary">Giriş <i class="flaticon-right-arrow"></i></a>
                                 </div> &nbsp; &nbsp; &nbsp; &nbsp;
                                  <div class="navbar-option-item">
-                                    <a href="authentication.html" class="btn main-btn main-btn-arrow">Sahibkar kimi giriş <i class="flaticon-right-arrow"></i></a>
+                                    <a href="authentication.html" class="btn btn-warning">Sahibkar kimi giriş <i class="flaticon-right-arrow"></i></a>
                                 </div>
                             </div>
                         </nav>
@@ -282,14 +282,14 @@
                  <div class="container">
   <div class="row">
     <div class="col-md-8 offset-md-2">
-      <form>
+                    <form method="get" action="{% url 'booking:list' %}">
         <div class="input-group input-group-lg" style="display: flex; justify-content: center; align-items: center;">
-          <input type="text" class="form-control" placeholder="Region yaxud ölkəni daxil et...">&nbsp;&nbsp;&nbsp;
+          <input type="text" class="form-control" name="q" placeholder="Ölkəni daxil et...">&nbsp;&nbsp;&nbsp;
           <span class="input-group-btn">
-            <button class="btn btn-secondary" type="button">Axtar</button>
+            <button class="btn btn-secondary" type="submit">Axtar</button>
           </span>
         </div>
-      </form>
+                    </form>
     </div>
   </div>
 </div>
@@ -319,7 +319,7 @@
                     <br>
                     <br>
 
-                    <a href="list.html" class="btn main-btn main-btn-arrow">Restoranları kəşf et  <i class="flaticon-right-arrow"></i></a>
+                    <a href="{% url 'booking:list' %}" class="btn main-btn main-btn-arrow">Restoranları kəşf et  <i class="flaticon-right-arrow"></i></a>
                 </div>
             </div>
             <div class="scroll-parallax" id="parallax">

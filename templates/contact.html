@@ -229,13 +229,13 @@
 <!--                                            </a>-->
 <!--                                        </li>-->
                                         <li>
-                                            <a href="cart.html">
+                                            <a href="{% url 'booking:reserved' %}">
                                                 <i class="flaticon-shopping-bag"></i>
                                                 <span class="option-badge">2</span>
                                             </a>
                                         </li>
                                           <li>
-                                            <a href="cart.html">
+                                            <a href="{% url 'booking:saved' %}">
                                                 <i class="fa-solid fa-bookmark"></i>
                                                 <span class="option-badge">2</span>
                                             </a>
@@ -244,10 +244,10 @@
                                 </div>
     
                                  <div class="navbar-option-item">
-                                    <a href="authentication.html" class="btn main-btn main-btn-arrow">Giriş <i class="flaticon-right-arrow"></i></a>
+                                    <a href="authentication.html" class="btn btn-primary">Giriş <i class="flaticon-right-arrow"></i></a>
                                 </div> &nbsp; &nbsp; &nbsp; &nbsp;
                                  <div class="navbar-option-item">
-                                    <a href="authentication.html" class="btn main-btn main-btn-arrow">Sahibkar kimi giriş <i class="flaticon-right-arrow"></i></a>
+                                    <a href="authentication.html" class="btn btn-warning">Sahibkar kimi giriş <i class="flaticon-right-arrow"></i></a>
                                 </div>
                             </div>
                         </nav>
@@ -265,7 +265,7 @@
                     <h1>Contact</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'booking:home' %}">Home</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Contact</li>
                         </ol>
                     </nav>

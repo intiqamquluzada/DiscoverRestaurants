@@ -1,11 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Restaurants, CooperationCompanies, Countries, Cities
 import requests
 import json
 
-api_key = '5117dbe9476548a6834433afd9b63554'
+api_key = "5117dbe9476548a6834433afd9b63554"
 
-api_url = 'https://ipgeolocation.abstractapi.com/v1/?api_key=' + api_key
+api_url = "https://ipgeolocation.abstractapi.com/v1/?api_key=" + api_key
 
 
 def get_ip_geolocation_data(ip_address):
@@ -21,38 +21,44 @@ def get_ip_geolocation_data(ip_address):
 def home_view(request):
     companies_corporation = CooperationCompanies.objects.all()
     rate = Restaurants.objects.all().values_list('rating', flat=True)
+    print(rate)
     popular_restaurants = Restaurants.objects.filter(rating=5)
     countries_list = Countries.objects.all()
 
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
 
     if x_forwarded_for:
 
-        ip = x_forwarded_for.split(',')[0]
+        ip = x_forwarded_for.split(",")[0]
 
     else:
 
-        ip = request.META.get('REMOTE_ADDR')
+        ip = request.META.get("REMOTE_ADDR")
 
     geolocation_json = get_ip_geolocation_data(ip)
 
     geolocation_data = json.loads(geolocation_json)
 
-    country = geolocation_data['country']
+    country = geolocation_data["country"]
+    print(country)
+    region = geolocation_data["region"]
+    print(region)
+    # cont = Countries.objects.filter(name=str(country)).values('slug')
 
-    region = geolocation_data['region']
+    # print(cont)
 
-    cont = Countries.objects.filter(name=str(country)).values('slug')
+    result = Restaurants.objects.all()
 
-    print(cont)
+    search = request.GET.get('q', None)
 
-    result = Restaurants.objects.filter(id__lte=8)
+    print(search)
 
-    city = Cities.objects.filter(country__slug__in=cont)
+    if search:
+        result = Restaurants.objects.filter(country_of_restaurant__name__icontains=search)
 
     context = {
         'countries_list': countries_list,
-        'city': city,
+
         'country': country,
         'region': region,
         'companies': companies_corporation,
@@ -72,23 +78,23 @@ def about_view(request):
 
 
 def list_view(request):
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
 
     if x_forwarded_for:
 
-        ip = x_forwarded_for.split(',')[0]
+        ip = x_forwarded_for.split(",")[0]
 
     else:
 
-        ip = request.META.get('REMOTE_ADDR')
+        ip = request.META.get("REMOTE_ADDR")
 
     geolocation_json = get_ip_geolocation_data(ip)
 
     geolocation_data = json.loads(geolocation_json)
 
-    country = geolocation_data['country']
+    country = geolocation_data["country"]
 
-    region = geolocation_data['region']
+    region = geolocation_data["region"]
 
     cont = Countries.objects.filter(name=str(country)).values('slug')
 
@@ -100,6 +106,7 @@ def list_view(request):
         'region': region,
 
     }
+
     return render(request, 'list.html', context)
 
 
@@ -117,3 +124,18 @@ def contact_view(request):
     }
 
     return render(request, "contact.html", context)
+
+
+def save_restaurants(request):
+    context = {
+
+    }
+
+    return render(request, "wishlist.html", context)
+
+def reserved_view(request):
+    context = {
+
+    }
+
+    return render(request, "reservation.html", context)
