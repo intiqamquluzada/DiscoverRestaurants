@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from .models import Restaurants, CooperationCompanies, Countries, Cities
 import requests
 import json
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 api_key = "5117dbe9476548a6834433afd9b63554"
 
@@ -57,15 +58,30 @@ def home_view(request):
     if search:
         result = Restaurants.objects.filter(country_of_restaurant__name__icontains=search)
 
+    paginator = Paginator(result, 4)
+    page = request.GET.get('page', 1)
+    p = paginator.get_page(page)
+
+    try:
+        p = paginator.page(page)
+    except PageNotAnInteger:
+        p = paginator.page(1)
+    except EmptyPage:
+        p = paginator.page(paginator.num_pages)
+
     context = {
+        'restaurants': result,
+
+        'p': p,
+        'search': search,
         'countries_list': countries_list,
+        'paginator': paginator,
 
         'country': country,
         'region': region,
         'companies': companies_corporation,
         'popular': popular_restaurants,
 
-        'restaurants': result
     }
     return render(request, "index.html", context)
 
@@ -101,7 +117,12 @@ def list_view(request):
 
     result = Restaurants.objects.filter(country_of_restaurant__slug__in=cont)
 
+    paginator = Paginator(result, 2)
+    page = request.GET.get('page', 1)
+    p = paginator.get_page(page)
+
     context = {
+        'p': p,
         'result': result,
         'country': country,
         'region': region,

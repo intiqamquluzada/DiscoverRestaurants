@@ -302,7 +302,7 @@
                 <div class="section-title section-title-lg">
                     <small>Populyar Restoranlar</small>
                     <h2>Sənin regionuna uyğun ən yaxşı restoranlar
-                    {{ country }}-da restoranlar
+                  <div>  {{ country }} restoranları </div>
                     </h2>
 
                 </div>
@@ -312,46 +312,59 @@
 
     <button id="toggle-btn" class="btn btn-primary m-md-5">Filtrlə <i class="fa-solid fa-filter"></i></button>
 	<div id="form-container" style="display: none;">
-<form>
+<form method="get">
     {% csrf_token %}
 		  <div class="form-row">
 		    <div class="form-group col-md-6">
-		      <label for="inputEmail4">Name</label>
-		      <input type="text" class="form-control" id="inputEmail4" placeholder="Name">
+		      <label for="city">Şəhər</label>
+		      <input type="text" name="city" class="form-control" id="city" placeholder="Şəhəri daxil edin: ">
 		    </div>
 
 		  </div>
 
 		  <div class="form-group">
-		    <label for="inputAddress2">Rating</label>
-		    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+
 		  </div>
 		  <div class="form-row">
-		    <div class="form-group col-md-6">
-		      <label for="inputCity">City</label>
-		      <input type="text" class="form-control" id="inputCity">
-		    </div>
+
 		    <div class="form-group col-md-4">
-		      <label for="inputState">Type</label>
-		      <select id="inputState" class="form-control">
-		        <option selected>Choose...</option>
-		        <option>...</option>
-                  <option>...</option>
-                  <option>...</option>
+		      <label for="inputState">Reytinq</label>
+		      <select name="type" id="inputState" class="form-control">
+		        <option selected>Seç</option>
+
+                  <option>5  &#9733;</option>
+                  <option>4  &#9733;</option>
+                  <option>3  &#9733;</option>
+                  <option>2  &#9733;</option>
+                  <option>1  &#9733;</option>
+
+
+		      </select>
+		    </div>
+               <div class="form-group col-md-4">
+		      <label for="inputState2">Restoranın tipi</label>
+		      <select name="rating" id="inputState2" class="form-control">
+		        <option selected>Seç</option>
+
+                  <option>Fast-food</option>
+                  <option>Milli</option>
+                  <option>Ailəvi</option>
+                  <option>Business-lunch</option>
+                  <option>Şirniyyat</option>
+                  <option>Vegetarian</option>
+                  <option>Özünə xidmət</option>
+                  <option>Klub</option>
+
+
 		      </select>
 		    </div>
 		    <div class="form-group col-md-2">
-		      <label for="inputZip">Zip</label>
-		      <input type="text" class="form-control" id="inputZip">
+		      <label for="inputZip">Qonaq sayı</label>
+		      <input type="number" class="form-control" id="inputZip">
 		    </div>
 		  </div>
 		  <div class="form-group">
-		    <div class="form-check">
-		      <input class="form-check-input" type="checkbox" id="gridCheck">
-		      <label class="form-check-label" for="gridCheck">
-		        Check me out
-		      </label>
-		    </div>
+
 		  </div>
 		  <button type="submit" class="btn btn-primary m-md-3">Filtrlə</button>
 		</form>
@@ -375,7 +388,7 @@
 
                 <div class="row">
 
-                    {% for restaurants in result %}
+                    {% for restaurants in p %}
                     <div class="col-md-6 col-lg-4 pb-30">
                         <div class="card-2">
                             <div class="card-2-image">
@@ -448,26 +461,61 @@
                     {% endfor %}
                 </div>
                 <!-- pagination -->
+
                 <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="list.html" aria-label="Previous">
-                                <i class="flaticon-left-chevron" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <li class="page-item active">
-                            <a class="page-link" href="list.html">1</a></li>
-                        <li class="page-item"><a class="page-link" href="list.html">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="list.html">3</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="list.html" aria-label="Next">
-                                <i class="flaticon-right-arrow-angle" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                    </ul>
+              <div class="d-flex justify-content-center">
+
+                <ul class="pagination">
+
+                    {% if p.number > 1 %}
+                <li class="page-item">
+                    <a class="page-link" href="?{% if search %}q={{search}}&{% endif %}page=1">Baş</a>
+                </li>
+                    {% endif %}
+                    {% if p.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?{% if search %}q={{search}}&{% endif %}page={{p.previous_page_number}}">&laquo;</a></li>
+                    {% endif %}
+
+                {% if p.number > 1 %}
+                    <li class="page-item"><a class="page-link" href="?{% if search %}q={{search}}&{% endif %}page={{p.number|add:'-1'}}">
+                        {{p.number|add:"-1"}}
+                        </a>
+                    </li>
+                    {% endif %}
+
+
+                    <li class="page-item active"><a  class="page-link" href="?{% if search %}q={{search}}&{% endif %}page={{p.number}}">
+                        {{p.number}}
+                        </a>
+                    </li>
+                    {% if p.number < p.paginator.num_pages %}
+                    <li class="page-item"><a class="page-link" href="?{% if search %}q={{search}}&{% endif %}page={{p.number|add:'1'}}">
+                        {{p.number|add:"1"}}
+                        </a>
+                    </li>
+                    {% endif %}
+
+
+
+
+
+
+
+                    {% if p.has_next %}
+                    <li class="page-item"><a class="page-link" href="?{% if search %}q={{search}}&{% endif %}page={{p.next_page_number}}">&raquo;</a></li>
+                    {% endif %}
+
+                    {% if p.number < p.paginator.num_pages %}
+                     <li class="page-item">
+                    <a class="page-link" href="?{% if search %}q={{search}}&{% endif %}page={{p.paginator.num_pages}}">Son</a>
+                </li>
+                    {% endif %}
+
+
+
+                </ul>
+
+            </div>
                 </nav>
             </div>
         </section>

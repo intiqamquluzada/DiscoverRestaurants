@@ -34,7 +34,8 @@ INSTALLED_APPS = [
 
     #third-party apps
     'location_field.apps.DefaultConfig',
-    'requests'
+    'requests',
+    'bootstrap_pagination',
 
 ]
 

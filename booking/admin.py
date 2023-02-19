@@ -10,7 +10,7 @@ class ImageInline(admin.StackedInline):
 
 class RestaurantAdmin(admin.ModelAdmin):
     inlines = [ImageInline]
-    list_display = ('name', 'type_r', 'slug')
+    list_display = ('name', 'type_r', 'slug', 'country_of_restaurant')
     list_filter = ('created_at', 'rating')
 
 
