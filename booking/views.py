@@ -58,10 +58,17 @@ def home_view(request):
     if search:
         result = Restaurants.objects.filter(country_of_restaurant__name__icontains=search)
 
+
+    if result.count() == 0:
+        message = "Sənin axtarışına uyğun nəticə tapılmadı"
+        print(message)
+    else:
+        message = ""
+
     paginator = Paginator(result, 4)
     page = request.GET.get('page', 1)
     p = paginator.get_page(page)
-
+    total = Restaurants.objects.all()
     try:
         p = paginator.page(page)
     except PageNotAnInteger:
@@ -69,13 +76,16 @@ def home_view(request):
     except EmptyPage:
         p = paginator.page(paginator.num_pages)
 
+
+
     context = {
         'restaurants': result,
-
+        'total': total,
         'p': p,
         'search': search,
         'countries_list': countries_list,
         'paginator': paginator,
+        'message': message,
 
         'country': country,
         'region': region,
@@ -117,11 +127,50 @@ def list_view(request):
 
     result = Restaurants.objects.filter(country_of_restaurant__slug__in=cont)
 
-    paginator = Paginator(result, 2)
+    rating = str(request.GET.get("rating")).split(" ")[0]
+
+    print(rating)
+
+    print(type(rating))
+
+    city = request.GET.get("city")
+
+    print(city)
+
+    r_type = request.GET.get("type")
+
+    print(r_type)
+
+    count = request.GET.get("count")
+
+    print(count)
+
+    if rating:
+        try:
+            rating = int(rating)
+            result = result.filter(rating=rating)
+        except ValueError:
+            pass
+    if city:
+        result = result.filter(city__icontains=city)
+    if r_type:
+        result = result.filter(type_r=r_type)
+
+    if count:
+        result = result.filter(available_seats__gte=count)
+
+    if result.count() == 0:
+        message = "Sənin axtarışına uyğun nəticə tapılmadı"
+        print(message)
+    else:
+        message = ""
+
+    paginator = Paginator(result, 6)
     page = request.GET.get('page', 1)
     p = paginator.get_page(page)
 
     context = {
+        'message': message,
         'p': p,
         'result': result,
         'country': country,

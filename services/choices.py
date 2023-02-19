@@ -1,10 +1,10 @@
 CHOICES = (
     ('Fast-food', 'Fast-food'),
     ('Milli', 'Milli'),
-    ('Ailevi', 'Ailevi'),
+    ('Ailəvi', 'Ailəvi'),
     ('Business-lunch', 'Business-lunch'),
-    ('Sirniyyat', 'Sirniyyat'),
+    ('Şirniyyat', 'Şirniyyat'),
     ('Vegetarian', 'Vegetarian'),
-    ('Self-service', 'Self-service'),
-    ('Club', 'Club'),
+    ('Özünə xidmət', 'Özünə xidmət'),
+    ('Klub', 'Klub'),
 )

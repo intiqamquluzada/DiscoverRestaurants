@@ -46,6 +46,7 @@ class Restaurants(DateMixin, SlugMixin):
     location = models.TextField()
     description = models.TextField()
     seats = models.IntegerField(null=True, blank=True, default=1)
+    available_seats = models.IntegerField(null=True, blank=True)
 
     class Meta:
         ordering = ("-created_at",)

@@ -313,7 +313,7 @@
     <button id="toggle-btn" class="btn btn-primary m-md-5">Filtrlə <i class="fa-solid fa-filter"></i></button>
 	<div id="form-container" style="display: none;">
 <form method="get">
-    {% csrf_token %}
+
 		  <div class="form-row">
 		    <div class="form-group col-md-6">
 		      <label for="city">Şəhər</label>
@@ -329,8 +329,8 @@
 
 		    <div class="form-group col-md-4">
 		      <label for="inputState">Reytinq</label>
-		      <select name="type" id="inputState" class="form-control">
-		        <option selected>Seç</option>
+		      <select name="rating" id="inputState" class="form-control">
+<option></option>
 
                   <option>5  &#9733;</option>
                   <option>4  &#9733;</option>
@@ -343,10 +343,10 @@
 		    </div>
                <div class="form-group col-md-4">
 		      <label for="inputState2">Restoranın tipi</label>
-		      <select name="rating" id="inputState2" class="form-control">
-		        <option selected>Seç</option>
+		      <select name="type" id="inputState2" class="form-control">
+                <option></option>
 
-                  <option>Fast-food</option>
+                   <option>Fast-food</option>
                   <option>Milli</option>
                   <option>Ailəvi</option>
                   <option>Business-lunch</option>
@@ -356,11 +356,12 @@
                   <option>Klub</option>
 
 
+
 		      </select>
 		    </div>
 		    <div class="form-group col-md-2">
 		      <label for="inputZip">Qonaq sayı</label>
-		      <input type="number" class="form-control" id="inputZip">
+		      <input type="number" name="count" class="form-control" id="inputZip">
 		    </div>
 		  </div>
 		  <div class="form-group">
@@ -380,6 +381,17 @@
 
 
 
+
+
+
+
+
+
+
+                         {% if message %}
+   <h1> <p>{{ message }}</p> </h1>
+                <br><br><br><br><br>
+            {% endif %}
 
 
 

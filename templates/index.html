@@ -366,7 +366,14 @@
                     <h2>Planlaşdır</h2>
                 </div>
                 <div class="row">
+                        {% if message %}
+   <h1> <p>{{ message }}</p> </h1>
+                <br><br><br><br><br>
+            {% endif %}
+
+
                     {% for restaurant in p %}
+
 
                     <div class="col-sm-6 col-lg-4 col-xl-3 pb-30">
                         <div class="card-1">
@@ -457,7 +464,8 @@
                     </div>
 
                     {% endfor %}
-                </div>
+
+
 
             </div>
 
