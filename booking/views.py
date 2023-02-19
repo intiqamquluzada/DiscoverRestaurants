@@ -131,7 +131,7 @@ def list_view(request):
 
     print(rating)
 
-    print(type(rating))
+
 
     city = request.GET.get("city")
 
