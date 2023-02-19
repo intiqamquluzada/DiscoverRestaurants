@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Restaurants, RestaurantImages, CooperationCompanies, Countries, Cities
+from .models import Restaurants, RestaurantImages, CooperationCompanies, Countries, Cities, BlogModel
 
 
 class ImageInline(admin.StackedInline):
@@ -15,7 +15,7 @@ class RestaurantAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Restaurants, RestaurantAdmin)
-
+admin.site.register(BlogModel)
 admin.site.register(CooperationCompanies)
 admin.site.register(Countries)
 admin.site.register(Cities)

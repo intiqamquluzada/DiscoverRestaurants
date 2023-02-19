@@ -4,6 +4,10 @@ from services.uploader import Uploader
 from services.mixin import DateMixin, SlugMixin
 from services.generator import Generator
 from django.core.validators import MaxValueValidator, MinValueValidator
+from ckeditor.fields import RichTextField
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class Countries(DateMixin, SlugMixin):
@@ -24,7 +28,7 @@ class Countries(DateMixin, SlugMixin):
 
 
 class Cities(models.Model):
-    name = models.CharField(max_length=100,)
+    name = models.CharField(max_length=100, )
     country = models.ForeignKey(Countries, on_delete=models.SET_NULL, null=True)
 
     class Meta:
@@ -88,3 +92,18 @@ class CooperationCompanies(DateMixin, SlugMixin):
         if not self.slug:
             self.slug = Generator.create_slug_shortcode(size=15, model_=CooperationCompanies)
         super(CooperationCompanies, self).save(*args, **kwargs)
+
+
+class BlogModel(DateMixin, SlugMixin):
+    name = models.CharField(max_length=200)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, )
+    image = models.ImageField(upload_to=Uploader.upload_images_for_blog)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ("-created_at",)
+        verbose_name = "Blog Model"
+        verbose_name_plural = "Blog models"

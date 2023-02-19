@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'location_field.apps.DefaultConfig',
     'requests',
     'bootstrap_pagination',
+    'ckeditor_uploader',
 
 ]
 
@@ -134,3 +135,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CKEDITOR_UPLOAD_PATH = "uploads/"

@@ -12,4 +12,8 @@ class Uploader:
     def upload_images_for_cooperation(instance, filename):
         return f"companies/{instance.slug}/{filename}"
 
+    @staticmethod
+    def upload_images_for_blog(instance, filename):
+        return f"blog/{instance.slug}/{filename}"
+
 
