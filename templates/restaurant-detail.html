@@ -186,11 +186,11 @@
                             <div class="navbar-option">
                                 <div class="navbar-option-item">
                                     <ul class="navbar-option-list">
-                                        <li>
-                                            <a href="#" class="page-search-btn">
-                                                <i class="flaticon-searching"></i>
-                                            </a>
-                                        </li>
+<!--                                        <li>-->
+<!--                                            <a href="#" class="page-search-btn">-->
+<!--                                                <i class="flaticon-searching"></i>-->
+<!--                                            </a>-->
+<!--                                        </li>-->
                                         <li>
                                             <a href="{% url 'booking:reserved' %}">
                                                 <i class="flaticon-shopping-bag"></i>
@@ -225,12 +225,12 @@
             <!-- header-content -->
             <div class="container">
                 <div class="header-content m-auto">
-                    <h1>Hotel Single</h1>
+                    <h1>{{restaurant.name}} restoranı</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li class="breadcrumb-item"><a href="hotels.html">Hotel Lists</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Hotel Single</li>
+                            <li class="breadcrumb-item"><a href="{% url 'booking:home' %}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'booking:list' %}">Restoranlar</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{restaurant.name}}</li>
                         </ol>
                     </nav>
                 </div>
@@ -252,40 +252,69 @@
                     <div class="row align-items-center">
                         <div class="col-lg-6">
                             <div class="details-card-image-carousel owl-carousel owl-theme default-owl-theme">
-                                <div class="item">
-                                    <img src="{% static 'assets/images/destinations/destination-1.jpg' %}" alt="tour">
+                                {% for i in restaurant.restaurantimages_set.all %}
+                                <div class="item" >
+
+                                    <img src="{{i.images.url}}" alt="tour" style="height: 600px; width: 600px;">
                                 </div>
-                                <div class="item">
-                                    <img src="{% static 'assets/images/destinations/destination-2.jpg' %}" alt="tour">
-                                </div>
-                                <div class="item">
-                                    <img src="{% static 'assets/images/destinations/destination-3.jpg' %}" alt="tour">
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="col-lg-6 desk-pad-left-40">
                             <div class="details-card-content">
                                 <div class="card-2-info">
-                                    <h3>Ikos Olivia</h3>
-                                    <div class="card-2-info-price">$32<span>/Night</span></div>
+                                    <h3>{{restaurant.name}}</h3>
+                                    <div class="card-2-info-price">+<span>/Business lunch</span></div>
                                 </div>
                                 <div class="card-2-reviews">
                                     <ul class="review-star">
-                                        <li class="full-star"><i class="flaticon-star"></i></li>
-                                        <li class="full-star"><i class="flaticon-star"></i></li>
-                                        <li class="full-star"><i class="flaticon-star"></i></li>
-                                        <li class="full-star"><i class="flaticon-star"></i></li>
-                                        <li class="full-star"><i class="flaticon-star"></i></li>
+                                     {% if restaurant.rating == 1 %}
+                                            <li class="full-star"><i class="flaticon-star"></i></li>
+                                            {% endif %}
+
+
+
+                                            {% if restaurant.rating == 2 %}
+                                            <li class="full-star"><i class="flaticon-star"></i></li>
+                                            <li class="full-star"><i class="flaticon-star"></i></li>
+                                            {% endif %}
+
+
+
+                                            {% if restaurant.rating == 3 %}
+                                            <li class="full-star"><i class="flaticon-star"></i></li>
+                                            <li class="full-star"><i class="flaticon-star"></i></li>
+                                            <li class="full-star"><i class="flaticon-star"></i></li>
+                                            {% endif %}
+
+
+
+                                            {% if restaurant.rating == 4 %}
+                                            <li class="full-star"><i class="flaticon-star"></i></li>
+                                            <li class="full-star"><i class="flaticon-star"></i></li>
+                                            <li class="full-star"><i class="flaticon-star"></i></li>
+                                            <li class="full-star"><i class="flaticon-star"></i></li>
+                                            {% endif %}
+
+
+
+                                            {% if restaurant.rating == 5 %}
+                                            <li class="full-star"><i class="flaticon-star"></i></li>
+                                            <li class="full-star"><i class="flaticon-star"></i></li>
+                                            <li class="full-star"><i class="flaticon-star"></i></li>
+                                            <li class="full-star"><i class="flaticon-star"></i></li>
+                                            <li class="full-star"><i class="flaticon-star"></i></li>
+                                            {% endif %}
                                     </ul>
                                     <span>(100 Reviews)</span>
                                 </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <p>{{restaurant.description}}</p>
                                 <div class="details-card-info">
                                     <h4>Hotel Details</h4>
                                     <div class="details-card-info-list">
                                         <div class="details-card-list-item">
                                             <div class="details-card-list-label">Location</div>
-                                            <div class="details-card-list-texts">Denpasar, England</div>
+                                            <div class="details-card-list-texts">{{restaurant.location}}</div>
                                         </div>
                                         <div class="details-card-list-item">
                                             <div class="details-card-list-label">Open</div>
@@ -295,21 +324,19 @@
                                             <div class="details-card-list-label">Close</div>
                                             <div class="details-card-list-texts">12:00 AM</div>
                                         </div>
+
                                         <div class="details-card-list-item">
-                                            <div class="details-card-list-label">Storey</div>
-                                            <div class="details-card-list-texts">5 Storey</div>
-                                        </div>
-                                        <div class="details-card-list-item">
-                                            <div class="details-card-list-label">Waiter</div>
+                                            <div class="details-card-list-label">Service</div>
                                             <div class="details-card-list-texts">24 Hour</div>
                                         </div>
                                         <div class="details-card-list-item">
                                             <div class="details-card-list-label">Available Seat</div>
-                                            <div class="details-card-list-texts">12</div>
+                                            <div class="details-card-list-texts">{{restaurant.available_seats}}</div>
                                         </div>
                                     </div>
                                 </div>
-                                <a href="#" class="btn main-btn main-btn-arrow">Book This Hotel <i class="flaticon-right-arrow"></i></a>
+                                <button type="submit" class="btn btn-warning">Yadda saxla <i class="fa-sharp fa-solid fa-bookmark"></i></button>
+                                <a href="{% url 'booking:reserve' restaurant.slug %}" class="btn btn-success">Rezerv et <i class="fa-solid fa-utensils"></i></a>
                             </div>
                         </div>
                     </div>

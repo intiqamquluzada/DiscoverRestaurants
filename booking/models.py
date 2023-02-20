@@ -4,7 +4,7 @@ from services.uploader import Uploader
 from services.mixin import DateMixin, SlugMixin
 from services.generator import Generator
 from django.core.validators import MaxValueValidator, MinValueValidator
-from ckeditor.fields import RichTextField
+from PIL import Image
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -73,6 +73,14 @@ class RestaurantImages(DateMixin, SlugMixin):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = Generator.create_slug_shortcode(size=15, model_=RestaurantImages)
+
+        if not self.images:
+            img = Image.open(self.images.path)
+            if img.height > 300 or img.width > 300:
+                new_img = (626, 600)
+                img.thumbnail(new_img)
+                img.save(self.images.path)
+
         super(RestaurantImages, self).save(*args, **kwargs)
 
 

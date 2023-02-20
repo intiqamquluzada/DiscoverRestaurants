@@ -33,9 +33,10 @@ INSTALLED_APPS = [
 
 
     #third-party apps
-    'location_field.apps.DefaultConfig',
+    'location_field',
     'requests',
     'bootstrap_pagination',
+    'ckeditor',
     'ckeditor_uploader',
 
 ]

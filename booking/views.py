@@ -160,7 +160,7 @@ def list_view(request):
         result = result.filter(available_seats__gte=count)
 
     if result.count() == 0:
-        message = "Sənin axtarışına uyğun nəticə tapılmadı"
+        message = "Sənin ölkənə yaxud axtarışına uyğun nəticə tapılmadı"
         print(message)
     else:
         message = ""
@@ -210,14 +210,24 @@ def reserved_view(request):
 
     }
 
-    return render(request, "reservation.html", context)
+    return render(request, "reserved.html", context)
 
 
 def restaurant_detail_view(request, slug):
     restaurant = get_object_or_404(Restaurants, slug=slug)
 
     context = {
+        'restaurant': restaurant,
 
     }
 
     return render(request, "restaurant-detail.html", context)
+
+
+def reserve_restaurant(request, slug):
+    restaurant = get_object_or_404(Restaurants, slug=slug)
+    context = {
+        'restaurant': restaurant,
+    }
+
+    return render(request, "reservation.html", context)

@@ -386,7 +386,7 @@
 
 
 
-
+<!--no result -->
 
                          {% if message %}
    <h1> <p>{{ message }}</p> </h1>
@@ -462,9 +462,9 @@
                                     </div>
                                     <div class="card-2-action">
                                         <br>
-                                <button type="submit" class="btn btn-success">Yadda saxla <i class="fa-sharp fa-solid fa-bookmark"></i></button>
+<!--                                <button type="submit" class="btn btn-success">Yadda saxla <i class="fa-sharp fa-solid fa-bookmark"></i></button>-->
 
-                              <button type="submit" class="btn btn-danger">Bron et <i class="fa-solid fa-utensils"></i></button>
+                              <a href="{% url 'booking:restaurant_detail' restaurants.slug %}" class="btn btn-danger">Nəzər yetir <i class="fa-solid fa-utensils"></i></a>
                                     </div>
                                 </div>
                             </div>
