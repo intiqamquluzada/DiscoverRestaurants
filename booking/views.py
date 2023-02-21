@@ -58,7 +58,6 @@ def home_view(request):
     if search:
         result = Restaurants.objects.filter(country_of_restaurant__name__icontains=search)
 
-
     if result.count() == 0:
         message = "Sənin axtarışına uyğun nəticə tapılmadı"
         print(message)
@@ -75,8 +74,6 @@ def home_view(request):
         p = paginator.page(1)
     except EmptyPage:
         p = paginator.page(paginator.num_pages)
-
-
 
     context = {
         'restaurants': result,
@@ -130,8 +127,6 @@ def list_view(request):
     rating = str(request.GET.get("rating")).split(" ")[0]
 
     print(rating)
-
-
 
     city = request.GET.get("city")
 

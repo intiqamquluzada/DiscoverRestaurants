@@ -118,7 +118,7 @@
                                     <li>
                                         <a href="cart.html">
                                             <i class="flaticon-shopping-bag"></i>
-                                            <span class="option-badge">2</span>
+                                            <span class="option-badge">3</span>
                                         </a>
                                     </li>
                                     <li class="d-none d-md-inline-block">
@@ -207,7 +207,7 @@
                                 </div>
 
                                  <div class="navbar-option-item">
-                                    <a href="{% url 'accounts:login_user' %}" class="btn btn-primary">Giriş <i class="flaticon-right-arrow"></i></a>
+                                    <a href="{% url 'accounts:login_user' %}" class="btn btn-primary">Qonaq kimi giriş <i class="flaticon-right-arrow"></i></a>
                                 </div> &nbsp; &nbsp; &nbsp; &nbsp;
                                  <div class="navbar-option-item">
                                     <a href="{% url 'accounts:login_owner' %}" class="btn btn-warning">Sahibkar kimi giriş <i class="flaticon-right-arrow"></i></a>
@@ -228,7 +228,7 @@
                     <h1>{{restaurant.name}} restoranı</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{% url 'booking:home' %}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'booking:home' %}">Ana səhifə</a></li>
                             <li class="breadcrumb-item"><a href="{% url 'booking:list' %}">Restoranlar</a></li>
                             <li class="breadcrumb-item active" aria-current="page">{{restaurant.name}}</li>
                         </ol>
