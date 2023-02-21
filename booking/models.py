@@ -7,6 +7,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from PIL import Image
 from django.contrib.auth import get_user_model
 
+
 User = get_user_model()
 
 
