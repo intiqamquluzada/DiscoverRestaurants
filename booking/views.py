@@ -4,6 +4,9 @@ import requests
 import json
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+import qrcode
+from io import BytesIO
+
 
 api_key = "5117dbe9476548a6834433afd9b63554"
 
@@ -208,11 +211,24 @@ def reserved_view(request):
     return render(request, "reserved.html", context)
 
 
-def restaurant_detail_view(request, slug):
+def restaurant_detail_view(request, slug, data):
     restaurant = get_object_or_404(Restaurants, slug=slug)
+
+    pdf_file_path = ""
+    qr = qrcode.QRCode(version=1, box_size=10, border=5)
+    qr.add_data(pdf_file_path)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color='black', back_color='white')
+
+    buffer = BytesIO()
+    img.save(buffer, 'PNG')
+    image_data = buffer.getvalue()
+
+
 
     context = {
         'restaurant': restaurant,
+        'qr_code': image_data,
 
     }
 

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'bootstrap_pagination',
     'ckeditor',
     'ckeditor_uploader',
+    'qr_code',
 
 ]
 
