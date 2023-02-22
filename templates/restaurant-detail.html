@@ -1,4 +1,5 @@
 {% load static %}
+{% load qr_code %}
 <!DOCTYPE html>
 <html lang="zxx">
     
@@ -333,13 +334,14 @@
                                             <div class="details-card-list-label">Available Seat</div>
                                             <div class="details-card-list-texts">{{restaurant.available_seats}}</div>
                                         </div>
-                                        <div>
-                                            <img src="data:image/png;base64,{{ qr_code|base64 }}">
-                                        </div>
+
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-warning">Yadda saxla <i class="fa-sharp fa-solid fa-bookmark"></i></button>
                                 <a href="{% url 'booking:reserve' restaurant.slug %}" class="btn btn-success">Rezerv et <i class="fa-solid fa-utensils"></i></a>
+
+
+
                             </div>
                         </div>
                     </div>

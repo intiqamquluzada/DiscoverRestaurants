@@ -7,7 +7,6 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 import qrcode
 from io import BytesIO
 
-
 api_key = "5117dbe9476548a6834433afd9b63554"
 
 api_url = "https://ipgeolocation.abstractapi.com/v1/?api_key=" + api_key
@@ -211,29 +210,45 @@ def reserved_view(request):
     return render(request, "reserved.html", context)
 
 
-def restaurant_detail_view(request, slug, data):
+from django.http import HttpResponse
+
+from services.uploader import Uploader
+
+
+# from PyPDF2 import PdfReader
+# import qrcode
+# import fitz
+#
+# def qr_for_menu_pdf(menu_pdf):
+#     """Generates a QR code for a PDF menu file."""
+#
+#     # Read the PDF file and extract the text from the first page
+#     with open(menu_pdf.path, 'rb') as f:
+#         pdf = fitz.open(menu_pdf.path)
+#         text = pdf[0].get_text("text")
+#
+#     # Construct the Google Search URL for the menu text
+#     search_url = f'https://www.google.com/search?q={text}'
+#
+#     # Generate the QR code image
+#     qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
+#     qr.add_data(search_url)
+#     qr.make(fit=True)
+#     img = qr.make_image(fill_color="black", back_color="white")
+#
+#     return img
+
+def restaurant_detail_view(request, slug):
     restaurant = get_object_or_404(Restaurants, slug=slug)
-
-    pdf_file_path = ""
-    qr = qrcode.QRCode(version=1, box_size=10, border=5)
-    qr.add_data(pdf_file_path)
-    qr.make(fit=True)
-    img = qr.make_image(fill_color='black', back_color='white')
-
-    buffer = BytesIO()
-    img.save(buffer, 'PNG')
-    image_data = buffer.getvalue()
-
-
+    # menu_pdf = restaurant.menu
+    # qr_img = qr_for_menu_pdf(menu_pdf)
 
     context = {
         'restaurant': restaurant,
-        'qr_code': image_data,
-
+        # 'qr_img': qr_img,
     }
 
     return render(request, "restaurant-detail.html", context)
-
 
 def reserve_restaurant(request, slug):
     restaurant = get_object_or_404(Restaurants, slug=slug)

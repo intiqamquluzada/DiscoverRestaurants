@@ -17,3 +17,4 @@ class Uploader:
         return f"blog/{instance.slug}/{filename}"
 
 
+
