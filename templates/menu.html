@@ -1,9 +1,8 @@
 {% load static %}
-{% load qr_code %}
 <!DOCTYPE html>
 <html lang="zxx">
     
-<!-- Mirrored from templates.envytheme.com/traip/default/single-hotel.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Feb 2023 21:32:06 GMT -->
+<!-- Mirrored from templates.envytheme.com/traip/default/terms-conditions.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Feb 2023 21:32:14 GMT -->
 <head>
         <meta charset="utf-8">
         <meta name="description" content="Traip">
@@ -11,7 +10,7 @@
         <meta name="author" content="EnvyTheme">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-        <title>Traip - Travel & Tour Booking HTML Template</title>
+        <title>Menu</title>
         <link rel="icon" href="{% static 'assets/images/favicon.png' %}" type="image/png" sizes="16x16">
 
         <!-- bootstrap css -->
@@ -37,9 +36,8 @@
         <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" type="text/css" media="all" />
         <!-- responsive css -->
         <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}" type="text/css" media="all" />
-
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
     </head>
 
@@ -119,9 +117,10 @@
                                     <li>
                                         <a href="cart.html">
                                             <i class="flaticon-shopping-bag"></i>
-                                            <span class="option-badge">3</span>
+                                            <span class="option-badge">2</span>
                                         </a>
                                     </li>
+
                                     <li class="d-none d-md-inline-block">
                                         <a href="authentication.html">
                                             <i class="flaticon-user-1"></i>
@@ -208,7 +207,8 @@
                                 </div>
 
                                  <div class="navbar-option-item">
-                                    <a href="{% url 'accounts:login_user' %}" class="btn btn-primary">Qonaq kimi giriş <i class="flaticon-right-arrow"></i></a>
+                                    <a href="{% url 'accounts:login_user' %}" class="btn btn-primary">Qonaq kimi giriş
+                                        <i class="flaticon-right-arrow"></i></a>
                                 </div> &nbsp; &nbsp; &nbsp; &nbsp;
                                  <div class="navbar-option-item">
                                     <a href="{% url 'accounts:login_owner' %}" class="btn btn-warning">Sahibkar kimi giriş <i class="flaticon-right-arrow"></i></a>
@@ -221,136 +221,68 @@
         </div>
         <!-- Navbar -->
         <!-- Header -->
-        <header class="inner-page-header inner-page-header-6">
+        <header class="inner-page-header inner-page-header-2">
             <div class="inner-header-shape"></div>
             <!-- header-content -->
             <div class="container">
                 <div class="header-content m-auto">
-                    <h1>{{restaurant.name}} restoranı</h1>
+                    <h1>Terms & Conditions</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{% url 'booking:home' %}">Ana səhifə</a></li>
-                            <li class="breadcrumb-item"><a href="{% url 'booking:list' %}">Restoranlar</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">{{restaurant.name}}</li>
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Terms & Conditions</li>
                         </ol>
                     </nav>
                 </div>
             </div>
         </header>
         <!-- Header -->
-        <!-- Hotel -->
-        <section class="hotel-section pt-100 pb-100 position-relative">
-            <div class="map-shapes">
-                <div class="map-shape map-shape-1 map-shape-top">
-                    <img src="{% static 'assets/images/shapes/map-1.png' %}" alt="shape">
-                </div>
-                <div class="map-shape map-shape-2 map-shape-bottom">
-                    <img src="{% static 'assets/images/shapes/map-2.png' %}" alt="shape">
-                </div>
-            </div>
+        <!-- Terms Policy -->
+        <section class="terms-policy-section p-tb-100 position-relative" style="display: flex; justify-content: center; align-items: center;">
+
             <div class="container">
                 <div class="details-card">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6">
+                    <div class="row align-items-center"><br><br><br><br>
+                        <div class="btn btn-warning">
+<h2 style="color: teal;">{{restaurant.name}} menyu</h2>
+
+                        </div>
+
+
                             <div class="details-card-image-carousel owl-carousel owl-theme default-owl-theme">
-                                {% for i in restaurant.restaurantimages_set.all %}
+
+                                {% for i in restaurant.restaurantmenu_set.all %}
                                 <div class="item" >
 
-                                    <img src="{{i.images.url}}" alt="tour" style="height: 600px; width: 600px;">
+                                    <img src="{{i.images.url}}" alt="tour" style="height: 600px; width: 100%;">
                                 </div>
                                 {% endfor %}
-                            </div>
-                        </div>
-                        <div class="col-lg-6 desk-pad-left-40">
-                            <div class="details-card-content">
-                                <div class="card-2-info">
-                                    <h3>{{restaurant.name}}</h3>
-                                    <div class="card-2-info-price">+<span>/Business lunch</span></div>
-                                </div>
-                                <div class="card-2-reviews">
-                                    <ul class="review-star">
-                                     {% if restaurant.rating == 1 %}
-                                            <li class="full-star"><i class="flaticon-star"></i></li>
-                                            {% endif %}
-
-
-
-                                            {% if restaurant.rating == 2 %}
-                                            <li class="full-star"><i class="flaticon-star"></i></li>
-                                            <li class="full-star"><i class="flaticon-star"></i></li>
-                                            {% endif %}
-
-
-
-                                            {% if restaurant.rating == 3 %}
-                                            <li class="full-star"><i class="flaticon-star"></i></li>
-                                            <li class="full-star"><i class="flaticon-star"></i></li>
-                                            <li class="full-star"><i class="flaticon-star"></i></li>
-                                            {% endif %}
-
-
-
-                                            {% if restaurant.rating == 4 %}
-                                            <li class="full-star"><i class="flaticon-star"></i></li>
-                                            <li class="full-star"><i class="flaticon-star"></i></li>
-                                            <li class="full-star"><i class="flaticon-star"></i></li>
-                                            <li class="full-star"><i class="flaticon-star"></i></li>
-                                            {% endif %}
-
-
-
-                                            {% if restaurant.rating == 5 %}
-                                            <li class="full-star"><i class="flaticon-star"></i></li>
-                                            <li class="full-star"><i class="flaticon-star"></i></li>
-                                            <li class="full-star"><i class="flaticon-star"></i></li>
-                                            <li class="full-star"><i class="flaticon-star"></i></li>
-                                            <li class="full-star"><i class="flaticon-star"></i></li>
-                                            {% endif %}
-                                    </ul>
-                                    <span>(100 Reviews)</span>
-                                </div>
-                                <p>{{restaurant.description}}</p>
-                                <div class="details-card-info">
-                                    <h4>Hotel Details</h4>
-                                    <div class="details-card-info-list">
-                                        <div class="details-card-list-item">
-                                            <div class="details-card-list-label">Location</div>
-                                            <div class="details-card-list-texts">{{restaurant.location}}</div>
-                                        </div>
-                                        <div class="details-card-list-item">
-                                            <div class="details-card-list-label">Open</div>
-                                            <div class="details-card-list-texts">10:00 AM</div>
-                                        </div>
-                                        <div class="details-card-list-item">
-                                            <div class="details-card-list-label">Close</div>
-                                            <div class="details-card-list-texts">12:00 AM</div>
-                                        </div>
-
-                                        <div class="details-card-list-item">
-                                            <div class="details-card-list-label">Service</div>
-                                            <div class="details-card-list-texts">24 Hour</div>
-                                        </div>
-                                        <div class="details-card-list-item">
-                                            <div class="details-card-list-label">Available Seat</div>
-                                            <div class="details-card-list-texts">{{restaurant.available_seats}}</div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-warning">Yadda saxla <i class="fa-sharp fa-solid fa-bookmark"></i></button>
-                                <a href="{% url 'booking:reserve' restaurant.slug %}" class="btn btn-success">Rezerv et <i class="fa-solid fa-utensils"></i></a>
-
-                                <img src="{{restaurant.restaurantmenu_set.all}}" alt="QR code">
-
-
 
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+
+<!--                         <div class="col-lg-6 desk-pad-left-40">-->
+<!--                            <div class="details-card-content">-->
+<!--                                <h1>{{restaurant.name}} restorani menyusu</h1>-->
+
+<!--                        </div>-->
+<!--                             <div class="card-2-info">-->
+<!--                            salam-->
+<!--                        </div>-->
+<!--                             </div>-->
+
+                         </div>
+                     </div>
+                 </div>
+
+
+
+
+
+
+
         </section>
-        <!-- Hotel -->
+        <!-- Terms Policy -->
         <!-- Footer -->
         <footer class="footer footer-bg">
             <div class="footer-upper pb-70 position-relative">
@@ -359,12 +291,12 @@
                         <div class="col-sm-6 col-md-6 col-lg-3">
                             <div class="footer-content-item">
                                 <div class="footer-logo">
-                                    <a href="index.html"><img src="{% static 'assets/images/logo-black.png' %}" alt="logo"></a>
+                                    <a href="index.html"><img src="assets/images/logo-black.png" alt="logo"></a>
                                 </div>
                                 <ul class="footer-details footer-address">
                                     <li>
                                         <i class="flaticon-mail"></i>
-                                        <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#2149444d4d4e6155534048510f424e4c"><span class="__cf_email__" data-cfemail="aec6cbc2c2c1eedadccfc7de80cdc1c3">[email&#160;protected]</span></a>
+                                        <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#422a272e2e2d023630232b326c212d2f"><span class="__cf_email__" data-cfemail="e8808d848487a89c9a898198c68b8785">[email&#160;protected]</span></a>
                                     </li>
                                     <li>
                                         <i class="flaticon-telephone"></i>
@@ -387,7 +319,7 @@
                                         <a href="tour.html">Popular Tour</a>
                                     </li>
                                     <li>
-                                        <a href="blog.html">Blog</a>
+                                        <a href="blogs-two-column.html">Blog</a>
                                     </li>
                                     <li>
                                         <a href="products.html">Shop</a>
@@ -513,7 +445,7 @@
                         <ul class="topbar-sidebar-lists">
                             <li>
                                 <i class="flaticon-mail"></i>
-                                <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#cca4a9a0a0a38cb8beada5bce2afa3a1"><span class="__cf_email__" data-cfemail="7f171a1313103f0b0d1e160f511c1012">[email&#160;protected]</span></a>
+                                <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#553d3039393a152127343c257b363a38"><span class="__cf_email__" data-cfemail="a4ccc1c8c8cbe4d0d6c5cdd48ac7cbc9">[email&#160;protected]</span></a>
                             </li>
                             <li>
                                 <i class="flaticon-telephone"></i>
@@ -546,7 +478,6 @@
             </div>
         </div>
         <!-- Top Sidebar -->
-        
 
         <!-- Search Wrapper -->
         <div class="searchbar-wrapper">
@@ -578,7 +509,7 @@
 
         <!-- essential js -->
         <script data-cfasync="false" src="{% static '../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js' %}"></script><script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
-        <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'assets/js/bootstrap.bundle.min.js"></script>
         <!-- jquery ui js -->
         <script src="{% static 'assets/js/jquery-ui.js' %}"></script>
         <!-- selectize js -->
@@ -599,5 +530,5 @@
         <script src="{% static 'assets/js/script.js' %}"></script>
     </body>
 
-<!-- Mirrored from templates.envytheme.com/traip/default/single-hotel.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Feb 2023 21:32:06 GMT -->
+<!-- Mirrored from templates.envytheme.com/traip/default/terms-conditions.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Feb 2023 21:32:15 GMT -->
 </html>

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Restaurants, CooperationCompanies, Countries, Cities
+from .models import Restaurants, CooperationCompanies, Countries, Cities, RestaurantMenu
 import requests
 import json
 from django.shortcuts import render, get_object_or_404
@@ -210,45 +210,38 @@ def reserved_view(request):
     return render(request, "reserved.html", context)
 
 
-from django.http import HttpResponse
-
-from services.uploader import Uploader
 
 
-# from PyPDF2 import PdfReader
-# import qrcode
-# import fitz
-#
-# def qr_for_menu_pdf(menu_pdf):
-#     """Generates a QR code for a PDF menu file."""
-#
-#     # Read the PDF file and extract the text from the first page
-#     with open(menu_pdf.path, 'rb') as f:
-#         pdf = fitz.open(menu_pdf.path)
-#         text = pdf[0].get_text("text")
-#
-#     # Construct the Google Search URL for the menu text
-#     search_url = f'https://www.google.com/search?q={text}'
-#
-#     # Generate the QR code image
-#     qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
-#     qr.add_data(search_url)
-#     qr.make(fit=True)
-#     img = qr.make_image(fill_color="black", back_color="white")
-#
-#     return img
+
 
 def restaurant_detail_view(request, slug):
     restaurant = get_object_or_404(Restaurants, slug=slug)
-    # menu_pdf = restaurant.menu
-    # qr_img = qr_for_menu_pdf(menu_pdf)
+
+
     print(restaurant)
     context = {
         'restaurant': restaurant,
-        # 'qr_img': qr_img,
+
+
     }
 
     return render(request, "restaurant-detail.html", context)
+
+from django.core.files.base import ContentFile
+def menu_restaurant(request, slug):
+    restaurant = get_object_or_404(Restaurants, slug=slug)
+    print(restaurant.generate_image)
+
+
+
+
+    context = {
+        'restaurant': restaurant,
+
+    }
+
+    return render(request, "menu.html", context)
+
 
 def reserve_restaurant(request, slug):
     restaurant = get_object_or_404(Restaurants, slug=slug)
