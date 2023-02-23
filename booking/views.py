@@ -242,7 +242,7 @@ def restaurant_detail_view(request, slug):
     restaurant = get_object_or_404(Restaurants, slug=slug)
     # menu_pdf = restaurant.menu
     # qr_img = qr_for_menu_pdf(menu_pdf)
-
+    print(restaurant)
     context = {
         'restaurant': restaurant,
         # 'qr_img': qr_img,
