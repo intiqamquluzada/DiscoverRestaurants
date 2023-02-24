@@ -254,26 +254,24 @@
                                 {% for i in restaurant.restaurantmenu_set.all %}
                                 <div class="item" >
 
-                                    <img src="{{i.images.url}}" alt="tour" style="height: 600px; width: 100%;">
+                                    <img src="{{i.images.url}}" style="height: 600px; width: 100%;">
                                 </div>
                                 {% endfor %}
+ <div class="owl-nav">
+                                    <button class="owl-prev" role="presentation"><i class="flaticon-left-arrow"></i></button>
+                                    <button class="owl-next" role="presentation"><i class="flaticon-right-arrow-angle"></i></button>
 
+                                </div>
+                                <div class="owl-dots disabled"></div>
                             </div>
 
 
-<!--                         <div class="col-lg-6 desk-pad-left-40">-->
-<!--                            <div class="details-card-content">-->
-<!--                                <h1>{{restaurant.name}} restorani menyusu</h1>-->
 
-<!--                        </div>-->
-<!--                             <div class="card-2-info">-->
-<!--                            salam-->
-<!--                        </div>-->
-<!--                             </div>-->
 
                          </div>
                      </div>
                  </div>
+
 
 
 

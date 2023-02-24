@@ -84,9 +84,8 @@ class RestaurantImages(DateMixin, SlugMixin):
         super(RestaurantImages, self).save(*args, **kwargs)
 
 
-from io import BytesIO
-from PIL import Image, ImageDraw
-from django.core.files import File
+
+from django.urls import reverse
 
 
 class RestaurantMenu(DateMixin, SlugMixin):
@@ -102,6 +101,8 @@ class RestaurantMenu(DateMixin, SlugMixin):
         verbose_name = 'Menu'
         verbose_name_plural = 'Menus'
 
+
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = Generator.create_slug_shortcode(size=15, model_=RestaurantMenu)
@@ -110,11 +111,7 @@ class RestaurantMenu(DateMixin, SlugMixin):
             new_img = (1276, 600)
             img.thumbnail(new_img)
             img.save(self.images.path)
-        qrcode_x = qrcode.QRCode(version=1, box_size=40, border=3)
-        qrcode_x.add_data(f"http://localhost:8000/booking/restaurant/detail/{self.restaurant.slug}/")
-        qrcode_x.make(fit=True)
-        generate_image = qrcode_x.make_image(fill_color="black", back_color="white")
-        generate_image.save(f"{self.slug}.png")
+
         
         super(RestaurantMenu, self).save(*args, **kwargs)
 

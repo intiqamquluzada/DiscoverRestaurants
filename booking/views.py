@@ -1,11 +1,12 @@
+import base64
+
 from django.shortcuts import render, redirect
 from .models import Restaurants, CooperationCompanies, Countries, Cities, RestaurantMenu
 import requests
 import json
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-import qrcode
-from io import BytesIO
+
 
 api_key = "5117dbe9476548a6834433afd9b63554"
 
@@ -210,30 +211,38 @@ def reserved_view(request):
     return render(request, "reserved.html", context)
 
 
+from django.urls import reverse
+from .utils import embed_QR
 
 
+def get_absolute_url(self):
+    return reverse('booking:menu', args=[str(self.slug)])
 
 
 def restaurant_detail_view(request, slug):
     restaurant = get_object_or_404(Restaurants, slug=slug)
 
+    url = "http://localhost:8000" + get_absolute_url(restaurant)
+    name = slug + ".png"
+    embed_QR(url, name)
+    with open(name, "rb") as image_file:
+        image_data = base64.b64encode(image_file.read()).decode('utf-8')
 
-    print(restaurant)
+
     context = {
         'restaurant': restaurant,
-
+        'qr': image_data,
 
     }
 
     return render(request, "restaurant-detail.html", context)
 
-from django.core.files.base import ContentFile
+
+
+
+
 def menu_restaurant(request, slug):
     restaurant = get_object_or_404(Restaurants, slug=slug)
-    print(restaurant.generate_image)
-
-
-
 
     context = {
         'restaurant': restaurant,

@@ -259,6 +259,7 @@
                                     <img src="{{i.images.url}}" alt="tour" style="height: 600px; width: 600px;">
                                 </div>
                                 {% endfor %}
+
                             </div>
                         </div>
                         <div class="col-lg-6 desk-pad-left-40">
@@ -340,8 +341,12 @@
                                 <button type="submit" class="btn btn-warning">Yadda saxla <i class="fa-sharp fa-solid fa-bookmark"></i></button>
                                 <a href="{% url 'booking:reserve' restaurant.slug %}" class="btn btn-success">Rezerv et <i class="fa-solid fa-utensils"></i></a>
 
-                                <img src="{{restaurant.restaurantmenu_set.all}}" alt="QR code">
+                                 <a href="{% url 'booking:menu' restaurant.slug %}" >
 
+                                <img src="data:image/png;base64,{{ qr }}">
+<marquee width="60%" direction="right" height="100px">
+Menyu üçün QR Kod-u oxut yaxud tıkla.
+</marquee>
 
 
                             </div>
