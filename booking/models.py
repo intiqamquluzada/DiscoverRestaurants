@@ -92,7 +92,7 @@ from django.core.files import File
 class RestaurantMenu(DateMixin, SlugMixin):
     restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE)
     images = models.FileField(upload_to=Uploader.upload_menu_to_restaurants, )
-    qr_code = models.ImageField(upload_to=Uploader.upload_images_for_menu, blank=True)
+    qr_code_x = models.ImageField(upload_to=Uploader.upload_images_for_menu, blank=True)
 
     def __str__(self):
         return self.restaurant.name
@@ -110,11 +110,10 @@ class RestaurantMenu(DateMixin, SlugMixin):
             new_img = (1276, 600)
             img.thumbnail(new_img)
             img.save(self.images.path)
-
-        qrcode_img = qrcode.QRCode(version=1, box_size=40, border=3)
-        qrcode_img.add_data(f"http://localhost:8000/booking/restaurant/detail/{self.restaurant.slug}/")
-        qrcode_img.make(fit=True)
-        generate_image = qrcode_img.make_image(fill_color="black", back_color="white")
+        qrcode_x = qrcode.QRCode(version=1, box_size=40, border=3)
+        qrcode_x.add_data(f"http://localhost:8000/booking/restaurant/detail/{self.restaurant.slug}/")
+        qrcode_x.make(fit=True)
+        generate_image = qrcode_x.make_image(fill_color="black", back_color="white")
         generate_image.save(f"{self.slug}.png")
         
         super(RestaurantMenu, self).save(*args, **kwargs)
