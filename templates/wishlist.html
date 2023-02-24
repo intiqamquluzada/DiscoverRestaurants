@@ -10,7 +10,7 @@
         <meta name="author" content="EnvyTheme">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
-        <title>Yadda saxla</title>
+        <title>Yadda saxlanılanlar</title>
         <link rel="icon" href="{% static 'assets/images/favicon.png' %}" type="image/png" sizes="16x16">
 
         <!-- bootstrap css -->
@@ -162,7 +162,7 @@
                                         <a href="#" class="nav-link ">Rezervasiya</a>
 
                                     </li>
-                                    <!-- <li class="nav-item">
+                                    <li class="nav-item">
                                         <a href="#" class="nav-link dropdown-toggle">Tours</a>
                                         <ul class="dropdown-menu">
                                             <li class="nav-item">
@@ -228,8 +228,8 @@
                     <h1>Wishlist</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Wishlist</li>
+                            <li class="breadcrumb-item"><a href="index.html">Ana səhifə</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Yadda saxlanılanlar</li>
                         </ol>
                     </nav>
                 </div>
@@ -246,18 +246,19 @@
             <div class="container">
                 <div class="product-info-header">
                     <h2>Wishlist</h2>
-                    <a href="products.html" class="btn main-btn main-btn-arrow">Back To Shop  <i class="flaticon-right-arrow"></i></a>
+                    <a href="{% url 'booking:list' %}" class="btn main-btn main-btn-arrow">Restoranlara qayıt  <i class="flaticon-right-arrow"></i></a>
                 </div>
                 <div class="cart-table">
                     <table>
                         <thead>
                             <tr>
-                                <th>Product Thumb</th>
-                                <th>Product Name</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Add Cart</th>
-                                <th>Remove</th>
+                                <th>Şəkil</th>
+                                <th>Restoran adı</th>
+                                <th>Tarix</th>
+                                <th>Qonaq sayı</th>
+                                <th>Rezerv et</th>
+                                <th>Yadda saxlanılanlardan sil</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -276,8 +277,9 @@
                                         <button class="qu-btn inc">+</button>
                                     </div>
                                 </td>
-                                <td>
-                                    <a href="cart.html" class="btn main-btn main-btn-secondary">Add To Cart</a>
+
+                                <td class="">
+                                    <button type="submit" class="btn btn-success">Rezerv et</button>
                                 </td>
                                 <td class="cancel">
                                     <a href="#"><i class="flaticon-close"></i></a>
@@ -298,8 +300,9 @@
                                         <button class="qu-btn inc">+</button>
                                     </div>
                                 </td>
-                                <td>
-                                    <a href="cart.html" class="btn main-btn main-btn-secondary">Add To Cart</a>
+
+                                 <td class="">
+                                    <button type="submit" class="btn btn-success">Rezerv et</button>
                                 </td>
                                 <td class="cancel">
                                     <a href="#"><i class="flaticon-close"></i></a>
