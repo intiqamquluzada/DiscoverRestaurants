@@ -312,7 +312,7 @@
                                 </div>
                                 <p>{{restaurant.description}}</p>
                                 <div class="details-card-info">
-                                    <h4>Hotel Details</h4>
+                                    <h4>Restoran haqqında</h4>
                                     <div class="details-card-info-list">
                                         <div class="details-card-list-item">
                                             <div class="details-card-list-label">Location</div>
@@ -343,7 +343,8 @@
 
                                  <a href="{% url 'booking:menu' restaurant.slug %}" >
 
-                                <img src="data:image/png;base64,{{ qr }}">
+
+                                     {% qr_from_text link size=20 border=6 %}
 <marquee width="60%" direction="right" height="100px">
 Menyu üçün QR Kod-u oxut yaxud tıkla.
 </marquee>

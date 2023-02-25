@@ -5,8 +5,10 @@ from services.uploader import Uploader
 from services.mixin import DateMixin, SlugMixin
 from services.generator import Generator
 from django.core.validators import MaxValueValidator, MinValueValidator
-from PIL import Image
+from PIL import Image, ImageDraw
 from django.contrib.auth import get_user_model
+from io import BytesIO
+from django.core.files import File
 
 User = get_user_model()
 
@@ -40,6 +42,9 @@ class Cities(models.Model):
         return self.name
 
 
+from django.urls import reverse
+
+
 class Restaurants(DateMixin, SlugMixin):
     name = models.CharField(max_length=200, )
     country_of_restaurant = models.ForeignKey(Countries, on_delete=models.CASCADE, null=True, blank=True)
@@ -52,6 +57,7 @@ class Restaurants(DateMixin, SlugMixin):
     seats = models.IntegerField(null=True, blank=True, default=1)
     available_seats = models.IntegerField(null=True, blank=True)
 
+
     class Meta:
         ordering = ("-created_at",)
         verbose_name = 'Restaurant'
@@ -60,9 +66,13 @@ class Restaurants(DateMixin, SlugMixin):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('booking:menu', args=[str(self.slug)])
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = Generator.create_slug_shortcode(size=15, model_=Restaurants)
+
         super(Restaurants, self).save(*args, **kwargs)
 
 
@@ -84,36 +94,23 @@ class RestaurantImages(DateMixin, SlugMixin):
         super(RestaurantImages, self).save(*args, **kwargs)
 
 
-
-from django.urls import reverse
-
-
 class RestaurantMenu(DateMixin, SlugMixin):
     restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE)
-    images = models.FileField(upload_to=Uploader.upload_menu_to_restaurants, )
-    qr_code_x = models.ImageField(upload_to=Uploader.upload_images_for_menu, blank=True)
-
-    def __str__(self):
-        return self.restaurant.name
-
-    class Meta:
-        ordering = ("-created_at",)
-        verbose_name = 'Menu'
-        verbose_name_plural = 'Menus'
-
-
+    menu_images = models.FileField(upload_to=Uploader.upload_images_for_menu, blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = Generator.create_slug_shortcode(size=15, model_=RestaurantMenu)
-        if not self.images:
-            img = Image.open(self.images.path)
-            new_img = (1276, 600)
-            img.thumbnail(new_img)
-            img.save(self.images.path)
 
-        
+        if not self.menu_images:
+            img = Image.open(self.images.path)
+            if img.height > 300 or img.width > 300:
+                new_img = (626, 600)
+                img.thumbnail(new_img)
+                img.save(self.menu_images.path)
+
         super(RestaurantMenu, self).save(*args, **kwargs)
+
 
 class CooperationCompanies(DateMixin, SlugMixin):
     name = models.CharField(max_length=100)
@@ -146,3 +143,9 @@ class BlogModel(DateMixin, SlugMixin):
         ordering = ("-created_at",)
         verbose_name = "Blog Model"
         verbose_name_plural = "Blog models"
+
+
+class Comment(DateMixin, SlugMixin):
+    restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    body = models.TextField()
