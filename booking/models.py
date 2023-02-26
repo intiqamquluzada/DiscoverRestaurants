@@ -149,3 +149,11 @@ class Comment(DateMixin, SlugMixin):
     restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField()
+
+    def __str__(self):
+        return self.restaurant.name
+
+    class Meta:
+        ordering = ("-created_at", )
+        verbose_name = "Comment"
+        verbose_name_plural = "Comments"
