@@ -155,7 +155,7 @@ def list_view(request):
         result = result.filter(available_seats__gte=count)
 
     if result.count() == 0:
-        message = "Sənin ölkənə yaxud axtarışına uyğun nəticə tapılmadı"
+        message = "Ölkəyə yaxud axtarışa uyğun nəticə tapılmadı"
         print(message)
     else:
         message = ""
