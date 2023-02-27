@@ -217,6 +217,7 @@ def restaurant_detail_view(request, slug):
     restaurant = get_object_or_404(Restaurants, slug=slug)
 
     link = "http://localhost:8000/booking/menu/" + slug
+    print(link)
 
     form = CommentForm(request.POST)
     if request.method == "POST":
