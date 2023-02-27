@@ -57,7 +57,6 @@ class Restaurants(DateMixin, SlugMixin):
     seats = models.IntegerField(null=True, blank=True, default=1)
     available_seats = models.IntegerField(null=True, blank=True)
 
-
     class Meta:
         ordering = ("-created_at",)
         verbose_name = 'Restaurant'
@@ -151,9 +150,33 @@ class Comment(DateMixin, SlugMixin):
     body = models.TextField()
 
     def __str__(self):
-        return self.restaurant.name
+        return self.user.username
 
     class Meta:
-        ordering = ("-created_at", )
+        ordering = ("-created_at",)
         verbose_name = "Comment"
         verbose_name_plural = "Comments"
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = Generator.create_slug_shortcode(size=15, model_=Comment)
+        super(Comment, self).save(*args, **kwargs)
+
+
+class ReplyComment(DateMixin, SlugMixin):
+    restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    reply_body = models.TextField()
+
+    def __str__(self):
+        return self.user.username
+
+    class Meta:
+        ordering = ("-created_at",)
+        verbose_name = "ReplyComment"
+        verbose_name_plural = "ReplyComments"
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = Generator.create_slug_shortcode(size=15, model_=ReplyComment)
+        super(ReplyComment, self).save(*args, **kwargs)

@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
-from .models import Restaurants, CooperationCompanies, Countries, Cities
+from .models import Restaurants, CooperationCompanies, Countries, Comment
 import requests
 import json
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from .forms import CommentForm, ReplyForm
 
 api_key = "5117dbe9476548a6834433afd9b63554"
 
@@ -208,7 +209,8 @@ def reserved_view(request):
     return render(request, "reserved.html", context)
 
 
-
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 
 def restaurant_detail_view(request, slug):
@@ -216,9 +218,40 @@ def restaurant_detail_view(request, slug):
 
     link = "http://localhost:8000/booking/menu/" + slug
 
+    form_1 = CommentForm(request.POST)
+    # comment
+    comments = Comment.objects.filter(restaurant=restaurant).order_by("-created_at")
+    # commentForm
+    if request.method == "POST":
+        form_1 = CommentForm(request.POST)
+        if form_1.is_valid():
+            comment = form_1.save(commit=False)
+            comment.restaurant = restaurant
+            comment.user = request.user
+            comment.save()
+            return redirect(reverse('booking:restaurant_detail', args=[restaurant.slug]))
+        else:
+            form = CommentForm()
+
+
+    form_2 = ReplyForm(request.POST)
+    if request.method == "POST":
+        form_2 = ReplyForm(request.POST)
+        if form_2.is_valid():
+            comment = form_2.save(commit=False)
+            comment.restaurant = restaurant
+            comment.user = request.user
+            comment.save()
+            return HttpResponseRedirect(reverse('booking:restaurant_detail', args=[restaurant.slug]))
+        else:
+            form_2 = ReplyForm()
     context = {
         'restaurant': restaurant,
-        'link': link
+        'link': link,
+
+        'comments': comments,
+        'form_1': form_1,
+        'form_2': form_2
 
     }
 
