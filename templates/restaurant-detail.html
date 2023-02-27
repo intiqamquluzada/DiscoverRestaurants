@@ -206,13 +206,20 @@
                                         </li>
                                     </ul>
                                 </div>
-
+                        {% if not user.is_authenticated %}
                                  <div class="navbar-option-item">
                                     <a href="{% url 'accounts:login_user' %}" class="btn btn-primary">Qonaq kimi giriş <i class="flaticon-right-arrow"></i></a>
                                 </div> &nbsp; &nbsp; &nbsp; &nbsp;
                                  <div class="navbar-option-item">
                                     <a href="{% url 'accounts:login_owner' %}" class="btn btn-warning">Sahibkar kimi giriş <i class="flaticon-right-arrow"></i></a>
                                 </div>
+                                {% endif %}
+
+                                {% if user.is_authenticated  %}
+                                <div class="navbar-option-item">
+                                    <a href="{% url 'accounts:login_owner' %}" class="btn btn-info">Cixis <i class="flaticon-right-arrow"></i></a>
+                                </div>
+                                {% endif %}
                             </div>
                         </nav>
                     </div>

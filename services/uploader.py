@@ -20,5 +20,9 @@ class Uploader:
     def upload_images_for_menu(instance, filename):
         return f"menu/{instance.slug}/{filename}"
 
+    @staticmethod
+    def upload_images_for_user(instance, filename):
+        return f"user/{instance.slug}/{filename}"
+
 
 
