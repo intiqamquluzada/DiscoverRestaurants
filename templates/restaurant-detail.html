@@ -373,8 +373,8 @@
                             	<img class="img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
                             </div>
                             <div class="form-group  col-sm-9">
-                                {{form_1.body}}
-                                <button type="submit" class="btn btn-outline-warning">Rəy bildir</button>
+                               {{form.body}}
+                                <button type="submit" class="btn btn-outline-warning reply-btn">Rəy bildir</button>
                             </div>
 
                         </div>
@@ -395,17 +395,12 @@
                             <li><i class="fa fa-thumbs-up"></i>13</li>
                         </ul>
                         <ul class="list-unstyled list-inline media-detail pull-right">
-                            <li class="btn btn-success">Like</li>
-                            <li class="btn dropdown-toggle reply-btn">Reply</li>
+                            <li class="btn btn-success">Like &nbsp;&nbsp;<i class="fa-solid fa-heart"></i></i></li>
+
                             <br><br>
 
                         </ul>
-                        <form method="post">
-                            {% csrf_token %}
-<div class="reply-section" style="display: none;">
-                {{form_1.body}}
-                <button type="submit" class="btn btn-outline-success">Cavabla</button>
-            </div></form>
+
                     </div>
                 </div>
                 <br><br>
@@ -418,16 +413,9 @@
     </div>
 
 </section>
-<script>
-
- $(document).ready(function(){
-    $(".reply-btn").click(function(){
-        $(this).closest(".media-body").find(".reply-section").toggle();
-    });
-});
 
 
-</script>
+
 
         <!-- Comment -->
         <!-- Footer -->

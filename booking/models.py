@@ -9,6 +9,9 @@ from PIL import Image, ImageDraw
 from django.contrib.auth import get_user_model
 from io import BytesIO
 from django.core.files import File
+from mptt.models import MPTTModel, TreeForeignKey
+
+
 
 User = get_user_model()
 
@@ -144,10 +147,11 @@ class BlogModel(DateMixin, SlugMixin):
         verbose_name_plural = "Blog models"
 
 
-class Comment(DateMixin, SlugMixin):
-    restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    body = models.TextField()
+class Comment(MPTTModel, DateMixin, SlugMixin):
+    restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+    body = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.user.username
@@ -163,20 +167,4 @@ class Comment(DateMixin, SlugMixin):
         super(Comment, self).save(*args, **kwargs)
 
 
-class ReplyComment(DateMixin, SlugMixin):
-    restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    reply_body = models.TextField()
 
-    def __str__(self):
-        return self.user.username
-
-    class Meta:
-        ordering = ("-created_at",)
-        verbose_name = "ReplyComment"
-        verbose_name_plural = "ReplyComments"
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = Generator.create_slug_shortcode(size=15, model_=ReplyComment)
-        super(ReplyComment, self).save(*args, **kwargs)

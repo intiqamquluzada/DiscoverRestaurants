@@ -16,5 +16,6 @@ urlpatterns = [
     path('reserved/', reserved_view, name='reserved'),
     path('restaurant/detail/<slug>/', restaurant_detail_view, name='restaurant_detail'),
     path('reserve-restaurant/<slug>/', reserve_restaurant, name='reserve'),
-    path('menu/<slug>/', menu_restaurant, name='menu')
+    path('menu/<slug>/', menu_restaurant, name='menu'),
+
 ]
