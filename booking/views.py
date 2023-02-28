@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
-from .models import Restaurants, CooperationCompanies, Countries, Comment
+from django.db.models import F
+from .models import Restaurants, CooperationCompanies, Countries, Comment, Likes
 import requests
 import json
+from django.contrib.auth import get_user_model
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from .forms import CommentForm
@@ -20,6 +22,8 @@ def get_ip_geolocation_data(ip_address):
 
     return response.content
 
+
+User = get_user_model()
 
 def home_view(request):
     companies_corporation = CooperationCompanies.objects.all()
@@ -209,7 +213,7 @@ def reserved_view(request):
     return render(request, "reserved.html", context)
 
 
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from django.urls import reverse
 
 
@@ -218,6 +222,7 @@ def restaurant_detail_view(request, slug):
 
     link = "http://localhost:8000/booking/menu/" + slug
 
+    # comment
     form = CommentForm(request.POST)
     if request.method == "POST":
         if form.is_valid():
@@ -261,3 +266,37 @@ def reserve_restaurant(request, slug):
     }
 
     return render(request, "reservation.html", context)
+
+
+def like_and_unlike(request):
+    user = request.user
+    if request.method == "POST":
+        comment_id = request.POST.get("comment_id")
+        comment_obj = Comment.objects.get(id=comment_id)
+
+        if user in comment_obj.likers.all():
+            comment_obj.likers.remove(user)
+        else:
+            comment_obj.likers.add(user)
+
+        like, created = Likes.objects.get_or_create(user=user, comment=comment_obj)
+
+        if not created:
+            if like.value == 'Like':
+                like.value = 'Unlike'
+            else:
+                like.value = 'Like'
+        else:
+            like.value = 'Like'
+            comment_obj.save()
+            like.save()
+
+        data = {
+            'value': like.value,
+            'likes': comment_obj.likers.all().count()
+        }
+
+        return JsonResponse(data)
+
+        # Fallback response
+    return HttpResponse('Error: could not process request.')

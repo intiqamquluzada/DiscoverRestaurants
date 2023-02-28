@@ -45,21 +45,7 @@
 
     <body>
         <!-- preloader -->
-        <div class="preloader">
-            <div class="preloader-wrapper">
-                <div class="preloader-grid">
-                    <div class="preloader-grid-item preloader-grid-item-1"></div>
-                    <div class="preloader-grid-item preloader-grid-item-2"></div>
-                    <div class="preloader-grid-item preloader-grid-item-3"></div>
-                    <div class="preloader-grid-item preloader-grid-item-4"></div>
-                    <div class="preloader-grid-item preloader-grid-item-5"></div>
-                    <div class="preloader-grid-item preloader-grid-item-6"></div>
-                    <div class="preloader-grid-item preloader-grid-item-7"></div>
-                    <div class="preloader-grid-item preloader-grid-item-8"></div>
-                    <div class="preloader-grid-item preloader-grid-item-9"></div>
-                </div>
-            </div>
-        </div>
+
         <!-- .end preloader -->
         <!-- Topbar -->
 
@@ -399,11 +385,25 @@
                         <p>{{comment.body}}</p>
                         <ul class="list-unstyled list-inline media-detail pull-left">
                             <li><i class="fa fa-calendar"></i>{{comment.created_at}}</li>
-                            <li><i class="fa fa-thumbs-up"></i>13</li>
+                            <li><i class="fa fa-thumbs-up"></i>{{comment.likers.count}}</li>
                         </ul>
                         <ul class="list-unstyled list-inline media-detail pull-right">
-                            <li class="btn btn-success">Like &nbsp;&nbsp;<i class="fa-solid fa-heart"></i></i></li>
 
+                            <li class="btn btn-success">
+                                </li>
+                            <form action="{% url 'booking:like' %}" method="post" id="{{comment.id}}">
+                                {% csrf_token %}
+                                <input type="hidden" name="comment_id" value="{{comment.id}}">
+                                <button type="submit">
+                                {% if user not in comment.likers.all %}
+
+                                Like
+                                {% else %}
+                                Unlike
+
+                                {% endif %}
+                                </button>
+                            </form>
                             <br><br>
 
                         </ul>
