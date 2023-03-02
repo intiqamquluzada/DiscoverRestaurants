@@ -25,6 +25,7 @@ def get_ip_geolocation_data(ip_address):
 
 User = get_user_model()
 
+
 def home_view(request):
     companies_corporation = CooperationCompanies.objects.all()
     rate = Restaurants.objects.all().values_list('rating', flat=True)
@@ -68,6 +69,8 @@ def home_view(request):
         print(message)
     else:
         message = ""
+
+
 
     paginator = Paginator(result, 4)
     page = request.GET.get('page', 1)
@@ -165,6 +168,8 @@ def list_view(request):
     else:
         message = ""
 
+
+
     paginator = Paginator(result, 6)
     page = request.GET.get('page', 1)
     p = paginator.get_page(page)
@@ -175,6 +180,7 @@ def list_view(request):
         'result': result,
         'country': country,
         'region': region,
+
 
     }
 
@@ -269,11 +275,12 @@ def reserve_restaurant(request, slug):
 
 
 def like_and_unlike(request):
-    user = request.user
-    if request.method == "POST":
+    if request.method == "POST" and request.is_ajax():
+        user = request.user
         comment_id = request.POST.get("comment_id")
-        comment_obj = Comment.objects.get(id=comment_id)
+        comment_obj = get_object_or_404(Comment, id=comment_id)
 
+        # Toggle like
         if user in comment_obj.likers.all():
             comment_obj.likers.remove(user)
         else:
@@ -288,8 +295,9 @@ def like_and_unlike(request):
                 like.value = 'Like'
         else:
             like.value = 'Like'
-            comment_obj.save()
-            like.save()
+
+        comment_obj.save()
+        like.save()
 
         data = {
             'value': like.value,
@@ -298,5 +306,4 @@ def like_and_unlike(request):
 
         return JsonResponse(data)
 
-        # Fallback response
-    return HttpResponse('Error: could not process request.')
+    return JsonResponse({'error': 'Invalid request.'})
