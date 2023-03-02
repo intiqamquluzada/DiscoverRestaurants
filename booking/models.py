@@ -57,6 +57,7 @@ class Restaurants(DateMixin, SlugMixin):
     description = models.TextField()
     seats = models.IntegerField(null=True, blank=True, default=1)
     available_seats = models.IntegerField(null=True, blank=True)
+    wishlist = models.ManyToManyField(User, blank=True, related_name="wishlist")
 
     class Meta:
         ordering = ("-created_at",)

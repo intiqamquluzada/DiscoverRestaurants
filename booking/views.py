@@ -70,8 +70,6 @@ def home_view(request):
     else:
         message = ""
 
-
-
     paginator = Paginator(result, 4)
     page = request.GET.get('page', 1)
     p = paginator.get_page(page)
@@ -168,8 +166,6 @@ def list_view(request):
     else:
         message = ""
 
-
-
     paginator = Paginator(result, 6)
     page = request.GET.get('page', 1)
     p = paginator.get_page(page)
@@ -180,7 +176,6 @@ def list_view(request):
         'result': result,
         'country': country,
         'region': region,
-
 
     }
 
@@ -274,6 +269,7 @@ def reserve_restaurant(request, slug):
     return render(request, "reservation.html", context)
 
 
+# commentLikeandUnlike
 def like_and_unlike(request):
     if request.method == "POST" and request.is_ajax():
         user = request.user
@@ -307,3 +303,35 @@ def like_and_unlike(request):
         return JsonResponse(data)
 
     return JsonResponse({'error': 'Invalid request.'})
+
+
+def wishlist_create_view(request):
+    data = {}
+
+    restaurant_id = request.POST.get("restaurant_id")
+    restaurant_obj = get_object_or_404(Restaurants, id=int(restaurant_id))
+
+    if request.user in restaurant_obj.wishlist.all():
+        restaurant_obj.wishlist.remove(request.user)
+        data['success'] = False
+    else:
+        restaurant_obj.wishlist.add(request.user)
+        data['success'] = True
+
+    return JsonResponse(data)
+
+
+def wishlist_remove_view(request):
+    data = {}
+
+    restaurant_id = request.POST.get("restaurant_id")
+    restaurant_obj = get_object_or_404(Restaurants, id=int(restaurant_id))
+
+    if request.user in restaurant_obj.wishlist.all():
+        data['success'] = False
+        restaurant_obj.wishlist.remove(request.user)
+
+    else:
+        data['success'] = False
+        restaurant_obj.wishlist.add(request.user)
+    return JsonResponse(data)

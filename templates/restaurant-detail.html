@@ -328,14 +328,17 @@
                                             <div class="details-card-list-label">Available Seat</div>
                                             <div class="details-card-list-texts">{{restaurant.available_seats}}</div>
                                         </div>
+                                        <br><br>
+ <a {% if not request.user.is_authenticated %} href="{% url 'accounts:login_user' %}" {% endif %} onclick="wishCreate('{{ restaurant.id }}')" class="btn btn-warning" id="productWish-{{ restaurant.id }}" {% if request.user in restaurant.wishlist.all %} style="color: red;" {% else %} style="color: black;" {% endif %}>Yadda saxla <i class="fa-sharp fa-solid fa-bookmark"></i></a>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                             <a href="{% url 'booking:reserve' restaurant.slug %}" class="btn btn-success">Rezerv  <i class="fa-solid fa-utensils"></i></a>
 
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-warning">Yadda saxla <i class="fa-sharp fa-solid fa-bookmark"></i></button>
-                                <a href="{% url 'booking:reserve' restaurant.slug %}" class="btn btn-success">Rezerv et <i class="fa-solid fa-utensils"></i></a>
 
 
                                      {% qr_from_text link size=20 border=6 %}
+
+
 <marquee width="60%" direction="right" height="100px">
 <a href="{% url 'booking:menu' restaurant.slug %}">Menyu üçün QR Kod-u oxut yaxud tıkla.</a>
 </marquee>
@@ -348,6 +351,50 @@
             </div>
         </section>
         <!-- Hotel -->
+        <script>
+
+            var wishlist_url = "{% url 'booking:create-wishlist' %}"
+            function wishCreate(id){
+            var myHeaders = new Headers();
+            myHeaders.append(
+                "X-CSRFToken",
+                document.querySelector("[name=csrfmiddlewaretoken]").value
+            );
+
+            var formData = new FormData();
+
+            formData.append("restaurant_id", id);
+
+            var requestOptions = {
+                method: "POST",
+                headers: myHeaders,
+                body: formData,
+                redirect: "follow",
+            };
+
+            response = fetch(wishlist_url, requestOptions).then(function (response) {
+                if (response.ok) {
+                    response.json().then((data) => {
+
+                        if(data.success){
+                            $("#productWish-"+id).css("color", "red")
+                            $("#productWish-"+id).innerHTML("Yadda saxlandi <i class=\"fa-sharp fa-solid fa-bookmark\"></i>")
+
+
+                        }
+
+                        else{
+                            $("#productWish-"+id).css("color", "black")
+                            $("#productWish-"+id).innerHTML("Yadda saxla <i class=\"fa-sharp fa-solid fa-bookmark\"></i>")
+
+                        }
+
+                    });
+                }
+            });
+        }
+
+        </script>
 
         <!-- Comment -->
 
