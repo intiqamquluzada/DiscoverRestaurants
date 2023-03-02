@@ -10,7 +10,6 @@ from .forms import CommentForm
 from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from django.urls import reverse
 
-
 api_key = "5117dbe9476548a6834433afd9b63554"
 
 api_url = "https://ipgeolocation.abstractapi.com/v1/?api_key=" + api_key
@@ -201,9 +200,23 @@ def contact_view(request):
     return render(request, "contact.html", context)
 
 
-def save_restaurants(request):
-    context = {
+def saved_restaurants(request):
+    user_restaurants = request.user.wishlist.all()
 
+    paginator = Paginator(user_restaurants, 2)
+    page = request.GET.get('page', 1)
+    p = paginator.get_page(page)
+
+    if user_restaurants.count() == 0:
+        message = "Heç bir restoran əlavə edilməyib"
+    else:
+        message = ""
+
+    context = {
+        'user_restaurants': user_restaurants,
+        'p': p,
+        'paginator': paginator,
+        'message': message,
     }
 
     return render(request, "wishlist.html", context)
@@ -215,9 +228,6 @@ def reserved_view(request):
     }
 
     return render(request, "reserved.html", context)
-
-
-
 
 
 def restaurant_detail_view(request, slug):
@@ -321,5 +331,3 @@ def wishlist_create_view(request):
         data['success'] = True
 
     return JsonResponse(data)
-
-

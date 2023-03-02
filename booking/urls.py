@@ -1,9 +1,9 @@
 from django.urls import path
 from .views import (home_view, about_view, list_view,
-                    blog_view, contact_view, save_restaurants,
+                    blog_view, contact_view, saved_restaurants,
                     reserved_view, restaurant_detail_view,
                     reserve_restaurant, menu_restaurant, like_and_unlike,
-                    wishlist_create_view, wishlist_remove_view
+                    wishlist_create_view,
                     )
 
 app_name = "booking"
@@ -13,14 +13,14 @@ urlpatterns = [
     path('restaurants/', list_view, name='list'),
     path('blog/', blog_view, name='blog'),
     path('contact/', contact_view, name='contact'),
-    path('saved/', save_restaurants, name='saved'),
+    path('saved/', saved_restaurants, name='saved'),
     path('reserved/', reserved_view, name='reserved'),
     path('restaurant/detail/<slug>/', restaurant_detail_view, name='restaurant_detail'),
     path('reserve-restaurant/<slug>/', reserve_restaurant, name='reserve'),
     path('menu/<slug>/', menu_restaurant, name='menu'),
     path('like/', like_and_unlike, name='like'),
     path('create/wishlist/', wishlist_create_view, name='create-wishlist'),
-    path('remove-wishlist/', wishlist_remove_view, name='remove-wishlist'),
+
 
 
 ]

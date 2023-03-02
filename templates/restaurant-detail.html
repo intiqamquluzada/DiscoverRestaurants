@@ -301,7 +301,7 @@
                                             <li class="full-star"><i class="flaticon-star"></i></li>
                                             {% endif %}
                                     </ul>
-                                    <span>(100 Reviews)</span>
+                                    <span>Haqqında {{comments.count}} rəy mövcuddur</span>
                                 </div>
                                 <p>{{restaurant.description}}</p>
                                 <div class="details-card-info">
@@ -331,7 +331,7 @@
                                         <br><br>
  <a {% if not request.user.is_authenticated %} href="{% url 'accounts:login_user' %}" {% endif %} onclick="wishCreate('{{ restaurant.id }}')" class="btn btn-warning" id="productWish-{{ restaurant.id }}" {% if request.user in restaurant.wishlist.all %} style="color: red;" {% else %} style="color: black;" {% endif %}>Yadda saxla <i class="fa-sharp fa-solid fa-bookmark"></i></a>
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                             <a href="{% url 'booking:reserve' restaurant.slug %}" class="btn btn-success">Rezerv  <i class="fa-solid fa-utensils"></i></a>
-
+                                        <br><br><h3>Menyu:</h3>
                                     </div>
                                 </div>
 
