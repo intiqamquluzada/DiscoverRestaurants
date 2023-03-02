@@ -7,6 +7,9 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from .forms import CommentForm
+from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
+from django.urls import reverse
+
 
 api_key = "5117dbe9476548a6834433afd9b63554"
 
@@ -214,8 +217,7 @@ def reserved_view(request):
     return render(request, "reserved.html", context)
 
 
-from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
-from django.urls import reverse
+
 
 
 def restaurant_detail_view(request, slug):
@@ -321,17 +323,3 @@ def wishlist_create_view(request):
     return JsonResponse(data)
 
 
-def wishlist_remove_view(request):
-    data = {}
-
-    restaurant_id = request.POST.get("restaurant_id")
-    restaurant_obj = get_object_or_404(Restaurants, id=int(restaurant_id))
-
-    if request.user in restaurant_obj.wishlist.all():
-        data['success'] = False
-        restaurant_obj.wishlist.remove(request.user)
-
-    else:
-        data['success'] = False
-        restaurant_obj.wishlist.add(request.user)
-    return JsonResponse(data)
