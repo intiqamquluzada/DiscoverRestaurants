@@ -330,4 +330,6 @@ def wishlist_create_view(request):
         restaurant_obj.wishlist.add(request.user)
         data['success'] = True
 
+    print(data)
+
     return JsonResponse(data)
