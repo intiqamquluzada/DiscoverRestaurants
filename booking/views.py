@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.db.models import F
-from .models import Restaurants, CooperationCompanies, Countries, Comment, Likes
+from .models import Restaurants, CooperationCompanies, Countries, Comment, Likes, Rating
 import requests
 import json
 from django.contrib.auth import get_user_model
@@ -249,11 +249,32 @@ def restaurant_detail_view(request, slug):
     # # comment
     comments = Comment.objects.filter(restaurant=restaurant).order_by("-created_at")
 
+    total_rating = 0
+    user = request.user
+    rate = request.GET.get("rate")
+    print(rate)
+    if rate:
+        if not user in Rating.objects.filter(restaurant=restaurant).values_list("user", flat=True):
+            if user:
+                obj = Rating.objects.create(restaurant=restaurant, user=user, rate=rate)
+                obj.save()
+
+    for i in Rating.objects.filter(restaurant=restaurant).values_list("rate", flat=True):
+        total_rating += i
+    say = Rating.objects.filter(
+
+            restaurant=restaurant
+
+        ).values_list("rate", flat=True).count()
+    if say:
+        total_rating = total_rating // say
+    print(total_rating)
+    print(Rating.objects.filter(restaurant=restaurant, user=user).values_list("rate", flat=True))
     context = {
         'restaurant': restaurant,
         'link': link,
         'form': form,
-
+        'total_rating': total_rating,
         'comments': comments,
 
     }
@@ -329,7 +350,5 @@ def wishlist_create_view(request):
     else:
         restaurant_obj.wishlist.add(request.user)
         data['success'] = True
-
-    print(data)
 
     return JsonResponse(data)

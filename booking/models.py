@@ -56,7 +56,7 @@ class Restaurants(DateMixin, SlugMixin):
     location = models.TextField()
     description = models.TextField()
     seats = models.IntegerField(null=True, blank=True, default=1)
-    available_seats = models.IntegerField(null=True, blank=True)
+    available_seats = models.IntegerField(null=True, blank=True, default=0)
     wishlist = models.ManyToManyField(User, blank=True, related_name="wishlist")
 
     class Meta:
@@ -200,3 +200,17 @@ class Likes(DateMixin, SlugMixin):
         if not self.slug:
             self.slug = Generator.create_slug_shortcode(size=15, model_=Likes)
         super(Likes, self).save(*args, **kwargs)
+
+
+class Rating(DateMixin, SlugMixin):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, )
+    restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE, related_name="restaurant")
+    rate = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], default=1)
+
+    def __str__(self):
+        return f"{self.rate} --> ulduz --> {self.restaurant.name}"
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = Generator.create_slug_shortcode(size=15, model_=Rating)
+        super(Rating, self).save(*args, **kwargs)
