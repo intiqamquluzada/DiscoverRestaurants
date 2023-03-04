@@ -187,7 +187,7 @@
                                           <li>
                                             <a href="{% url 'booking:saved' %}">
                                                 <i class="fa-solid fa-bookmark"></i>
-                                                <span class="option-badge">2</span>
+                                                <span class="option-badge">{{restaurant.wishlist.all.count}}</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -262,30 +262,22 @@
                                     <div class="card-2-info-price">+<span>/Business lunch</span></div>
                                 </div>
                                 <div class="card-2-reviews">
+
                                     <ul class="review-star">
-                                     {% if restaurant.rating == 1 %}
+                                     {% if total_rating == 1 %}
                                             <li class="full-star"><i class="flaticon-star"></i></li>
                                             {% endif %}
 
 
 
-                                            {% if restaurant.rating == 2 %}
-                                            <li class="full-star"><i class="flaticon-star"></i></li>
-                                            <li class="full-star"><i class="flaticon-star"></i></li>
-                                            {% endif %}
-
-
-
-                                            {% if restaurant.rating == 3 %}
-                                            <li class="full-star"><i class="flaticon-star"></i></li>
+                                            {% if total_rating == 2 %}
                                             <li class="full-star"><i class="flaticon-star"></i></li>
                                             <li class="full-star"><i class="flaticon-star"></i></li>
                                             {% endif %}
 
 
 
-                                            {% if restaurant.rating == 4 %}
-                                            <li class="full-star"><i class="flaticon-star"></i></li>
+                                            {% if total_rating == 3 %}
                                             <li class="full-star"><i class="flaticon-star"></i></li>
                                             <li class="full-star"><i class="flaticon-star"></i></li>
                                             <li class="full-star"><i class="flaticon-star"></i></li>
@@ -293,7 +285,16 @@
 
 
 
-                                            {% if restaurant.rating == 5 %}
+                                            {% if total_rating == 4 %}
+                                            <li class="full-star"><i class="flaticon-star"></i></li>
+                                            <li class="full-star"><i class="flaticon-star"></i></li>
+                                            <li class="full-star"><i class="flaticon-star"></i></li>
+                                            <li class="full-star"><i class="flaticon-star"></i></li>
+                                            {% endif %}
+
+
+
+                                            {% if total_rating == 5 %}
                                             <li class="full-star"><i class="flaticon-star"></i></li>
                                             <li class="full-star"><i class="flaticon-star"></i></li>
                                             <li class="full-star"><i class="flaticon-star"></i></li>
@@ -301,6 +302,7 @@
                                             <li class="full-star"><i class="flaticon-star"></i></li>
                                             {% endif %}
                                     </ul>
+
                                     <span>Haqqında {{comments.count}} rəy mövcuddur</span>
                                 </div>
                                 <p>{{restaurant.description}}</p>
@@ -329,7 +331,10 @@
                                             <div class="details-card-list-texts">{{restaurant.available_seats}}</div>
                                         </div>
                                         <div class="details-card-list-item">
-                                            <form method="get">
+                                            {% if request.user.id in users %}
+                                            <h4 style="padding-top: 10px;">Siz qiymətləndirməni yerinə yetirmisiniz</h4>
+                                            {% else %}
+                                            <form id="rating-form" method="get">
 
                                                 <button style="padding-top: 11px; color: #ff839b;" class="details-card-list-label" type="submit">Qiymətləndir</button>
                                                                           <div class="rate">
@@ -345,6 +350,8 @@
     <input type="radio" id="star1" name="rate" value="1" />
     <label for="star1" title="text">1 star</label>
   </div>
+
+
 </form>
         <style>
             .rate {
@@ -384,6 +391,7 @@
 }
 
         </style>
+                                            {% endif %}
                                         </div>
                                         <br><br>
  <a {% if not request.user.is_authenticated %} href="{% url 'accounts:login_user' %}" {% endif %} onclick="wishCreate('{{ restaurant.id }}')" class="btn btn-warning" id="productWish-{{ restaurant.id }}" {% if request.user in restaurant.wishlist.all %} style="color: red;" {% else %} style="color: black;" {% endif %}>Yadda saxla <i class="fa-sharp fa-solid fa-bookmark"></i></a>

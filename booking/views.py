@@ -253,8 +253,11 @@ def restaurant_detail_view(request, slug):
     user = request.user
     rate = request.GET.get("rate")
     print(rate)
+    users = Rating.objects.filter(restaurant=restaurant).values_list("user", flat=True)
+
     if rate:
-        if not user in Rating.objects.filter(restaurant=restaurant).values_list("user", flat=True):
+        if not (user.id in users):
+
             if user:
                 obj = Rating.objects.create(restaurant=restaurant, user=user, rate=rate)
                 obj.save()
@@ -276,6 +279,7 @@ def restaurant_detail_view(request, slug):
         'form': form,
         'total_rating': total_rating,
         'comments': comments,
+        'users': users,
 
     }
 
@@ -352,3 +356,5 @@ def wishlist_create_view(request):
         data['success'] = True
 
     return JsonResponse(data)
+
+
