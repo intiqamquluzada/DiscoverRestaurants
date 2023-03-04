@@ -187,7 +187,7 @@
                                           <li>
                                             <a href="{% url 'booking:saved' %}">
                                                 <i class="fa-solid fa-bookmark"></i>
-                                                <span class="option-badge">{{restaurant.wishlist.all.count}}</span>
+                                                <span id="counter-{{ restaurant.id }}" class="option-badge">{{restaurant.wishlist.all.count}}</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -264,6 +264,10 @@
                                 <div class="card-2-reviews">
 
                                     <ul class="review-star">
+
+                                        {% if total_rating == 0 %}
+                                            <li class="full-star"><h5>Hələki qiymətləndirmə yoxdur :)</h5></i></li>
+                                            {% endif %}
                                      {% if total_rating == 1 %}
                                             <li class="full-star"><i class="flaticon-star"></i></li>
                                             {% endif %}
@@ -336,7 +340,7 @@
                                             {% else %}
                                             <form id="rating-form" method="get">
 
-                                                <button style="padding-top: 11px; color: #ff839b;" class="details-card-list-label" type="submit">Qiymətləndir</button>
+                                                <button style="padding-top: 11px; color: #ff839b;" class="details-card-list-label btn btn-outline-warning" type="submit">Qiymətləndir</button>
                                                                           <div class="rate">
 
     <input type="radio" id="star5" name="rate" value="5" />
@@ -447,14 +451,11 @@
 
                         if(data.success){
                             $("#productWish-"+id).css("color", "red")
-                            $("#productWish-"+id).innerHTML("Yadda saxlandi <i class=\"fa-sharp fa-solid fa-bookmark\"></i>")
-
 
                         }
 
                         else{
                             $("#productWish-"+id).css("color", "black")
-                            $("#productWish-"+id).innerHTML("Yadda saxla <i class=\"fa-sharp fa-solid fa-bookmark\"></i>")
 
                         }
 

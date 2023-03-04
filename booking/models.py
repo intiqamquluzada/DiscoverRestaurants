@@ -214,3 +214,27 @@ class Rating(DateMixin, SlugMixin):
         if not self.slug:
             self.slug = Generator.create_slug_shortcode(size=15, model_=Rating)
         super(Rating, self).save(*args, **kwargs)
+
+
+class Reserve(DateMixin, SlugMixin):
+    full_name = models.CharField(max_length=100)
+    count_of_adult = models.IntegerField(default=1)
+    count_of_children = models.IntegerField(default=0)
+    phone_number = models.TextField()
+    passport_number = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.full_name
+
+    class Meta:
+        ordering = ("-created_at", )
+        verbose_name = "Reserve"
+        verbose_name_plural = "Reserves"
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = Generator.create_slug_shortcode(size=15, model_=Rating)
+        super(Rating, self).save(*args, **kwargs)
+
+
+
