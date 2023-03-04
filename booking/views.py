@@ -269,7 +269,7 @@ def restaurant_detail_view(request, slug):
     if say:
         total_rating = total_rating // say
     print(total_rating)
-    print(Rating.objects.filter(restaurant=restaurant, user=user).values_list("rate", flat=True))
+    print(77777777777777777777777)
     context = {
         'restaurant': restaurant,
         'link': link,
