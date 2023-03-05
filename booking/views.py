@@ -30,8 +30,7 @@ User = get_user_model()
 
 def home_view(request):
     companies_corporation = CooperationCompanies.objects.all()
-    rate = Restaurants.objects.all().values_list('rating', flat=True)
-    print(rate)
+
     popular_restaurants = Restaurants.objects.filter(rating=5)
     countries_list = Countries.objects.all()
 
@@ -91,7 +90,6 @@ def home_view(request):
         'countries_list': countries_list,
         'paginator': paginator,
         'message': message,
-
         'country': country,
         'region': region,
         'companies': companies_corporation,
@@ -230,6 +228,29 @@ def reserved_view(request):
     return render(request, "reserved.html", context)
 
 
+def star(restaurant, user, rate):
+    total_rating = 0
+    users = Rating.objects.filter(restaurant=restaurant).values_list("user", flat=True)
+
+    if rate:
+        if not (user.id in users):
+            if user:
+                obj = Rating.objects.create(restaurant=restaurant, user=user, rate=rate)
+                obj.save()
+
+    for i in Rating.objects.filter(restaurant=restaurant).values_list("rate", flat=True):
+        total_rating += i
+
+    say = Rating.objects.filter(
+        restaurant=restaurant
+    ).values_list("rate", flat=True).count()
+
+    if say:
+        total_rating = total_rating // say
+
+    return total_rating
+
+
 def restaurant_detail_view(request, slug):
     restaurant = get_object_or_404(Restaurants, slug=slug)
 
@@ -248,30 +269,8 @@ def restaurant_detail_view(request, slug):
             form = CommentForm()
     # # comment
     comments = Comment.objects.filter(restaurant=restaurant).order_by("-created_at")
-
-    total_rating = 0
-    user = request.user
-    rate = request.GET.get("rate")
-    print(rate)
     users = Rating.objects.filter(restaurant=restaurant).values_list("user", flat=True)
-
-    if rate:
-        if not (user.id in users):
-
-            if user:
-                obj = Rating.objects.create(restaurant=restaurant, user=user, rate=rate)
-                obj.save()
-
-    for i in Rating.objects.filter(restaurant=restaurant).values_list("rate", flat=True):
-        total_rating += i
-    say = Rating.objects.filter(
-
-            restaurant=restaurant
-
-        ).values_list("rate", flat=True).count()
-    if say:
-        total_rating = total_rating // say
-    print(total_rating)
+    total_rating = star(restaurant, request.user, request.GET.get("rate"))
 
     context = {
         'restaurant': restaurant,
@@ -356,5 +355,3 @@ def wishlist_create_view(request):
         data['success'] = True
 
     return JsonResponse(data)
-
-
