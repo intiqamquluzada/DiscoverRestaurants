@@ -49,18 +49,12 @@ def home_view(request):
     geolocation_data = json.loads(geolocation_json)
 
     country = geolocation_data["country"]
-    print(country)
-    region = geolocation_data["region"]
-    print(region)
-    # cont = Countries.objects.filter(name=str(country)).values('slug')
 
-    # print(cont)
+    region = geolocation_data["region"]
 
     result = Restaurants.objects.all()
 
     search = request.GET.get('q', None)
-
-    print(search)
 
     if search:
         result = Restaurants.objects.filter(country_of_restaurant__name__icontains=search)
@@ -132,19 +126,11 @@ def list_view(request):
 
     rating = str(request.GET.get("rating")).split(" ")[0]
 
-    print(rating)
-
     city = request.GET.get("city")
-
-    print(city)
 
     r_type = request.GET.get("type")
 
-    print(r_type)
-
     count = request.GET.get("count")
-
-    print(count)
 
     if rating:
         try:
@@ -165,6 +151,8 @@ def list_view(request):
         print(message)
     else:
         message = ""
+
+
 
     paginator = Paginator(result, 6)
     page = request.GET.get('page', 1)
@@ -248,7 +236,10 @@ def star(restaurant, user, rate):
     if say:
         total_rating = total_rating // say
 
-    return total_rating
+    restaurant.rating = total_rating
+    restaurant.save()
+
+    return restaurant.rating
 
 
 def restaurant_detail_view(request, slug):

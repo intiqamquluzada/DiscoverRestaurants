@@ -74,6 +74,8 @@ class Restaurants(DateMixin, SlugMixin):
         if not self.slug:
             self.slug = Generator.create_slug_shortcode(size=15, model_=Restaurants)
 
+
+
         super(Restaurants, self).save(*args, **kwargs)
 
 
