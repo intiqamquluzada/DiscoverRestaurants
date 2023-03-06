@@ -412,7 +412,9 @@
 
                                     <div class="card-1-reviews">
                                         <ul class="review-star">
-
+                                            {% if restaurant.rating == 0 %}
+                                           <li class="full-star"><small>Yeni restoran</small></li>
+                                            {% endif %}
                                             {% if restaurant.rating == 1 %}
                                             <li class="full-star"><i class="flaticon-star"></i></li>
                                             {% endif %}

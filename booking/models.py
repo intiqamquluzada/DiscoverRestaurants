@@ -51,13 +51,13 @@ class Restaurants(DateMixin, SlugMixin):
     country_of_restaurant = models.ForeignKey(Countries, on_delete=models.CASCADE, null=True, blank=True)
     city = models.CharField(max_length=200, )
     type_r = models.CharField(max_length=100, choices=CHOICES, )
-    rating = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
+    rating = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)], default=0, editable=False, null=True, blank=True)
     number = models.TextField()
     location = models.TextField()
     description = models.TextField()
     seats = models.IntegerField(null=True, blank=True, default=1)
     available_seats = models.IntegerField(null=True, blank=True, default=0)
-    wishlist = models.ManyToManyField(User, blank=True, related_name="wishlist")
+    wishlist = models.ManyToManyField(User, blank=True, related_name="wishlist", editable=False)
 
     class Meta:
         ordering = ("-created_at",)
@@ -73,8 +73,6 @@ class Restaurants(DateMixin, SlugMixin):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = Generator.create_slug_shortcode(size=15, model_=Restaurants)
-
-
 
         super(Restaurants, self).save(*args, **kwargs)
 
@@ -229,7 +227,7 @@ class Reserve(DateMixin, SlugMixin):
         return self.full_name
 
     class Meta:
-        ordering = ("-created_at", )
+        ordering = ("-created_at",)
         verbose_name = "Reserve"
         verbose_name_plural = "Reserves"
 
@@ -237,6 +235,3 @@ class Reserve(DateMixin, SlugMixin):
         if not self.slug:
             self.slug = Generator.create_slug_shortcode(size=15, model_=Rating)
         super(Rating, self).save(*args, **kwargs)
-
-
-
