@@ -1,6 +1,6 @@
 import qrcode
 from django.db import models
-from services.choices import CHOICES
+from services.choices import CHOICES, TIME_CHOICES
 from services.uploader import Uploader
 from services.mixin import DateMixin, SlugMixin
 from services.generator import Generator
@@ -217,11 +217,15 @@ class Rating(DateMixin, SlugMixin):
 
 
 class Reserve(DateMixin, SlugMixin):
-    full_name = models.CharField(max_length=100)
-    count_of_adult = models.IntegerField(default=1)
-    count_of_children = models.IntegerField(default=0)
+    restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE,)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,)
+    full_name = models.CharField(max_length=100,)
+    count_of_guest = models.IntegerField(default=1)
     phone_number = models.TextField()
     passport_number = models.CharField(max_length=100)
+    date = models.DateField()
+    hour = models.CharField(choices=TIME_CHOICES, max_length=100)
+    notes = models.TextField()
 
     def __str__(self):
         return self.full_name
@@ -233,5 +237,5 @@ class Reserve(DateMixin, SlugMixin):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = Generator.create_slug_shortcode(size=15, model_=Rating)
-        super(Rating, self).save(*args, **kwargs)
+            self.slug = Generator.create_slug_shortcode(size=15, model_=Reserve)
+        super(Reserve, self).save(*args, **kwargs)

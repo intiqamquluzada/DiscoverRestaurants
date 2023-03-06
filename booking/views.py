@@ -6,7 +6,7 @@ import json
 from django.contrib.auth import get_user_model
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from .forms import CommentForm
+from .forms import CommentForm, ReserveForm
 from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from django.urls import reverse
 
@@ -152,8 +152,6 @@ def list_view(request):
     else:
         message = ""
 
-
-
     paginator = Paginator(result, 6)
     page = request.GET.get('page', 1)
     p = paginator.get_page(page)
@@ -289,8 +287,25 @@ def menu_restaurant(request, slug):
 
 def reserve_restaurant(request, slug):
     restaurant = get_object_or_404(Restaurants, slug=slug)
+
+    if request.method == "POST":
+        print(55555, 'post')
+        form = ReserveForm(request.POST or None)
+        if form.is_valid():
+            print(55555, 'isvalid')
+            reservation = form.save(commit=False)
+
+            reservation.user = request.user
+            reservation.restaurant = restaurant
+            reservation.save()
+            form = ReserveForm()
+    else:
+        print(55555, 'else')
+        form = ReserveForm()
+
     context = {
         'restaurant': restaurant,
+        'form': form
     }
 
     return render(request, "reservation.html", context)

@@ -10,7 +10,7 @@
         <meta name="author" content="EnvyTheme">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-        <title>Traip - Travel & Tour Booking HTML Template</title>
+        <title>Rezervasiya</title>
         <link rel="icon" href="{% static 'assets/images/favicon.png' %}" type="image/png" sizes="16x16">
 
         <!-- bootstrap css -->
@@ -254,57 +254,25 @@
                                 <h3 class="sub-section-title-heading">Rezervasiya detalları</h3>
                             </div>
                             <div class="checkout-form">
-                                <form>
+
+
                                     <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group mb-20">
-                                                <label>Last Name</label>
-                                                <input type="email" name="name" class="form-control form-control-background-white" required placeholder="Last name*">
-                                            </div>
-                                        </div>
-
-
-
-                                        <div class="col-sm-6">
-                                            <div class="form-group mb-20">
-                                                <label>Phone</label>
-                                                <input type="text" name="phone" class="form-control form-control-background-white" required placeholder="Phone number*">
-                                            </div>
-                                        </div>
-
-
-
-
-
-
-                                        <div class="col-sm-12 col-lg-6">
-                                            <div class="form-group mb-20">
-                                                <label>Postcode / Zip</label>
-                                                <input type="email" name="postcode-zip" class="form-control  form-control-background-white" required placeholder="Postcode / Zip*">
-                                            </div>
-                                        </div>
-                                         <div class="col-sm-12 col-lg-6">
-                                            <div class="form-group mb-20">
-                                                <label>Postcode / Zip</label>
-                                                <input type="email" name="postcode-zip" class="form-control  form-control-background-white" required placeholder="Postcode / Zip*">
-                                            </div>
-                                        </div>
-
+                                        <form method="post">
+                                    {% csrf_token %}
+                                            {% for field in form %}
                                         <div class="col-sm-12">
-                                            <div class="form-group m-0">
-                                                <label>Order Notes</label>
-                                                <textarea name="order" class="form-control  form-control-background-white" rows="10" placeholder="Order Notes*"></textarea>
-                                            </div>
-                                        </div>
-
-                                          <div style="padding-top: 10px;" class="col-sm-6">
                                             <div class="form-group mb-20">
-                                                <button type="submit" class="btn btn-outline-success">Təsdiqlə</button>
+                                                <label>{{field.label}} </label>
+                                                {{field}}
                                             </div>
                                         </div>
 
-                                    </div>
+                                    {% endfor %}
+                                            <button class="btn btn-outline-success" type="submit">Rezervasiya et </button>
+
                                 </form>
+                                    </div>
+
                             </div>
                         </div>
                     </div>

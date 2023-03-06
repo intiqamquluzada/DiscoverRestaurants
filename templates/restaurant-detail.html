@@ -249,7 +249,7 @@
                                 {% for i in restaurant.restaurantimages_set.all %}
                                 <div class="item" >
 
-                                    <img src="{{i.images.url}}" alt="tour" style="height: 600px; width: 600px;">
+                                    <img src="{{i.images.url}}" alt="tour" style="height: 1000px; width: 600px;">
                                 </div>
                                 {% endfor %}
 
@@ -397,7 +397,7 @@
         </style>
                                             {% endif %}
                                         </div>
-                                        <br><br>
+                                        <br>
  <a {% if not request.user.is_authenticated %} href="{% url 'accounts:login_user' %}" {% endif %} onclick="wishCreate('{{ restaurant.id }}')" class="btn btn-warning" id="productWish-{{ restaurant.id }}" {% if request.user in restaurant.wishlist.all %} style="color: red;" {% else %} style="color: black;" {% endif %}>Yadda saxla <i class="fa-sharp fa-solid fa-bookmark"></i></a>
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                             <a href="{% url 'booking:reserve' restaurant.slug %}" class="btn btn-success">Rezerv  <i class="fa-solid fa-utensils"></i></a>
                                         <br><br><h3>Menyu:</h3>
