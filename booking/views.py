@@ -131,6 +131,7 @@ def list_view(request):
     r_type = request.GET.get("type")
 
     count = request.GET.get("count")
+    print(count)
 
     if rating:
         try:
@@ -256,7 +257,7 @@ def restaurant_detail_view(request, slug):
             return HttpResponseRedirect(reverse('booking:restaurant_detail', args=[restaurant.slug]))
         else:
             form = CommentForm()
-    # # comment
+    # comment
     comments = Comment.objects.filter(restaurant=restaurant).order_by("-created_at")
     users = Rating.objects.filter(restaurant=restaurant).values_list("user", flat=True)
     total_rating = star(restaurant, request.user, request.GET.get("rate"))
