@@ -132,7 +132,7 @@ def list_view(request):
 
     count = request.GET.get("count")
     print(count)
-
+    print("SALAM ALEYKUMM")
     if rating:
         try:
             rating = int(rating)
