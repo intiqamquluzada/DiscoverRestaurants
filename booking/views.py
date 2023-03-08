@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from .forms import CommentForm, ReserveForm
-from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
+from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 
 api_key = "5117dbe9476548a6834433afd9b63554"
