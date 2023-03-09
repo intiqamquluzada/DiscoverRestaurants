@@ -310,13 +310,12 @@ def reserve_restaurant(request, slug):
     obyekt = Reserve.objects.filter(user=request.user, restaurant=restaurant)
 
 
-    print(restaurant.available_seats)
     if request.method == "POST" and obyekt.first():
         count_guest = obyekt.first().count_of_guest
         if restaurant.available_seats >= count_guest:
             restaurant.available_seats = restaurant.available_seats - count_guest
             restaurant.save()
-    print(restaurant.available_seats)
+
     context = {
         'restaurant': restaurant,
         'form': form,
