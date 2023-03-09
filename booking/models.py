@@ -217,8 +217,8 @@ class Rating(DateMixin, SlugMixin):
 
 
 class Reserve(DateMixin, SlugMixin):
-    restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE,)
-    user = models.ForeignKey(User, on_delete=models.CASCADE,)
+    restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE, related_name='restaurantforreserve')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
     full_name = models.CharField(max_length=100,)
     count_of_guest = models.IntegerField(default=1)
     phone_number = models.TextField()
@@ -226,6 +226,7 @@ class Reserve(DateMixin, SlugMixin):
     date = models.DateField()
     hour = models.CharField(choices=TIME_CHOICES, max_length=100)
     notes = models.TextField()
+    reserved = models.BooleanField(default=True)
 
     def __str__(self):
         return self.full_name

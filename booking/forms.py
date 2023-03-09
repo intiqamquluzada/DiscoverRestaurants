@@ -34,7 +34,7 @@ class ReserveForm(forms.ModelForm):
 
     class Meta:
         model = Reserve
-        exclude = ("user", "restaurant")
+        exclude = ("user", "restaurant", "reserved")
 
     def __init__(self, *args, **kwargs):
         super(ReserveForm, self).__init__(*args, **kwargs)

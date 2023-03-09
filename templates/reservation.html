@@ -251,7 +251,18 @@
                     <div class="col-lg-7 pb-30 desk-pad-right-40">
                         <div class="checkout-box">
                             <div class="sub-section-title">
-                                <h3 class="sub-section-title-heading">Rezervasiya detalları</h3>
+                                {% if user.id in obj %}
+
+
+
+
+
+
+                      <h5>Siz bu restoranı rezerv etmisiniz</h5>
+
+                              {% else %}
+
+                                  <h3 class="sub-section-title-heading">Rezervasiya detalları</h3>
                             </div>
                             <div class="checkout-form">
 
@@ -271,6 +282,7 @@
                                             <button class="btn btn-outline-success" type="submit">Rezervasiya et </button>
 
                                 </form>
+
                                     </div>
 
                             </div>
@@ -382,7 +394,9 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
         </section>
+
         <!-- Checkout -->
         <!-- Footer -->
         <footer class="footer footer-bg">

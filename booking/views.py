@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.db.models import F
-from .models import Restaurants, CooperationCompanies, Countries, Comment, Likes, Rating
+from .models import Restaurants, CooperationCompanies, Countries, Comment, Likes, Rating, Reserve
 import requests
 import json
 from django.contrib.auth import get_user_model
@@ -286,26 +286,41 @@ def menu_restaurant(request, slug):
 
 
 def reserve_restaurant(request, slug):
+    context = {}
     restaurant = get_object_or_404(Restaurants, slug=slug)
+    print(Reserve.objects.filter(user=request.user, restaurant=restaurant))
+    print(Reserve.objects.filter(user=request.user, restaurant=restaurant).count())
+    obj = Reserve.objects.filter(user=request.user, restaurant=restaurant)
+    obj = list(obj.values_list("user", flat=True))
+    print(obj)
+
 
     if request.method == "POST":
         print(55555, 'post')
         form = ReserveForm(request.POST or None)
+
         if form.is_valid():
             print(55555, 'isvalid')
             reservation = form.save(commit=False)
-
             reservation.user = request.user
             reservation.restaurant = restaurant
             reservation.save()
             form = ReserveForm()
+
     else:
         print(55555, 'else')
         form = ReserveForm()
+    obyekt = Reserve.objects.filter(user=request.user, restaurant=restaurant)
+    count_guest = obyekt[0].count_of_guest
+    print(type(count_guest), type(restaurant.available_seats))
+
+    print(restaurant.available_seats)
 
     context = {
         'restaurant': restaurant,
-        'form': form
+        'form': form,
+        'obj': obj,
+
     }
 
     return render(request, "reservation.html", context)
