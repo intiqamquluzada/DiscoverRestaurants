@@ -30,9 +30,11 @@ class ReserveForm(forms.ModelForm):
     hour = forms.ChoiceField(choices=TIME_CHOICES)
 
 
+
+
     class Meta:
         model = Reserve
-        fields = "__all__"
+        exclude = ("user", "restaurant")
 
     def __init__(self, *args, **kwargs):
         super(ReserveForm, self).__init__(*args, **kwargs)
@@ -41,6 +43,8 @@ class ReserveForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({"class": "form-control  form-control-background-white"})
 
         self.fields["full_name"].required = True
+
+
 
         self.fields["count_of_guest"].required = True
 
