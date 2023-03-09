@@ -55,7 +55,6 @@ class Restaurants(DateMixin, SlugMixin):
     number = models.TextField()
     location = models.TextField()
     description = models.TextField()
-    seats = models.IntegerField(null=True, blank=True, default=1)
     available_seats = models.IntegerField(null=True, blank=True, default=0)
     wishlist = models.ManyToManyField(User, blank=True, related_name="wishlist", editable=False)
 
