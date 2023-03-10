@@ -1,20 +1,19 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from services.uploader import Uploader
 from services.generator import Generator
 
 
 class MyUserManager(BaseUserManager):
     def create_user(self, email, password=None, is_active=True, is_staff=False, is_superuser=False):
         if not email:
-            raise ValueError("Users must have an email address")
+            raise ValueError("Istifadecinin elektron-poctu olmalidir")
         user = self.model(
             email=self.normalize_email(email)
         )
         user.set_password(password)
-        user.is_active = is_active
         user.is_staff = is_staff
         user.is_superuser = is_superuser
+        user.is_active = is_active
         user.save(using=self._db)
         return user
 
@@ -29,20 +28,17 @@ class MyUserManager(BaseUserManager):
         return user
 
 
-class CustomUser(AbstractBaseUser):
+class MyUser(AbstractBaseUser):
     email = models.EmailField(unique=True, max_length=120)
-    name = models.CharField(max_length=40, verbose_name="İstifadəçi adı", blank=True, null=True)
-    surname = models.CharField(max_length=40, verbose_name="İstifadəçi soyadı", blank=True, null=True)
-    profile_image = models.ImageField(upload_to=Uploader.upload_images_for_user, null=True, blank=True)
-
+    name = models.CharField(max_length=40, verbose_name="Istifadəçi adı", blank=True, null=True)
+    surname = models.CharField(max_length=40, verbose_name="Istifadəçi soyadı", blank=True, null=True)
+    pp = models.ImageField(upload_to="accounts/", blank=True, null=True)
     slug = models.SlugField(unique=True)
-
-    activation_code = models.CharField(max_length=6, unique=True, blank=True, null=True)
+    activation_code = models.CharField(max_length=50, unique=True, blank=True, null=True)
     password_reset_code = models.CharField(max_length=120, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
-    timestamp = models.DateTimeField(auto_now_add=True)
-
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
@@ -51,9 +47,9 @@ class CustomUser(AbstractBaseUser):
     USERNAME_FIELD = 'email'
 
     class Meta:
-        ordering = ['-timestamp']
-        verbose_name = 'CustomUser'
-        verbose_name_plural = 'Custom Users'
+        ordering = ['-created_at']
+        verbose_name = 'MyUser'
+        verbose_name_plural = 'MyUser'
 
     def __str__(self):
         return self.email
@@ -71,5 +67,5 @@ class CustomUser(AbstractBaseUser):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = Generator.create_slug_shortcode(size=20, model_=CustomUser)
-        return super(CustomUser, self).save(*args, **kwargs)
+            self.slug = Generator.create_slug_shortcode(size=20, model_=MyUser)
+        return super(MyUser, self).save(*args, **kwargs)

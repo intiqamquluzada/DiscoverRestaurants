@@ -187,7 +187,7 @@
                                           <li>
                                             <a href="{% url 'booking:saved' %}">
                                                 <i class="fa-solid fa-bookmark"></i>
-                                                <span id="counter-{{ restaurant.id }}" class="option-badge">{{restaurant.wishlist.all.count}}</span>
+                                                <span id="counter-{{ restaurant.id }}" class="option-badge">{% if restaurant.wishlist.all.count > 0 %} {{restaurant.wishlist.all.count}} {% endif %}</span>
                                             </a>
                                         </li>
                                     </ul>

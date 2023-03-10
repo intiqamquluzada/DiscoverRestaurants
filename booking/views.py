@@ -4,6 +4,7 @@ from .models import Restaurants, CooperationCompanies, Countries, Comment, Likes
 import requests
 import json
 from django.contrib.auth import get_user_model
+from accounts.models import MyUser
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from .forms import CommentForm, ReserveForm
@@ -25,7 +26,8 @@ def get_ip_geolocation_data(ip_address):
     return response.content
 
 
-User = get_user_model()
+User = MyUser()
+
 
 
 def home_view(request):
@@ -291,7 +293,6 @@ def reserve_restaurant(request, slug):
     obj = Reserve.objects.filter(user=request.user, restaurant=restaurant)
     obj = list(obj.values_list("user", flat=True))
 
-
     if request.method == "POST":
 
         form = ReserveForm(request.POST or None)
@@ -308,7 +309,6 @@ def reserve_restaurant(request, slug):
         form = ReserveForm()
 
     obyekt = Reserve.objects.filter(user=request.user, restaurant=restaurant)
-
 
     if request.method == "POST" and obyekt.first():
         count_guest = obyekt.first().count_of_guest
