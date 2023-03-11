@@ -181,24 +181,43 @@
                                         <li>
                                             <a href="{% url 'booking:reserved' %}">
                                                 <i class="flaticon-shopping-bag"></i>
-                                                <span class="option-badge">2</span>
+
                                             </a>
                                         </li>
                                           <li>
                                             <a href="{% url 'booking:saved' %}">
                                                 <i class="fa-solid fa-bookmark"></i>
-                                                <span id="counter-{{ restaurant.id }}" class="option-badge">{% if restaurant.wishlist.all.count > 0 %} {{restaurant.wishlist.all.count}} {% endif %}</span>
+
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
                         {% if not user.is_authenticated %}
-                                 <div class="navbar-option-item">
-                                    <a href="{% url 'accounts:login_user' %}" class="btn btn-primary">Qonaq kimi giriş <i class="flaticon-right-arrow"></i></a>
-                                </div> &nbsp; &nbsp; &nbsp; &nbsp;
-                                 <div class="navbar-option-item">
-                                    <a href="{% url 'accounts:login_owner' %}" class="btn btn-warning">Sahibkar kimi giriş <i class="flaticon-right-arrow"></i></a>
-                                </div>
+<button id="login-btn" class="btn btn-primary" style="margin-right: 10px;">Giriş</button>
+
+<div id="login-options" style="display: none;">
+    <div class="navbar-option-item" style="margin-bottom: 10px;">
+        <a href="{% url 'accounts:login_user' %}" class="btn btn-primary">Qonaq kimi giriş <i class="flaticon-right-arrow"></i></a>
+    </div>
+    <div class="navbar-option-item">
+        <a href="{% url 'accounts:login_owner' %}" class="btn btn-warning">Sahibkar kimi giriş <i class="flaticon-right-arrow"></i></a>
+    </div>
+</div>
+
+<script>
+    var loginBtn = document.getElementById("login-btn");
+    var loginOptions = document.getElementById("login-options");
+
+    loginBtn.addEventListener("click", function() {
+        if (loginOptions.style.display === "none") {
+            loginOptions.style.display = "block";
+        } else {
+            loginOptions.style.display = "none";
+        }
+    });
+</script>
+
+
                                 {% endif %}
 
                                 {% if user.is_authenticated  %}
@@ -214,6 +233,8 @@
         </div>
         <!-- Navbar -->
         <!-- Header -->
+
+
         <header class="inner-page-header inner-page-header-6">
             <div class="inner-header-shape"></div>
             <!-- header-content -->
@@ -318,20 +339,20 @@
                                             <div class="details-card-list-texts">{{restaurant.location}}</div>
                                         </div>
                                         <div class="details-card-list-item">
-                                            <div class="details-card-list-label">Open</div>
+                                            <div class="details-card-list-label">Açılır</div>
                                             <div class="details-card-list-texts">10:00 AM</div>
                                         </div>
                                         <div class="details-card-list-item">
-                                            <div class="details-card-list-label">Close</div>
+                                            <div class="details-card-list-label">Bağlanır</div>
                                             <div class="details-card-list-texts">12:00 AM</div>
                                         </div>
 
                                         <div class="details-card-list-item">
-                                            <div class="details-card-list-label">Service</div>
-                                            <div class="details-card-list-texts">24 Hour</div>
+                                            <div class="details-card-list-label">Xidmət</div>
+                                            <div class="details-card-list-texts">24 Saat</div>
                                         </div>
                                         <div class="details-card-list-item">
-                                            <div class="details-card-list-label">Available Seat</div>
+                                            <div class="details-card-list-label">Hal-hazırda boş yerlərin sayı</div>
                                             <div class="details-card-list-texts">{{restaurant.available_seats}}</div>
                                         </div>
                                         <div class="details-card-list-item">
@@ -343,16 +364,33 @@
                                                 <button style="padding-top: 11px; color: #ff839b;" class="details-card-list-label btn btn-outline-warning" type="submit">Qiymətləndir</button>
                                                                           <div class="rate">
 
-    <input type="radio" id="star5" name="rate" value="5" />
-    <label for="star5" title="text">5 stars</label>
-    <input type="radio" id="star4" name="rate" value="4" />
-    <label for="star4" title="text">4 stars</label>
-    <input type="radio" id="star3" name="rate" value="3" />
-    <label for="star3" title="text">3 stars</label>
-    <input type="radio" id="star2" name="rate" value="2" />
-    <label for="star2" title="text">2 stars</label>
-    <input type="radio" id="star1" name="rate" value="1" />
-    <label for="star1" title="text">1 star</label>
+    <input type="radio" id="star5" name="rate" value="5"/>
+    <label for="star5" title="text" href="#">5 stars</label>
+    <input type="radio" id="star4" name="rate" value="4"/>
+    <label for="star4" title="text" href="#">4 stars</label>
+    <input type="radio" id="star3" name="rate" value="3"/>
+    <label for="star3" title="text" href="#">3 stars</label>
+    <input type="radio" id="star2" name="rate" value="2"/>
+    <label for="star2" title="text" href="#">2 stars</label>
+    <input type="radio" id="star1" name="rate" value="1"/>
+    <label for="star1" title="text" href="#">1 star</label>
+                                                                              <script>
+                                                                                  // Get all the label elements
+const labels = document.querySelectorAll('label');
+
+// Add a click event listener to each label element
+labels.forEach(label => {
+  label.addEventListener('click', (event) => {
+    event.preventDefault(); // Prevent the default behavior of the click event
+    const input = document.getElementById(label.getAttribute('for')); // Get the associated radio button
+    input.checked = true; // Check the associated radio button
+    // Do other things here, such as submitting a form or updating a rating
+  });
+});
+
+                                                                              </script>
+
+
   </div>
 
 

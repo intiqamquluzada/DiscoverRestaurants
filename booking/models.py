@@ -57,7 +57,7 @@ class Restaurants(DateMixin, SlugMixin):
     location = models.TextField()
     description = models.TextField()
     available_seats = models.IntegerField(null=True, blank=True, default=0)
-    wishlist = models.ManyToManyField(User, blank=True, null=True, related_name="wishlist",)
+    wishlist = models.ManyToManyField(User, blank=True, related_name="wishlist",)
 
     class Meta:
         ordering = ("-created_at",)
@@ -151,7 +151,7 @@ class Comment(MPTTModel, DateMixin, SlugMixin):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
     body = models.TextField(null=True, blank=True)
-    likers = models.ManyToManyField(User, default=None, blank=True, null=True, related_name='likers')
+    likers = models.ManyToManyField(User, default=None, blank=True, related_name='likers')
 
     def __str__(self):
         return self.user.username
