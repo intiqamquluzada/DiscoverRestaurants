@@ -364,7 +364,7 @@ def like_and_unlike(request):
 
 def wishlist_create_view(request):
     data = {}
-
+    print(data.values())
     restaurant_id = request.POST.get("restaurant_id")
     restaurant_obj = get_object_or_404(Restaurants, id=int(restaurant_id))
 
