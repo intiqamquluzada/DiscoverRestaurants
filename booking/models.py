@@ -78,7 +78,7 @@ class Restaurants(DateMixin, SlugMixin):
 
 
 class RestaurantImages(DateMixin, SlugMixin):
-    restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE)
+    restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE,)
     images = models.FileField(upload_to=Uploader.upload_images_to_restaurants, )
 
     def save(self, *args, **kwargs):
@@ -96,7 +96,7 @@ class RestaurantImages(DateMixin, SlugMixin):
 
 
 class RestaurantMenu(DateMixin, SlugMixin):
-    restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE)
+    restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE, )
     menu_images = models.FileField(upload_to=Uploader.upload_images_for_menu, blank=True)
 
     def save(self, *args, **kwargs):
@@ -133,7 +133,7 @@ class CooperationCompanies(DateMixin, SlugMixin):
 
 class BlogModel(DateMixin, SlugMixin):
     name = models.CharField(max_length=200)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, )
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="userblog")
     image = models.ImageField(upload_to=Uploader.upload_images_for_blog)
     description = models.TextField()
 
@@ -147,14 +147,14 @@ class BlogModel(DateMixin, SlugMixin):
 
 
 class Comment(MPTTModel, DateMixin, SlugMixin):
-    restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE, null=True, blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE, null=True, blank=True, related_name="commentrestaurant")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='commentuser')
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
     body = models.TextField(null=True, blank=True)
     likers = models.ManyToManyField(User, default=None, blank=True, related_name='likers')
 
     def __str__(self):
-        return self.user.username
+        return self.restaurant.name
 
     def user_like_status(self, user):
         if Likes.objects.filter(user=user, comment=self).exists():
@@ -189,7 +189,7 @@ class Likes(DateMixin, SlugMixin):
     value = models.CharField(choices=LIKE_CHOICES, default='Like', max_length=10)
 
     def __str__(self):
-        return self.user.username
+        return self.user.email
 
     class Meta:
         ordering = ("-created_at",)
@@ -218,7 +218,7 @@ class Rating(DateMixin, SlugMixin):
 
 class Reserve(DateMixin, SlugMixin):
     restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE, related_name='restaurantforreserve')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='userreserve')
     full_name = models.CharField(max_length=100,)
     count_of_guest = models.IntegerField(default=1)
     phone_number = models.TextField()

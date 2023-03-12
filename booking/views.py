@@ -262,6 +262,7 @@ def restaurant_detail_view(request, slug):
     comments = Comment.objects.filter(restaurant=restaurant).order_by("-created_at")
     users = Rating.objects.filter(restaurant=restaurant).values_list("user", flat=True)
     total_rating = star(restaurant, request.user, request.GET.get("rate"))
+    user = request.user
 
     context = {
         'restaurant': restaurant,
@@ -270,6 +271,7 @@ def restaurant_detail_view(request, slug):
         'total_rating': total_rating,
         'comments': comments,
         'users': users,
+        'user': user,
 
     }
 
