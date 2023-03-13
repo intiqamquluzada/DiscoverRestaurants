@@ -267,6 +267,10 @@ def restaurant_detail_view(request, slug):
     print("forgitttt")
     print("forgitttt")
     print("forgitttt")
+    print("forgitttt")
+    print("forgitttt")
+    print("forgitttt")
+    print("forgitttt")
 
     context = {
         'restaurant': restaurant,
