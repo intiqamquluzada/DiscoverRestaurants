@@ -263,6 +263,10 @@ def restaurant_detail_view(request, slug):
     users = Rating.objects.filter(restaurant=restaurant).values_list("user", flat=True)
     total_rating = star(restaurant, request.user, request.GET.get("rate"))
     user = request.user
+    print("forgitttt")
+    print("forgitttt")
+    print("forgitttt")
+    print("forgitttt")
 
     context = {
         'restaurant': restaurant,
@@ -271,7 +275,8 @@ def restaurant_detail_view(request, slug):
         'total_rating': total_rating,
         'comments': comments,
         'users': users,
-        'user': user,
+        'user': user
+
 
     }
 

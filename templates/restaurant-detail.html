@@ -521,10 +521,13 @@ labels.forEach(label => {
                 	<h3 class="pull-left">Yeni rəy</h3>
 
                     <fieldset>
-                        <div class="row">
+                        <div class="row">{% if user.pp %}
                             <div class="col-sm-3 col-lg-2 hidden-xs">
+
                             	<img class="img-responsive" style="height: 100px; width: 100px;" src="{{ user.pp.url }}" alt="">
+
                             </div>
+                            {% endif %}
                             <div class="form-group  col-sm-9">
                                {{form.body}}
                                 <button type="submit" class="btn btn-outline-warning reply-btn">Rəy bildir</button>
@@ -539,7 +542,7 @@ labels.forEach(label => {
                 <!-- COMMENT 1 - START -->
              {% for comment in comments %}
     <div class="media">
-        <a class="pull-left" href="#"><img class="media-object" style="height: 100px; width: 100px;" src="{{ user.pp.url }}" alt=""></a>
+        <a class="pull-left" href="#"><img class="media-object" style="height: 100px; width: 100px;" src="{{ comment.user.pp.url }}" alt=""></a>
         <div class="media-body">
             <h4 class="media-heading">{{comment.user}}</h4>
             <p>{{comment.body}}</p>

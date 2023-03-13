@@ -1,11 +1,20 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import get_user_model
-
+from .models import MyUser as User
+from django.contrib import messages
 
 
 def login_user_view(request):
-
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('booking:home')
+        else:
+            messages.error(request, 'Invalid username or password')
 
     context = {
 
@@ -15,8 +24,18 @@ def login_user_view(request):
 
 
 def registration_user_view(request):
-
-
+    if request.method == "POST":
+        print(request.POST)
+        user = User.objects.create(
+            name=request.POST.get("firstname"),
+            surname=request.POST.get("lastname"),
+            email=request.POST.get("email"),
+            gender=request.POST.get("gender"),
+            phone=request.POST.get("number")
+        )
+        user.set_password(request.POST.get("password"))
+        user.save()
+        return redirect("accounts:registration_user")
 
     context = {
 

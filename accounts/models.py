@@ -33,6 +33,9 @@ class MyUser(AbstractBaseUser):
     name = models.CharField(max_length=40, verbose_name="Istifadəçi adı", blank=True, null=True)
     surname = models.CharField(max_length=40, verbose_name="Istifadəçi soyadı", blank=True, null=True)
     pp = models.ImageField(upload_to="accounts/", blank=True, null=True)
+    birthday = models.DateField(null=True, blank=True)
+    gender = models.CharField(max_length=20, null=True, blank=True)
+    phone = models.CharField(max_length=100, null=True, blank=True)
     slug = models.SlugField(unique=True)
     activation_code = models.CharField(max_length=50, unique=True, blank=True, null=True)
     password_reset_code = models.CharField(max_length=120, blank=True, null=True)
@@ -69,3 +72,6 @@ class MyUser(AbstractBaseUser):
         if not self.slug:
             self.slug = Generator.create_slug_shortcode(size=20, model_=MyUser)
         return super(MyUser, self).save(*args, **kwargs)
+
+
+

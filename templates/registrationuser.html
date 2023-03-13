@@ -18,7 +18,7 @@
       <div class="col-12 col-lg-9 col-xl-7">
         <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
           <div class="card-body p-4 p-md-5">
-            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Istifadəçi üçün qeydiyyat formu</h3>
             <form method="post">
               {% csrf_token %}
 
@@ -27,7 +27,7 @@
 
                   <div class="form-outline">
                     <input type="text" name="firstname" id="firstName" class="form-control form-control-lg" />
-                    <label class="form-label" for="firstName">First Name</label>
+                    <label class="form-label" for="firstName">Ad</label>
                   </div>
 
                 </div>
@@ -35,52 +35,16 @@
 
                   <div class="form-outline">
                     <input type="text" id="lastName" name="lastname" class="form-control form-control-lg" />
-                    <label class="form-label" for="lastName">Last Name</label>
+                    <label class="form-label" for="lastName">Soyad</label>
                   </div>
 
                 </div>
-                <div class="col-md-6 mb-4">
 
-                  <div class="form-outline">
-                    <input type="text"  name="username" class="form-control form-control-lg" />
-                    <label class="form-label" for="lastName">Username</label>
-                  </div>
-
-                </div>
               </div>
 
               <div class="row">
-                <div class="col-md-6 mb-4 d-flex align-items-center">
 
-                  <div class="form-outline datepicker w-100">
-                    <input type="date" name="birthday" class="form-control form-control-lg" id="birthdayDate" />
-                    <label for="birthdayDate" class="form-label">Birthday</label>
-                  </div>
 
-                </div>
-                <div class="col-md-6 mb-4">
-
-                  <h6 class="mb-2 pb-1">Gender: </h6>
-
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="femaleGender"
-                      value="option1" checked />
-                    <label class="form-check-label" for="femaleGender">Female</label>
-                  </div>
-
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="maleGender"
-                      value="option2" />
-                    <label class="form-check-label" for="maleGender">Male</label>
-                  </div>
-
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="otherGender"
-                      value="option3" />
-                    <label class="form-check-label" for="otherGender">Other</label>
-                  </div>
-
-                </div>
               </div>
 
               <div class="row">
@@ -96,24 +60,42 @@
                   </div>
                   <div class="form-outline">
                     <input type="password" id="agpassword" name="againpassword" class="form-control form-control-lg" />
-                    <label class="form-label" for="lastName">Parolu yeniden daxil edin: </label>
+                    <label class="form-label" for="lastName">Parolunuzu təsdiqləyin: </label>
                   </div>
 
                 </div>
-                <div class="col-md-6 mb-4 pb-2">
+                <div class="col-md-6 mb-4 ">
 
                   <div class="form-outline">
                     <input type="tel" id="phoneNumber" name="number" class="form-control form-control-lg" />
-                    <label class="form-label" for="phoneNumber">Phone Number</label>
+                    <label class="form-label" for="phoneNumber">Əlaqə nömrəsi: </label>
+                  </div>
+                <div class="col-md-6 mb-4 mt-2">
+
+                  <h6 class="mb-2 pb-1">Cinsiyyət: </h6>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="femaleGender"
+                      value="option1" checked />
+                    <label class="form-check-label" for="femaleGender">Qadın</label>
                   </div>
 
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="maleGender"
+                      value="option2" />
+                    <label class="form-check-label" for="maleGender">Kişi</label>
+                  </div>
+
+
+
+                </div>
                 </div>
               </div>
 
 
 
               <div class="mt-4 pt-2">
-                <button class="btn btn-primary btn-lg" type="submit" value="Submit" />Submit</button>
+                <button class="btn btn-primary btn-lg" type="submit" value="Submit" />Qeydiyyatdan keç</button>
               </div>
 
             </form>
