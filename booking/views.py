@@ -4,7 +4,8 @@ from django.db.models import F
 from .models import Restaurants, CooperationCompanies, Countries, Comment, Likes, Rating, Reserve
 import requests
 import json
-from django.contrib.auth import get_user_model
+import datetime
+from django.utils import timezone
 from accounts.models import MyUser
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -209,11 +210,8 @@ def saved_restaurants(request):
     return render(request, "wishlist.html", context)
 
 
-def reserved_view(request, ):
+def reserved_view(request):
     reserve_restaurants = Reserve.objects.filter(user=request.user)
-
-
-
 
     paginator = Paginator(reserve_restaurants, 1)
     page = request.GET.get('page', 1)
@@ -232,9 +230,11 @@ def reserved_view(request, ):
 
 def reserve_delete_view(request, slug):
     reserve = get_object_or_404(Reserve, slug=slug)
+    print(timezone.now())
     messages.success(request, f"{reserve.full_name} adına, ({reserve.restaurant.name}) rezervi silindi  !")
     reserve.delete()
     return redirect("booking:reserved")
+
 
 def star(restaurant, user, rate):
     total_rating = 0
@@ -324,6 +324,7 @@ def reserve_restaurant(request, slug):
             reservation.user = request.user
             reservation.restaurant = restaurant
             reservation.save()
+
             form = ReserveForm()
 
     else:
@@ -346,6 +347,16 @@ def reserve_restaurant(request, slug):
     }
 
     return render(request, "reservation.html", context)
+
+
+def time_over_reserve(request, slug):
+    reserve = get_object_or_404(Reserve, slug=slug)
+    now = timezone.now()
+    time_diff = now - reserve.date
+    print(time_diff)
+
+
+
 
 
 # commentLikeandUnlike
