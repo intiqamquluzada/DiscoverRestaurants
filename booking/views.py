@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.db.models import F
 from .models import Restaurants, CooperationCompanies, Countries, Comment, Likes, Rating, Reserve
@@ -27,7 +28,6 @@ def get_ip_geolocation_data(ip_address):
 
 
 User = MyUser()
-
 
 
 def home_view(request):
@@ -209,19 +209,32 @@ def saved_restaurants(request):
     return render(request, "wishlist.html", context)
 
 
-def reserved_view(request, slug):
-    restaurant = get_object_or_404(Restaurants, slug=slug)
+def reserved_view(request, ):
+    reserve_restaurants = Reserve.objects.filter(user=request.user)
 
-    reserve_restaurants = Reserve.objects.filter(user=request.user, restaurant=restaurant)
+
+
+
+    paginator = Paginator(reserve_restaurants, 1)
+    page = request.GET.get('page', 1)
+    p = paginator.get_page(page)
 
     context = {
 
         'reserves': reserve_restaurants,
+        'p': p,
+        'paginator': paginator,
 
     }
 
     return render(request, "reserved.html", context)
 
+
+def reserve_delete_view(request, slug):
+    reserve = get_object_or_404(Reserve, slug=slug)
+    messages.success(request, f"{reserve.full_name} adına, ({reserve.restaurant.name}) rezervi silindi  !")
+    reserve.delete()
+    return redirect("booking:reserved")
 
 def star(restaurant, user, rate):
     total_rating = 0
@@ -271,7 +284,6 @@ def restaurant_detail_view(request, slug):
     total_rating = star(restaurant, request.user, request.GET.get("rate"))
     user = request.user
 
-
     context = {
         'restaurant': restaurant,
         'link': link,
@@ -280,7 +292,6 @@ def restaurant_detail_view(request, slug):
         'comments': comments,
         'users': users,
         'user': user
-
 
     }
 
