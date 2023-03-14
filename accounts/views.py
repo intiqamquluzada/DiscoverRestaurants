@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import get_user_model
 from .models import MyUser as User
 from django.contrib import messages
@@ -41,6 +41,11 @@ def registration_user_view(request):
 
     }
     return render(request, "registrationuser.html", context)
+
+
+def logout_user(request):
+    logout(request)
+    return redirect("booking:home")
 
 
 def forget_password_user(request):

@@ -191,28 +191,56 @@
 <!--                                                <i class="flaticon-searching"></i>-->
 <!--                                            </a>-->
 <!--                                        </li>-->
+                                        {% if user.is_authenticated %}
                                         <li>
                                             <a href="{% url 'booking:reserved' %}">
-                                                <i class="flaticon-shopping-bag"></i>
-                                                <span class="option-badge">2</span>
+                                                <i class="fa-solid fa-person-falling"></i>
+
                                             </a>
                                         </li>
                                           <li>
                                             <a href="{% url 'booking:saved' %}">
                                                 <i class="fa-solid fa-bookmark"></i>
-                                                <span class="option-badge">2</span>
+
                                             </a>
                                         </li>
+                                        {% endif %}
                                     </ul>
                                 </div>
 
-                                 <div class="navbar-option-item">
-                                    <a href="{% url 'accounts:login_user' %}" class="btn btn-primary">Qonaq kimi giriş
-                                        <i class="flaticon-right-arrow"></i></a>
-                                </div> &nbsp; &nbsp; &nbsp; &nbsp;
-                                 <div class="navbar-option-item">
-                                    <a href="{% url 'accounts:login_owner' %}" class="btn btn-warning">Sahibkar kimi giriş <i class="flaticon-right-arrow"></i></a>
+                                 {% if not user.is_authenticated %}
+<button id="login-btn" class="btn btn-primary" style="margin-right: 10px;">Giriş</button>
+
+<div id="login-options" style="display: none;">
+    <div class="navbar-option-item" style="margin-bottom: 10px;">
+        <a href="{% url 'accounts:login_user' %}" class="btn btn-primary">Qonaq kimi giriş <i class="flaticon-right-arrow"></i></a>
+    </div>
+    <div class="navbar-option-item">
+        <a href="{% url 'accounts:login_owner' %}" class="btn btn-warning">Sahibkar kimi giriş <i class="flaticon-right-arrow"></i></a>
+    </div>
+</div>
+
+<script>
+    var loginBtn = document.getElementById("login-btn");
+    var loginOptions = document.getElementById("login-options");
+
+    loginBtn.addEventListener("click", function() {
+        if (loginOptions.style.display === "none") {
+            loginOptions.style.display = "block";
+        } else {
+            loginOptions.style.display = "none";
+        }
+    });
+</script>
+
+
+                                {% endif %}
+
+                                {% if user.is_authenticated  %}
+                                <div class="navbar-option-item">
+                                    <a href="{% url 'accounts:logout_user' %}" class="btn btn-info">Çıxış <i class="flaticon-right-arrow"></i></a>
                                 </div>
+                                {% endif %}
                             </div>
                         </nav>
                     </div>

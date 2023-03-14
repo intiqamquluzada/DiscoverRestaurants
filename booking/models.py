@@ -217,8 +217,8 @@ class Rating(DateMixin, SlugMixin):
 
 
 class Reserve(DateMixin, SlugMixin):
-    restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE, related_name='restaurantforreserve')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='userreserve')
+    restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE, )
+    user = models.ForeignKey(User, on_delete=models.CASCADE, )
     full_name = models.CharField(max_length=100,)
     count_of_guest = models.IntegerField(default=1)
     phone_number = models.TextField()

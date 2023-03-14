@@ -180,7 +180,7 @@
 <!--                                        </li>-->
                                         <li>
                                             <a href="{% url 'booking:reserved' %}">
-                                                <i class="flaticon-shopping-bag"></i>
+                                                <i class="fa-solid fa-person-falling"></i>
 
                                             </a>
                                         </li>
@@ -222,7 +222,7 @@
 
                                 {% if user.is_authenticated  %}
                                 <div class="navbar-option-item">
-                                    <a href="{% url 'accounts:login_owner' %}" class="btn btn-info">Cixis <i class="flaticon-right-arrow"></i></a>
+                                    <a href="{% url 'accounts:logout_user' %}" class="btn btn-info">Çıxış <i class="flaticon-right-arrow"></i></a>
                                 </div>
                                 {% endif %}
                             </div>
@@ -518,8 +518,10 @@ labels.forEach(label => {
             <div class="col-sm-8">
                 <form method="post">
                     {% csrf_token %}
-                	<h3 class="pull-left">Yeni rəy</h3>
 
+                    {% if user.is_authenticated %}
+                	<h3 class="pull-left">Yeni rəy</h3>
+                    {% endif %}
                     <fieldset>
                         <div class="row">{% if user.pp %}
                             <div class="col-sm-3 col-lg-2 hidden-xs">
@@ -528,11 +530,12 @@ labels.forEach(label => {
 
                             </div>
                             {% endif %}
+                            {% if user.is_authenticated %}
                             <div class="form-group  col-sm-9">
                                {{form.body}}
                                 <button type="submit" class="btn btn-outline-warning reply-btn">Rəy bildir</button>
                             </div>
-
+                            {% endif %}
                         </div>
                     </fieldset>
                 </form>
@@ -542,7 +545,9 @@ labels.forEach(label => {
                 <!-- COMMENT 1 - START -->
              {% for comment in comments %}
     <div class="media">
+        {% if comment.user.pp %}
         <a class="pull-left" href="#"><img class="media-object" style="height: 100px; width: 100px;" src="{{ comment.user.pp.url }}" alt=""></a>
+       {% endif %}
         <div class="media-body">
             <h4 class="media-heading">{{comment.user}}</h4>
             <p>{{comment.body}}</p>
@@ -554,13 +559,14 @@ labels.forEach(label => {
                 <li>
                     {% if user.is_authenticated %}
                     <button class="like-btn btn btn-info"  id="myButton" data-commentid="{{ comment.id }}">
-                       {% endif %}
+
                         {% if user not in comment.likers.all %}
                             Like
                         {% else %}
                             Unlike
                         {% endif %}
                     </button>
+                    {% endif %}
                 </li>
             </ul>
         </div>

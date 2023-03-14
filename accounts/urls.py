@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import login_user_view, registration_user_view, forget_password_user, login_for_owner, forget_password_owner
+from .views import (login_user_view, registration_user_view, forget_password_user,
+                    login_for_owner, forget_password_owner, logout_user)
 
 app_name = 'accounts'
 urlpatterns = [
@@ -8,5 +9,6 @@ urlpatterns = [
     path("forgetpassword/user/", forget_password_user, name='forgetuser'),
     path("login/owner/", login_for_owner, name='login_owner'),
     path("registration/owner/", registration_user_view, name='registration_owner'),
-    path("forgetpassword/owner/", forget_password_owner, name='forgetowner')
+    path("forgetpassword/owner/", forget_password_owner, name='forgetowner'),
+    path("logout/user/", logout_user, name='logout_user')
 ]

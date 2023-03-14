@@ -188,6 +188,7 @@ def contact_view(request):
 
 def saved_restaurants(request):
     user_restaurants = request.user.wishlist.all()
+    print(user_restaurants)
 
     paginator = Paginator(user_restaurants, 2)
     page = request.GET.get('page', 1)
@@ -208,8 +209,14 @@ def saved_restaurants(request):
     return render(request, "wishlist.html", context)
 
 
-def reserved_view(request):
+def reserved_view(request, slug):
+    restaurant = get_object_or_404(Restaurants, slug=slug)
+
+    reserve_restaurants = Reserve.objects.filter(user=request.user, restaurant=restaurant)
+
     context = {
+
+        'reserves': reserve_restaurants,
 
     }
 

@@ -248,22 +248,24 @@
 <!--                                                <i class="flaticon-searching"></i>-->
 <!--                                            </a>-->
 <!--                                        </li>-->
+                                        {% if user.is_authenticated %}
                                         <li>
-                                            <a href="{% url 'booking:reserved' %}">
-                                                <i class="flaticon-shopping-bag"></i>
-                                                <span class="option-badge">2</span>
+                                            <a href="{% url 'booking:reserved' user.slug %}">
+                                                <i class="fa-solid fa-person-falling"></i>
+
                                             </a>
                                         </li>
                                           <li>
                                             <a href="{% url 'booking:saved' %}">
                                                 <i class="fa-solid fa-bookmark"></i>
-                                                <span class="option-badge">2</span>
+
                                             </a>
                                         </li>
+                                        {% endif %}
                                     </ul>
                                 </div>
 
-                                 {% if not user.is_authenticated %}
+                                  {% if not user.is_authenticated %}
 <button id="login-btn" class="btn btn-primary" style="margin-right: 10px;">Giriş</button>
 
 <div id="login-options" style="display: none;">
@@ -291,6 +293,11 @@
 
                                 {% endif %}
 
+                                {% if user.is_authenticated  %}
+                                <div class="navbar-option-item">
+                                    <a href="{% url 'accounts:logout_user' %}" class="btn btn-info">Çıxış <i class="flaticon-right-arrow"></i></a>
+                                </div>
+                                {% endif %}
                             </div>
                         </nav>
                     </div>
