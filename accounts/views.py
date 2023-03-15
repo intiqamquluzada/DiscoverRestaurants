@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth import get_user_model
 from .models import MyUser as User
 from django.contrib import messages
 
@@ -35,7 +34,7 @@ def registration_user_view(request):
         )
         user.set_password(request.POST.get("password"))
         user.save()
-        return redirect("accounts:registration_user")
+        return redirect("accounts:login_user")
 
     context = {
 
@@ -64,6 +63,9 @@ def my_account_for_user(request):
 
 
 def login_for_owner(request):
+
+
+
     context = {
 
     }
@@ -72,7 +74,20 @@ def login_for_owner(request):
 
 
 def registration_for_owner(request):
+    CHOICES = (
+        ('Fast-food', 'Fast-food'),
+        ('Milli', 'Milli'),
+        ('Ailəvi', 'Ailəvi'),
+        ('Business-lunch', 'Business-lunch'),
+        ('Şirniyyat', 'Şirniyyat'),
+        ('Vegetarian', 'Vegetarian'),
+        ('Özünə xidmət', 'Özünə xidmət'),
+        ('Klub', 'Klub'),
+    )
+
     context = {
+
+        'types': CHOICES,
 
     }
 

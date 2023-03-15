@@ -1,6 +1,6 @@
 from django import forms
 from .models import Comment, Reserve
-from services.choices import TIME_CHOICES
+
 
 
 class CommentForm(forms.ModelForm):

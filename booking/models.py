@@ -1,6 +1,6 @@
 import qrcode
 from django.db import models
-from services.choices import CHOICES, TIME_CHOICES
+from services.choices import CHOICES
 from services.uploader import Uploader
 from services.mixin import DateMixin, SlugMixin
 from services.generator import Generator
