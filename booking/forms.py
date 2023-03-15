@@ -15,7 +15,7 @@ class CommentForm(forms.ModelForm):
 
 class ReserveForm(forms.ModelForm):
     date = forms.CharField(label='Tarix',
-                           widget=forms.TextInput(attrs={'placeholder': 'Tarix / Saat*', 'type': 'date'}))
+                           widget=forms.TextInput(attrs={'placeholder': 'Tarix / Saat*', 'type': 'datetime-local'}))
     full_name = forms.CharField(label='Ad və soyad', widget=forms.TextInput(attrs={'placeholder': 'Ad və soyad*'}))
 
     count_of_guest = forms.CharField(label='Qonaqların sayı', widget=forms.TextInput(
@@ -26,11 +26,6 @@ class ReserveForm(forms.ModelForm):
                                       widget=forms.TextInput(attrs={'placeholder': 'Passport nömrəsi*', }))
     notes = forms.CharField(label='Əlavə qeydlər',
                             widget=forms.Textarea(attrs={'placeholder': 'Əlavə qeydlər', 'rows': 10}))
-
-    hour = forms.ChoiceField(choices=TIME_CHOICES)
-
-
-
 
     class Meta:
         model = Reserve
@@ -43,8 +38,6 @@ class ReserveForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({"class": "form-control  form-control-background-white"})
 
         self.fields["full_name"].required = True
-
-
 
         self.fields["count_of_guest"].required = True
 

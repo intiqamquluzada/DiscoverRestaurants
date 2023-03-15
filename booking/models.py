@@ -8,8 +8,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from PIL import Image, ImageDraw
 from django.contrib.auth import get_user_model
 from accounts.models import MyUser
-from io import BytesIO
-from django.core.files import File
+import datetime
 from mptt.models import MPTTModel, TreeForeignKey
 
 User = MyUser()
@@ -52,12 +51,13 @@ class Restaurants(DateMixin, SlugMixin):
     country_of_restaurant = models.ForeignKey(Countries, on_delete=models.CASCADE, null=True, blank=True)
     city = models.CharField(max_length=200, )
     type_r = models.CharField(max_length=100, choices=CHOICES, )
-    rating = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)], default=0, editable=False, null=True, blank=True)
+    rating = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)], default=0, editable=False,
+                                 null=True, blank=True)
     number = models.TextField()
     location = models.TextField()
     description = models.TextField()
     available_seats = models.IntegerField(null=True, blank=True, default=0)
-    wishlist = models.ManyToManyField(User, blank=True, related_name="wishlist",)
+    wishlist = models.ManyToManyField(User, blank=True, related_name="wishlist", )
 
     class Meta:
         ordering = ("-created_at",)
@@ -78,7 +78,7 @@ class Restaurants(DateMixin, SlugMixin):
 
 
 class RestaurantImages(DateMixin, SlugMixin):
-    restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE,)
+    restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE, )
     images = models.FileField(upload_to=Uploader.upload_images_to_restaurants, )
 
     def save(self, *args, **kwargs):
@@ -147,7 +147,8 @@ class BlogModel(DateMixin, SlugMixin):
 
 
 class Comment(MPTTModel, DateMixin, SlugMixin):
-    restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE, null=True, blank=True, related_name="commentrestaurant")
+    restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE, null=True, blank=True,
+                                   related_name="commentrestaurant")
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='commentuser')
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
     body = models.TextField(null=True, blank=True)
@@ -219,12 +220,11 @@ class Rating(DateMixin, SlugMixin):
 class Reserve(DateMixin, SlugMixin):
     restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE, )
     user = models.ForeignKey(User, on_delete=models.CASCADE, )
-    full_name = models.CharField(max_length=100,)
+    full_name = models.CharField(max_length=100, )
     count_of_guest = models.IntegerField(default=1)
     phone_number = models.TextField()
     passport_number = models.CharField(max_length=100)
-    date = models.DateField()
-    hour = models.CharField(choices=TIME_CHOICES, max_length=100)
+    date = models.DateTimeField()
     notes = models.TextField()
     reserved = models.BooleanField(default=True)
 
@@ -236,7 +236,11 @@ class Reserve(DateMixin, SlugMixin):
         verbose_name = "Reserve"
         verbose_name_plural = "Reserves"
 
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = Generator.create_slug_shortcode(size=15, model_=Reserve)
+
         super(Reserve, self).save(*args, **kwargs)
+
+
