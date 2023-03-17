@@ -239,7 +239,6 @@ def reserved_view(request):
 
 def reserve_delete_view(request, slug):
     reserve = get_object_or_404(Reserve, slug=slug)
-    print(reserve.restaurant)
     messages.success(request, f"{reserve.full_name} adına, ({reserve.restaurant.name}) rezervi silindi  !")
     reserve.delete()
     return redirect("booking:reserved")
