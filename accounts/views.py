@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .models import MyUser as User
 from django.contrib import messages
+from booking.models import Countries, Cities
 
 
 def login_user_view(request):
@@ -85,9 +86,16 @@ def registration_for_owner(request):
         ('Klub', 'Klub'),
     )
 
+    countries = Countries.objects.all().values_list("name", flat=True)
+    cities = Cities.objects.all().values_list("name", flat=True)
+    print(cities, countries)
+    print(request.POST)
+
     context = {
 
         'types': CHOICES,
+        'countries': countries,
+        'cities': cities,
 
     }
 

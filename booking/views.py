@@ -215,10 +215,11 @@ def reserved_view(request):
 
     for i in reserve_restaurants:
         total_1 = int(datetime.datetime.now().timestamp())
+        print(total_1)
         total_2 = int(i.date.timestamp())
-
+        print(total_2)
         age = total_1 - total_2
-        if age > 24 * 60 * 60:
+        if age > 0:
             i.delete()
 
     paginator = Paginator(reserve_restaurants, 1)
@@ -238,7 +239,7 @@ def reserved_view(request):
 
 def reserve_delete_view(request, slug):
     reserve = get_object_or_404(Reserve, slug=slug)
-
+    print(reserve.restaurant)
     messages.success(request, f"{reserve.full_name} adına, ({reserve.restaurant.name}) rezervi silindi  !")
     reserve.delete()
     return redirect("booking:reserved")

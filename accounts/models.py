@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from services.generator import Generator
+from services.mixin import DateMixin, SlugMixin
 
 
 class MyUserManager(BaseUserManager):
@@ -73,6 +74,10 @@ class MyUser(AbstractBaseUser):
         if not self.slug:
             self.slug = Generator.create_slug_shortcode(size=20, model_=MyUser)
         return super(MyUser, self).save(*args, **kwargs)
+
+
+
+# class CheckRestaurant(DateMixin, SlugMixin):
 
 
 
