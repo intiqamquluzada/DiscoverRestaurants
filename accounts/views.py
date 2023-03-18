@@ -89,7 +89,7 @@ def registration_for_owner(request):
     countries = Countries.objects.all().values_list("name", flat=True)
     cities = Cities.objects.all().values_list("name", flat=True)
     print(cities, countries)
-    print(request.POST)
+
 
 
     if request.method == "POST":
