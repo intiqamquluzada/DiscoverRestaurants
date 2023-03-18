@@ -1,11 +1,9 @@
 from django.contrib import messages
-from django.shortcuts import render, redirect
-from django.db.models import F
+from django.shortcuts import redirect
 from .models import Restaurants, CooperationCompanies, Countries, Comment, Likes, Rating, Reserve
 import requests
 import json
 import datetime
-from django.utils import timezone
 from accounts.models import MyUser
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -58,6 +56,8 @@ def home_view(request):
     result = Restaurants.objects.all()
 
     search = request.GET.get('q', None)
+
+    result = result.filter(owner__is_active=True)
 
     if search:
         result = Restaurants.objects.filter(country_of_restaurant__name__icontains=search)
@@ -126,6 +126,8 @@ def list_view(request):
     cont = Countries.objects.filter(name=str(country)).values('slug')
 
     result = Restaurants.objects.filter(country_of_restaurant__slug__in=cont)
+
+    result = result.filter(owner__is_active=True)
 
     rating = str(request.GET.get("rating")).split(" ")[0]
 

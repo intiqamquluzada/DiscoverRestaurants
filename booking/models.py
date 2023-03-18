@@ -1,17 +1,21 @@
-import qrcode
 from django.db import models
 from services.choices import CHOICES
 from services.uploader import Uploader
 from services.mixin import DateMixin, SlugMixin
 from services.generator import Generator
 from django.core.validators import MaxValueValidator, MinValueValidator
-from PIL import Image, ImageDraw
-from django.contrib.auth import get_user_model
+from PIL import Image
 from accounts.models import MyUser
-import datetime
 from mptt.models import MPTTModel, TreeForeignKey
+from django.urls import reverse
 
 User = MyUser()
+
+
+LIKE_CHOICES = (
+    ('Like', 'Like'),
+    ('Unlike', 'Unlike')
+)
 
 
 class Countries(DateMixin, SlugMixin):
@@ -43,14 +47,15 @@ class Cities(models.Model):
         return self.name
 
 
-from django.urls import reverse
+
 
 
 class Restaurants(DateMixin, SlugMixin):
+    owner = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE, related_name='owner')
     name = models.CharField(max_length=200, )
     country_of_restaurant = models.ForeignKey(Countries, on_delete=models.CASCADE, null=True, blank=True)
     city = models.CharField(max_length=200, )
-    type_r = models.CharField(max_length=100, choices=CHOICES, )
+    type_r = models.CharField(max_length=100, choices=CHOICES, null=True, blank=True)
     rating = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)], default=0, editable=False,
                                  null=True, blank=True)
     number = models.TextField()
@@ -178,10 +183,6 @@ class Comment(MPTTModel, DateMixin, SlugMixin):
         super(Comment, self).save(*args, **kwargs)
 
 
-LIKE_CHOICES = (
-    ('Like', 'Like'),
-    ('Unlike', 'Unlike')
-)
 
 
 class Likes(DateMixin, SlugMixin):
