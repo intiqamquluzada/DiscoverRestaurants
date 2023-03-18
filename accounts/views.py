@@ -91,6 +91,11 @@ def registration_for_owner(request):
     print(cities, countries)
     print(request.POST)
 
+
+    if request.method == "POST":
+        print(request.POST)
+
+
     context = {
 
         'types': CHOICES,
