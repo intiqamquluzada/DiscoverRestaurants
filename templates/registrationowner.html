@@ -51,10 +51,10 @@
               </div>
               <div class="col-md-9 pe-5">
 
-                  <select id="country-dropdown" name="country" class="form-select" aria-label="Default select example" >
+                  <select id="country-dropdown" name="rcountry" class="form-select" aria-label="Default select example" >
                       <option selected>Seçin..</option>
-{% for country in gg %}
-                      <option name="rcountry" id="{{country}}" value="{{country.id}}">{{ country }}</option>
+{% for country in countries %}
+                      <option value="{{country.name}}" id="{{country.id}}">{{ country.name }}</option>
                       {% endfor %}
                   </select>
 
@@ -70,11 +70,11 @@
               </div>
               <div class="col-md-9 pe-5">
 
-                <select class="form-select" aria-label="Default select example">
+                <select name="rtype" class="form-select" aria-label="Default select example">
   <option selected>Seçin..</option>
 
-{% for i, type in types %}
-  <option name="rtype" id="{{type}}">{{type}}</option>
+{% for i, j in types %}
+  <option value="{{i}}" id="{{i}}">{{i}}</option>
                     {% endfor %}
 
 </select>

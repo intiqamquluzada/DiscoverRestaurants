@@ -18,3 +18,13 @@ class Generator:
         if qs_exists:
             return cls.create_slug_shortcode(size, model_)
         return new_code
+
+    @classmethod
+    def create_activation_code(cls, size: str, model_: Any) -> str:
+        new_code = cls.code_slug_generator(
+            size=size, chars=string.digits
+        )
+        qs_exists = model_.objects.filter(activation_code=new_code).exists()
+        if qs_exists:
+            return cls.create_slug_shortcode(size, model_)
+        return new_code

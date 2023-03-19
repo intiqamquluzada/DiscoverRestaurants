@@ -294,6 +294,9 @@
                                 {% if user.is_authenticated  %}
                                 <div class="navbar-option-item">
                                     <a href="{% url 'accounts:logout_user' %}" class="btn btn-info">Çıxış <i class="flaticon-right-arrow"></i></a>
+                                </div> &nbsp;&nbsp;&nbsp;
+                                <div class="navbar-option-item">
+                                    <a href="#" class="btn btn-outline-success">Hesab: {{user.email}} </a>
                                 </div>
                                 {% endif %}
                             </div>
