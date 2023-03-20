@@ -174,6 +174,7 @@ def list_view(request):
 
 
 def blog_view(request):
+    print('blogu bugun hell ele')
     context = {
 
     }
