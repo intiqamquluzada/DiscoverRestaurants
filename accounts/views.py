@@ -10,7 +10,7 @@ from django.conf import settings
 
 
 def login_user_view(request):
-    print("xxxxxx")
+
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
