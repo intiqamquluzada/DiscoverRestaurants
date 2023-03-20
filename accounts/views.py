@@ -10,6 +10,7 @@ from django.conf import settings
 
 
 def login_user_view(request):
+    print("xxxxxx")
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -32,7 +33,7 @@ from django.http import HttpResponseServerError
 
 def registration_user_view(request):
     if request.method == "POST":
-        print(request.POST)
+
         user = User.objects.create(
             name=request.POST.get("firstname"),
             surname=request.POST.get("lastname"),
