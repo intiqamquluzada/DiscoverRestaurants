@@ -161,8 +161,8 @@ def restaurant_account(request, slug):
     user = get_object_or_404(User, slug=slug)
     restaurant = Restaurants.objects.filter(owner=user)
     countries = Countries.objects.all()
-    if request.method == "POST" and ("total" in request.POST) and request.FILES:
-        print(request.POST and request.FILES)
+
+
 
     context = {
         "types": CHOICES,
@@ -189,6 +189,24 @@ def login_for_owner(request):
     }
 
     return render(request, "loginowner.html", context)
+
+
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+
+
+@require_POST
+def delete_image(request):
+    image_id = request.POST.get('image_id')
+    try:
+        image = RestaurantImages.objects.get(id=image_id)
+        image.delete()
+        return JsonResponse({'success': True})
+    except RestaurantImages.DoesNotExist:
+        return JsonResponse({'success': False, 'error': 'Image not found'})
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)})
+
 
 
 def registration_for_owner(request):

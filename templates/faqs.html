@@ -283,29 +283,61 @@
                     {% for rr in restaurant %}
 
 
-
                       <div class="accordion-item">
                         <h2 class="accordion-header" id="aga">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#agam" aria-expanded="false" aria-controls="collapseTwo">
-                                Restoranın şəkilləri
+                                Restoranın şəkilləri &nbsp;&nbsp;&nbsp;
+                                <input type="file" id="image-input" name="photo" style="display: none;">
+                                <label for="image-input" class="btn btn-success">Şəkil yüklə</label>
                             </button>
                         </h2>
                         <div id="agam" class="accordion-collapse collapse" aria-labelledby="aga" data-bs-target="#aga">
                             <div  id="productImageDiv-{{ productimage.id }}" class="accordion-body" style="display: flex; flex-wrap: wrap;">
-{% for i in rr.restaurantimages_set.all %}
 
+
+                                {% for i in rr.restaurantimages_set.all %}
+                                <form method="post" id="delete-form-{{ i.id }}">
+                                    {% csrf_token %}
                                 <input type="hidden" name="photo">
-                                <img src="{{i.images.url}}" class="form-control" style="height: 200px; width: 200px;" alt="">
-                                <button style="height: 40px; width: 40px;" class="btn btn-danger">Sil</button>
-
+                                <img src="{{i.images.url}}" id="{{i.images.url}}" class="form-control" style="height: 200px; width: 200px;" alt="">
+                                <button type="submit" onclick="deleteImage({{ i.id }})" style="height: 40px; width: 40px;" class="btn btn-danger">Sil</button>
+</form>
                                     {% endfor %}
                                 </div>
                         </div>
                     </div>
+
+                    <script>
+function deleteImage(imageId) {
+  if (confirm("Restoranın şəklini silməyə əminsiniz?")) {
+    // Send AJAX request to delete the image
+    $.ajax({
+      url: "{% url 'accounts:delete-image' %}",
+      type: "POST",
+      data: {
+        'image_id': imageId,
+        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+      },
+      success: function() {
+        // Remove the image from the DOM
+        $('#delete-form-' + imageId).remove();
+      },
+      error: function(xhr, textStatus, errorThrown) {
+        alert("Silmək alınmadı: " + errorThrown);
+      }
+    });
+  }
+}
+</script>
+
+
+<input type="file" name="addMenu" id="adderMenu" style="display: none;">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="aa">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#agam2" aria-expanded="false" aria-controls="collapseTwo">
                                 Menyu
+                                &nbsp; &nbsp; &nbsp; &nbsp; <label class="btn btn-outline-warning" for="adderMenu">
+                                Menyuya hissə əlavə et</label>
                             </button>
                         </h2>
                         <div id="agam2" class="accordion-collapse collapse" aria-labelledby="aa" data-bs-target="#aa">
