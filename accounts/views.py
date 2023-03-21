@@ -7,7 +7,20 @@ from django.core.mail import send_mail
 from booking.models import Restaurants, RestaurantMenu, RestaurantImages
 from services.generator import Generator
 from django.conf import settings
-from .forms import ProfilePhoto
+from django.http import HttpResponseServerError
+from django.contrib.auth.hashers import check_password
+from booking.models import RestaurantImages
+
+CHOICES = (
+    ('Fast-food', 'Fast-food'),
+    ('Milli', 'Milli'),
+    ('Ailəvi', 'Ailəvi'),
+    ('Business-lunch', 'Business-lunch'),
+    ('Şirniyyat', 'Şirniyyat'),
+    ('Vegetarian', 'Vegetarian'),
+    ('Özünə xidmət', 'Özünə xidmət'),
+    ('Klub', 'Klub'),
+)
 
 
 def login_user_view(request):
@@ -26,9 +39,6 @@ def login_user_view(request):
     }
 
     return render(request, "loginuser.html", context)
-
-
-from django.http import HttpResponseServerError
 
 
 def registration_user_view(request):
@@ -102,10 +112,6 @@ def forget_password_user(request):
     return render(request, "forget-password.html", context)
 
 
-from django.contrib.auth.hashers import make_password
-from django.contrib.auth.hashers import check_password
-
-
 def my_account_for_user(request, slug):
     user = get_object_or_404(User, slug=slug)
     if user.pp:
@@ -138,7 +144,7 @@ def my_account_for_user(request, slug):
                 if new_pass_2 == new_pass_1:
                     user.set_password(new_pass_1)
                     user.save()
-                    login(request,user)
+                    login(request, user)
                     return redirect("accounts:my_account_user", slug=slug)
                 else:
                     messages.error(request, 'Şifrələr uyğun deyil')
@@ -151,12 +157,20 @@ def my_account_for_user(request, slug):
     return render(request, "my-account.html", context)
 
 
-# def delete_photo(request, slug):
-#     user = get_object_or_404(User, slug=slug)
-#     if request.method == "POST":
-#         user.pp.delete()
-#         user.save()
-#         return redirect("accounts:my_account_user", slug=slug)
+def restaurant_account(request, slug):
+    user = get_object_or_404(User, slug=slug)
+    restaurant = Restaurants.objects.filter(owner=user)
+    countries = Countries.objects.all()
+    if request.method == "POST" and ("total" in request.POST) and request.FILES:
+        print(request.POST and request.FILES)
+
+    context = {
+        "types": CHOICES,
+        "restaurant": restaurant,
+        'countries': countries,
+
+    }
+    return render(request, "faqs.html", context)
 
 
 def login_for_owner(request):
@@ -179,16 +193,6 @@ def login_for_owner(request):
 
 def registration_for_owner(request):
     context = {}
-    CHOICES = (
-        ('Fast-food', 'Fast-food'),
-        ('Milli', 'Milli'),
-        ('Ailəvi', 'Ailəvi'),
-        ('Business-lunch', 'Business-lunch'),
-        ('Şirniyyat', 'Şirniyyat'),
-        ('Vegetarian', 'Vegetarian'),
-        ('Özünə xidmət', 'Özünə xidmət'),
-        ('Klub', 'Klub'),
-    )
     countries = Countries.objects.all()
     print(countries)
 
@@ -252,3 +256,10 @@ def forget_password_owner(request):
     }
 
     return render(request, "forget-password-owner.html", context)
+
+
+
+
+
+
+

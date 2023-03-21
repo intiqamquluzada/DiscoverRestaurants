@@ -110,7 +110,7 @@
         </div>
         <!-- Topbar -->
         <!-- Navbar -->
-        <div class="fixed-top">
+       <div class="fixed-top">
             <div class="navbar-area">
                 <div class="container">
                     <div class="mobile-nav">
@@ -238,13 +238,13 @@
                                         {% if user.is_authenticated and user.is_restaurant_owner == False %}
                                         <li>
                                             <a href="{% url 'booking:reserved' %}">
-                                                <i class="fa-solid fa-person-falling"></i>
+                                                <i class="fa-solid fa-person-military-to-person fa-shake"></i>
 
                                             </a>
                                         </li>
                                           <li>
                                             <a href="{% url 'booking:saved' %}">
-                                                <i class="fa-solid fa-bookmark"></i>
+                                                <i class="fa-solid fa-bookmark fa-spin"></i>
 
                                             </a>
                                         </li>

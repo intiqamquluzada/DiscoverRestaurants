@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
     
-<!-- Mirrored from templates.envytheme.com/traip/default/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Feb 2023 21:32:01 GMT -->
+<!-- Mirrored from templates.envytheme.com/traip/default/faqs.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 21 Mar 2023 14:24:32 GMT -->
 <head>
         <meta charset="utf-8">
         <meta name="description" content="Traip">
@@ -10,10 +10,11 @@
         <meta name="author" content="EnvyTheme">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-        <title>Rezervasiya</title>
+        <title>Restoran Rezervasiya Sistemi</title>
         <link rel="icon" href="{% static 'assets/images/favicon.png' %}" type="image/png" sizes="16x16">
-
-        <!-- bootstrap css -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <!-- bootstrap css -->
         <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" type="text/css" media="all" />
         <!-- animate css -->
         <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}" type="text/css" media="all" />
@@ -36,8 +37,9 @@
         <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" type="text/css" media="all" />
         <!-- responsive css -->
         <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}" type="text/css" media="all" />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+
 
     </head>
 
@@ -249,185 +251,207 @@
         </div>
         <!-- Navbar -->
         <!-- Header -->
-        <header class="inner-page-header inner-page-header-2">
+        <header class="inner-page-header inner-page-header-4">
             <div class="inner-header-shape"></div>
             <!-- header-content -->
             <div class="container">
                 <div class="header-content m-auto">
-                    <h1>Checkout</h1>
+                    <h1>Mənim restoranım <i class="fa-solid fa-utensils fa-spin"></i></h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                            <li class="breadcrumb-item"><a href="index.html">Ana səhifə</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Mənim restoranım </li>
                         </ol>
                     </nav>
                 </div>
             </div>
         </header>
         <!-- Header -->
-        <!-- Checkout -->
-        <section class="checkout-section pt-100 pb-70 position-relative">
+        <!-- Accordion -->
+        <section class="accordion-section pb-100 position-relative">
             <div class="map-shapes">
-                <div class="map-shape map-shape-2 map-shape-vertical-center">
+                <div class="map-shape map-shape-2 map-shape-top">
                     <img src="{% static 'assets/images/shapes/map-2.png' %}" alt="shape">
                 </div>
             </div>
             <div class="container">
-                <div class="product-info-header">
-                    <h2>Rezervasiya təsdiqləmə</h2>
-                    <a href="products.html" class="btn main-btn main-btn-secondary m-0">Restoranlara qayıt</a>
+                <div class="section-title">
+                    <small>Sizin restorannız</small>
+                    <h2>Elə indicə restoranının vəziyyətinə bax</h2>
                 </div>
-                <div class="row">
-                    <div class="col-lg-7 pb-30 desk-pad-right-40">
-                        <div class="checkout-box">
-                            <div class="sub-section-title">
-                                {% if user.id in obj %}
+                <div class="accordion box-width-680 m-auto" id="accordionExample">
+                    {% for rr in restaurant %}
 
 
 
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="aga">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#agam" aria-expanded="false" aria-controls="collapseTwo">
+                                Restoranın şəkilləri
+                            </button>
+                        </h2>
+                        <div id="agam" class="accordion-collapse collapse" aria-labelledby="aga" data-bs-target="#aga">
+                            <div  id="productImageDiv-{{ productimage.id }}" class="accordion-body" style="display: flex; flex-wrap: wrap;">
+{% for i in rr.restaurantimages_set.all %}
 
-
-
-                      <h5>Siz bu restoranı rezerv etmisiniz</h5>
-
-                              {% else %}
-
-                                  <h3 class="sub-section-title-heading">Rezervasiya detalları</h3>
-                            </div>
-                            <div class="checkout-form">
-
-
-                                    <div class="row">
-                                        <form method="post">
-                                    {% csrf_token %}
-                                            {% for field in form %}
-                                        <div class="col-sm-12">
-                                            <div class="form-group mb-20">
-                                                <label>{{field.label}} </label>
-                                                {{field}}
-                                            </div>
-                                        </div>
+                                <input type="hidden" name="photo">
+                                <img src="{{i.images.url}}" class="form-control" style="height: 200px; width: 200px;" alt="">
+                                <button style="height: 40px; width: 40px;" class="btn btn-danger">Sil</button>
 
                                     {% endfor %}
-                                            <button class="btn btn-outline-success" type="submit">Rezervasiya et </button>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="aa">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#agam2" aria-expanded="false" aria-controls="collapseTwo">
+                                Menyu
+                            </button>
+                        </h2>
+                        <div id="agam2" class="accordion-collapse collapse" aria-labelledby="aa" data-bs-target="#aa">
+                            <div class="accordion-body" style="display: flex; flex-wrap: wrap;">
+{% for j in rr.restaurantmenu_set.all %}
+                                    <input type="hidden" name="menyu">
+                                <img src="{{j.menu_images.url}}" class="form-control" style="height: 200px; width: 200px;" alt="">
+                                <button style="height: 40px; width: 40px;" class="btn btn-danger">Sil</button>
 
-                                </form>
+                                    {% endfor %}
+                                </div>
+                        </div>
+                    </div>
+                        <input type="hidden" name="total">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                Restoranın adı
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <input type="text" name="name" class="form-control" value="{{rr.name}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Yerləşdiyi ölkə
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <select id="country-dropdown" name="rcountry" class="form-select" aria-label="Default select example" >
+                      <option selected>{{rr.country_of_restaurant.name}}</option>
+{% for country in countries %}
+                      <option value="{{country.name}}" id="{{country.id}}">{{ country.name }}</option>
+                      {% endfor %}
+                  </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseTwo">
+                                Yerləşdiyi şəhər
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <input type="text" name="name" class="form-control" value="{{rr.city}}" id="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseTwo">
+                                Tip
+                            </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                 <select name="rtype" class="form-select" aria-label="Default select example">
+  <option selected>{{rr.type_r}}</option>
 
-                                    </div>
+{% for i, j in types %}
+  <option value="{{i}}" id="{{i}}">{{i}}</option>
+                    {% endfor %}
+
+</select>
 
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-5 pb-30">
-                        <div class="checkout-item">
-                            <div class="sub-section-title">
-                                <h3 class="sub-section-title-heading">Order Summary</h3>
-                            </div>
-                            <div class="cart-details">
-                                <div class="cart-total-box cart-total-box-secondcolor mb-30">
-                                    <div class="cart-total-item">
-                                        <h4 class="checkout-total-title">Product Name</h4>
-                                        <p class="checkout-total-title">Total</p>
-                                    </div>
-                                    <div class="cart-total-item">
-                                        <div class="cart-total-item-info">
-                                            <div class="product-table-thumb">
-                                                <div class="cart-product-number">2</div>
-                                                <img src="{% static 'assets/images/products/product-1.jpg' %}" alt="product">
-                                            </div>
-                                            <h4>Travel Shoe</h4>
-                                        </div>
-                                        <p>$300.0</p>
-                                    </div>
-                                    <div class="cart-total-item">
-                                        <div class="cart-total-item-info">
-                                            <div class="product-table-thumb">
-                                                <div class="cart-product-number">1</div>
-                                                <img src="{% static 'assets/images/products/product-2.jpg' %}" alt="product">
-                                            </div>
-                                            <h4>Travel Bag</h4>
-                                        </div>
-                                        <p>$50.0</p>
-                                    </div>
-                                </div>
-                                <div class="cart-total-box mb-30">
-                                    <div class="cart-total-item">
-                                        <h4>Subtotal</h4>
-                                        <p>$350.0</p>
-                                    </div>
-                                    <div class="cart-total-item">
-                                        <h4>Vat <span>(2%)</span></h4>
-                                        <p>$40.0</p>
-                                    </div>
-                                    <div class="cart-total-item">
-                                        <h4>Total</h4>
-                                        <p>$400.0</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="checkout-box checkout-payment-area">
-                                <div class="sub-section-title">
-                                    <h3 class="sub-section-title-heading">What's Payment Method</h3>
-                                </div>
-                                <div class="checkout-payment-form">
-                                    <form>
-                                        <div class="input-checkbox mb-20">
-                                            <input type="radio" id="check3" name="payment">
-                                            <label for="check3">Bank Transfer</label>
-                                        </div>
-                                        <div class="input-checkbox mb-20">
-                                            <input type="radio" id="check4" name="payment">
-                                            <label for="check4">Paypal</label>
-                                        </div>
-                                        <div class="input-checkbox mb-20">
-                                            <input type="radio" id="check5" name="payment">
-                                            <label for="check5">Visa</label>
-                                        </div>
-                                        <div class="sub-section-title">
-                                            <h3 class="sub-section-title-heading">Payment</h3>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="form-group mb-20">
-                                                    <label>Card Holder Name</label>
-                                                    <input type="text" name="email" class="form-control form-control-background-white" required placeholder="Name On The Card*">
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-group mb-20">
-                                                    <label>Card Number</label>
-                                                    <input type="text" name="email" class="form-control form-control-background-white" required placeholder="1234 4567 7890">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group mb-20">
-                                                    <label>Card Expire</label>
-                                                    <input type="text" name="number" class="form-control form-control-background-white" required placeholder="Card Expire*">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group mb-20">
-                                                    <label>CVC</label>
-                                                    <input type="text" name="number" class="form-control form-control-background-white" required placeholder="123*">
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <button class="btn main-btn main-btn-lg full-width" type="submit">
-                                                    Make Payment
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFive">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseTwo">
+                                Reytinq
+                            </button>
+                        </h2>
+                        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div class="form-control">{{rr.rating}} &#9733;</div>
                             </div>
                         </div>
                     </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingSix">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseTwo">
+                                Restoran əlaqə nömrəsi
+                            </button>
+                        </h2>
+                        <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <input type="tel" class="form-control" name="" value="{{rr.number}}" id="">
+                                </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingSeven">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseTwo">
+                                Ünvan
+                            </button>
+                        </h2>
+                        <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <input type="text" class="form-control" name="" value="{{rr.location}}" id="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingEight">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseTwo">
+                                Haqqında
+                            </button>
+                        </h2>
+                        <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <input type="text" class="form-control" value="{{rr.description}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingNine">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNine" aria-expanded="false" aria-controls="collapseTwo">
+                                Boş yerlər
+                            </button>
+                        </h2>
+                        <div id="collapseNine" class="accordion-collapse collapse" aria-labelledby="headingNine" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <input type="number" name="" class="form-control" value="{{rr.available_seats}}" id="">
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+
+
                 </div>
             </div>
-            {% endif %}
         </section>
 
-        <!-- Checkout -->
+
+
+        <!-- Accordion -->
         <!-- Footer -->
         <footer class="footer footer-bg">
             <div class="footer-upper pb-70 position-relative">
@@ -441,7 +465,7 @@
                                 <ul class="footer-details footer-address">
                                     <li>
                                         <i class="flaticon-mail"></i>
-                                        <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#92faf7fefefdd2e6e0f3fbe2bcf1fdff"><span class="__cf_email__" data-cfemail="49212c252526093d3b282039672a2624">[email&#160;protected]</span></a>
+                                        <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#264e434a4a49665254474f560845494b"><span class="__cf_email__" data-cfemail="1f777a7373705f6b6d7e766f317c7072">[email&#160;protected]</span></a>
                                     </li>
                                     <li>
                                         <i class="flaticon-telephone"></i>
@@ -464,7 +488,7 @@
                                         <a href="tour.html">Popular Tour</a>
                                     </li>
                                     <li>
-                                        <a href="blog.html">Blog</a>
+                                        <a href="blogs-two-column.html">Blog</a>
                                     </li>
                                     <li>
                                         <a href="products.html">Shop</a>
@@ -511,15 +535,15 @@
                                     <ul class="footer-gallery">
                                         <li>
                                             <a href="https://www.instagram.com/">
-                                            <img src="{% static 'assets/images/instafeed/instafeed-1.jpg' %}" alt="insta"></a>
+                                            <img src="assets/images/instafeed/instafeed-1.jpg" alt="insta"></a>
                                         </li>
                                         <li>
                                             <a href="https://www.instagram.com/">
-                                            <img src="{% static 'assets/images/instafeed/instafeed-2.jpg' %}" alt="insta"></a>
+                                            <img src="assets/images/instafeed/instafeed-2.jpg" alt="insta"></a>
                                         </li>
                                         <li>
                                             <a href="https://www.instagram.com/">
-                                            <img src="{% static 'assets/images/instafeed/instafeed-3.jpg' %}" alt="insta"></a>
+                                            <img src="assets/images/instafeed/instafeed-3.jpg" alt="insta"></a>
                                         </li>
                                         <li>
                                             <a href="https://www.instagram.com/">
@@ -590,7 +614,7 @@
                         <ul class="topbar-sidebar-lists">
                             <li>
                                 <i class="flaticon-mail"></i>
-                                <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#4a222f2626250a3e382b233a64292527"><span class="__cf_email__" data-cfemail="abc3cec7c7c4ebdfd9cac2db85c8c4c6">[email&#160;protected]</span></a>
+                                <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#3a525f5656557a4e485b534a14595557"><span class="__cf_email__" data-cfemail="5e363b3232311e2a2c3f372e703d3133">[email&#160;protected]</span></a>
                             </li>
                             <li>
                                 <i class="flaticon-telephone"></i>
@@ -623,6 +647,7 @@
             </div>
         </div>
         <!-- Top Sidebar -->
+        
 
         <!-- Search Wrapper -->
         <div class="searchbar-wrapper">
@@ -652,7 +677,7 @@
         <!-- Scroll-top -->
 
 
-        <!-- essential js -->
+         <!-- essential js -->
         <script data-cfasync="false" src="{% static '../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js' %}"></script><script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
         <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
         <!-- jquery ui js -->
@@ -675,5 +700,5 @@
         <script src="{% static 'assets/js/script.js' %}"></script>
     </body>
 
-<!-- Mirrored from templates.envytheme.com/traip/default/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Feb 2023 21:32:01 GMT -->
+<!-- Mirrored from templates.envytheme.com/traip/default/faqs.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 21 Mar 2023 14:24:32 GMT -->
 </html>

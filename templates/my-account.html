@@ -193,13 +193,13 @@
                                         {% if user.is_authenticated and user.is_restaurant_owner == False %}
                                         <li>
                                             <a href="{% url 'booking:reserved' %}">
-                                                <i class="fa-solid fa-person-falling"></i>
+                                                <i class="fa-solid fa-person-military-to-person fa-shake"></i>
 
                                             </a>
                                         </li>
                                           <li>
                                             <a href="{% url 'booking:saved' %}">
-                                                <i class="fa-solid fa-bookmark"></i>
+                                                <i class="fa-solid fa-bookmark fa-spin"></i>
 
                                             </a>
                                         </li>
@@ -286,9 +286,11 @@
                                {% if user.is_restaurant_owner == False %}
                                 <li><a href="{% url 'booking:saved' %}">Yadda saxladıqlarım</a></li>
                                 <li><a href="{% url 'booking:reserved' %}">Mənim rezervlərim</a></li>
+                                {% else %}
+                                <li><a href="{% url 'accounts:restaurantchanging' user.slug %}">Mənim restoranım</a></li>
                                 {% endif %}
-                                <li><a href="{% url 'booking:reserved' %}">Mənim restoranım</a></li>
                                 <li><a href="{% url 'accounts:logout_user' %}">Hesabdan çıxış et</a></li>
+
                             </ul>
                         </div>
                     </div>
@@ -315,13 +317,13 @@
                                             <input type="file" name="pp_photo" style="display: none;" id="xx">
                                             <input type="hidden" name="form1_submit">
                                             <li><button type="button" class="btn main-btn"><label for="xx">Şəkil yüklə <i class="fa-solid fa-upload fa-beat"></i></label> </button></li>
-                                                <br> <button class="btn btn-warning" type="submit" name="form1_submit">Yadda saxla</button>
+                                                <br> <button class="btn btn-warning" type="submit" name="form1_submit">Şəkil seçimi etdinsə, tıkla</button>
                                             </form>
                                                 {% else %}
                                             <form method="post">
 {% csrf_token %}<input type="hidden" name="form2_submit">
                                             <li><button class="btn main-btn main-btn-red" type="submit">Şəkli sil
-                                                <i class="fa-regular fa-trash fa-bounce"></i></button></li>
+                                                <i class="fa-solid fa-trash fa-bounce"></i></button></li>
                                                 </form>
                                             {% endif %}
                                         </ul>
