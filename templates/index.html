@@ -246,7 +246,7 @@
 <!--                                                <i class="flaticon-searching"></i>-->
 <!--                                            </a>-->
 <!--                                        </li>-->
-                                        {% if user.is_authenticated %}
+                                        {% if user.is_authenticated and user.is_restaurant_owner == False %}
                                         <li>
                                             <a href="{% url 'booking:reserved' %}">
                                                 <i class="fa-solid fa-person-falling"></i>
@@ -296,7 +296,7 @@
                                     <a href="{% url 'accounts:logout_user' %}" class="btn btn-info">Çıxış <i class="flaticon-right-arrow"></i></a>
                                 </div> &nbsp;&nbsp;&nbsp;
                                 <div class="navbar-option-item">
-                                    <a href="#" class="btn btn-outline-success">Hesab: {{user.email}} </a>
+                                    <a href="{% url 'accounts:my_account_user' user.slug %}" class="btn btn-outline-success">Hesab: {{user.email}} </a>
                                 </div>
                                 {% endif %}
                             </div>

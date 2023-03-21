@@ -45,3 +45,11 @@ class UserAdminChangeForm(forms.ModelForm):
         # This is done here, rather than on the field, because the
         # field does not have access to the initial value
         return self.initial["password"]
+
+
+class ProfilePhoto(forms.ModelForm):
+    pp = forms.CharField(widget=forms.TextInput(attrs={"class": "btn main-btn main-btn-red", "type": "button"}))
+
+    class Meta:
+        model = User
+        fields = ("pp",)

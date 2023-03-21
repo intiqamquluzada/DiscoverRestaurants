@@ -7,10 +7,10 @@ from django.core.mail import send_mail
 from booking.models import Restaurants, RestaurantMenu, RestaurantImages
 from services.generator import Generator
 from django.conf import settings
+from .forms import ProfilePhoto
 
 
 def login_user_view(request):
-
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -102,11 +102,61 @@ def forget_password_user(request):
     return render(request, "forget-password.html", context)
 
 
-def my_account_for_user(request):
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import check_password
+
+
+def my_account_for_user(request, slug):
+    user = get_object_or_404(User, slug=slug)
+    if user.pp:
+        if request.method == "POST" and ('form2_submit' in request.POST):
+            user.pp.delete()
+            print(user.pp.delete())
+            user.save()
+    else:
+        if request.method == "POST" and request.FILES and ('form1_submit' in request.POST):
+            print(request.FILES)
+            pp_photo = request.FILES.get("pp_photo")
+            user.pp = pp_photo
+            user.save()
+    if request.method == "POST" and ('form3_submit' in request.POST):
+        name = request.POST.get("name")
+        surname = request.POST.get("surname")
+        phone = request.POST.get("phone")
+        old_pass = request.POST.get("old_pass")
+        new_pass_1 = request.POST.get("new_pass1")
+        new_pass_2 = request.POST.get("new_pass2")
+        if name:
+            user.name = name
+        if surname:
+            user.surname = surname
+        if phone:
+            user.phone = phone
+        user.save()
+        if new_pass_1 or new_pass_2:
+            if check_password(old_pass, user.password):
+                if new_pass_2 == new_pass_1:
+                    user.set_password(new_pass_1)
+                    user.save()
+                    login(request,user)
+                    return redirect("accounts:my_account_user", slug=slug)
+                else:
+                    messages.error(request, 'Şifrələr uyğun deyil')
+            else:
+                messages.error(request, "Köhnə şifrəniz yalnışdır")
+
     context = {
 
     }
     return render(request, "my-account.html", context)
+
+
+# def delete_photo(request, slug):
+#     user = get_object_or_404(User, slug=slug)
+#     if request.method == "POST":
+#         user.pp.delete()
+#         user.save()
+#         return redirect("accounts:my_account_user", slug=slug)
 
 
 def login_for_owner(request):

@@ -63,7 +63,7 @@
 
         <!-- Topbar -->
         <!-- Navbar -->
-        <div class="fixed-top">
+       <div class="fixed-top">
             <div class="navbar-area">
                 <div class="container">
                     <div class="mobile-nav">
@@ -120,7 +120,6 @@
                                             <span class="option-badge">2</span>
                                         </a>
                                     </li>
-
                                     <li class="d-none d-md-inline-block">
                                         <a href="authentication.html">
                                             <i class="flaticon-user-1"></i>
@@ -140,8 +139,6 @@
                     <div class="container">
                         <nav class="navbar navbar-expand-md navbar-light">
                             <a class="navbar-brand" href="index.html">
-                                <img src="{% static 'assets/images/logo.png' %}" alt="logo" class="logo default-logo">
-                                <img src="{% static 'assets/images/logo-default-color.png' %}" alt="logo" class="sticky-logo">
                             </a>
                             <div class="collapse navbar-collapse mean-menu " id="navbarSupportedContent">
                                 <ul class="navbar-nav mx-auto">
@@ -191,7 +188,7 @@
 <!--                                                <i class="flaticon-searching"></i>-->
 <!--                                            </a>-->
 <!--                                        </li>-->
-                                        {% if user.is_authenticated %}
+                                        {% if user.is_authenticated and user.is_restaurant_owner == False %}
                                         <li>
                                             <a href="{% url 'booking:reserved' %}">
                                                 <i class="fa-solid fa-person-falling"></i>
@@ -208,7 +205,7 @@
                                     </ul>
                                 </div>
 
-                                 {% if not user.is_authenticated %}
+                                  {% if not user.is_authenticated %}
 <button id="login-btn" class="btn btn-primary" style="margin-right: 10px;">Giriş</button>
 
 <div id="login-options" style="display: none;">
@@ -239,6 +236,9 @@
                                 {% if user.is_authenticated  %}
                                 <div class="navbar-option-item">
                                     <a href="{% url 'accounts:logout_user' %}" class="btn btn-info">Çıxış <i class="flaticon-right-arrow"></i></a>
+                                </div> &nbsp;&nbsp;&nbsp;
+                                <div class="navbar-option-item">
+                                    <a href="{% url 'accounts:my_account_user' user.slug %}" class="btn btn-outline-success">Hesab: {{user.email}} </a>
                                 </div>
                                 {% endif %}
                             </div>

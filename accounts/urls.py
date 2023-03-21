@@ -1,6 +1,8 @@
 from django.urls import path
-from .views import (login_user_view, registration_user_view, forget_password_user, registration_for_owner,
-                    login_for_owner, forget_password_owner, logout_user, activate_user_view)
+from .views import (login_user_view, registration_user_view,
+                    forget_password_user, registration_for_owner,
+                    login_for_owner, forget_password_owner, logout_user,
+                    activate_user_view, my_account_for_user, )
 
 app_name = 'accounts'
 urlpatterns = [
@@ -11,5 +13,7 @@ urlpatterns = [
     path("registration/owner/", registration_for_owner, name='registration_owner'),
     path("forgetpassword/owner/", forget_password_owner, name='forgetowner'),
     path("logout/user/", logout_user, name='logout_user'),
-    path("activate/<slug>/", activate_user_view, name='activate')
+    path("activate/<slug>/", activate_user_view, name='activate'),
+    path("my-account-user/<slug>/", my_account_for_user, name='my_account_user'),
+    # path("delete_user_photo/<slug>/", delete_photo, name='delete_user_photo')
 ]
