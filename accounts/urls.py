@@ -2,7 +2,8 @@ from django.urls import path
 from .views import (login_user_view, registration_user_view,
                     forget_password_user, registration_for_owner,
                     login_for_owner, forget_password_owner, logout_user,
-                    activate_user_view, my_account_for_user, restaurant_account, delete_image)
+                    activate_user_view, my_account_for_user, restaurant_account,
+                    delete_image, )
 
 app_name = 'accounts'
 urlpatterns = [

@@ -10,6 +10,9 @@ from django.conf import settings
 from django.http import HttpResponseServerError
 from django.contrib.auth.hashers import check_password
 from booking.models import RestaurantImages
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+
 
 CHOICES = (
     ('Fast-food', 'Fast-food'),
@@ -159,8 +162,24 @@ def my_account_for_user(request, slug):
 
 def restaurant_account(request, slug):
     user = get_object_or_404(User, slug=slug)
-    restaurant = Restaurants.objects.filter(owner=user)
+    restaurant = Restaurants.objects.get(owner=user)
     countries = Countries.objects.all()
+
+    if request.method == "POST":
+
+        name = request.POST.get("name")
+        photo = request.FILES.getlist("photo")
+        menu = request.FILES.getlist("menu")
+        rcountry = request.POST.get("rcountry")
+        city = request.POST.get("city")
+        rtype = request.POST.get("rtype")
+        rating = str(request.POST.get("rating")).split(" ")[0]
+        phone = request.POST.get("phone")
+        location = request.POST.get("location")
+        description = request.POST.get("description")
+        available_seats = request.POST.get("available_seats")
+        print(photo, menu)
+
 
 
 
@@ -191,8 +210,7 @@ def login_for_owner(request):
     return render(request, "loginowner.html", context)
 
 
-from django.http import JsonResponse
-from django.views.decorators.http import require_POST
+
 
 
 @require_POST
@@ -206,6 +224,13 @@ def delete_image(request):
         return JsonResponse({'success': False, 'error': 'Image not found'})
     except Exception as e:
         return JsonResponse({'success': False, 'error': str(e)})
+
+
+
+
+
+
+
 
 
 

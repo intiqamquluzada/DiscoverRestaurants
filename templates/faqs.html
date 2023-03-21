@@ -280,28 +280,32 @@
                     <h2>Elə indicə restoranının vəziyyətinə bax</h2>
                 </div>
                 <div class="accordion box-width-680 m-auto" id="accordionExample">
-                    {% for rr in restaurant %}
+                    <form method="post" enctype="multipart/form-data">
+
 
 
                       <div class="accordion-item">
                         <h2 class="accordion-header" id="aga">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#agam" aria-expanded="false" aria-controls="collapseTwo">
                                 Restoranın şəkilləri &nbsp;&nbsp;&nbsp;
-                                <input type="file" id="image-input" name="photo" style="display: none;">
-                                <label for="image-input" class="btn btn-success">Şəkil yüklə</label>
+
+                                <input type="file" id="image-input" name="photo" style="display: none;" multiple>
+                                <label for="image-input" class="btn btn-outline-danger">Şəkil seç</label>
+
                             </button>
                         </h2>
+
                         <div id="agam" class="accordion-collapse collapse" aria-labelledby="aga" data-bs-target="#aga">
                             <div  id="productImageDiv-{{ productimage.id }}" class="accordion-body" style="display: flex; flex-wrap: wrap;">
 
 
-                                {% for i in rr.restaurantimages_set.all %}
-                                <form method="post" id="delete-form-{{ i.id }}">
+                                {% for i in restaurant.restaurantimages_set.all %}
+                                <div method="post" id="delete-form-{{ i.id }}">
                                     {% csrf_token %}
-                                <input type="hidden" name="photo">
+
                                 <img src="{{i.images.url}}" id="{{i.images.url}}" class="form-control" style="height: 200px; width: 200px;" alt="">
                                 <button type="submit" onclick="deleteImage({{ i.id }})" style="height: 40px; width: 40px;" class="btn btn-danger">Sil</button>
-</form>
+</div>
                                     {% endfor %}
                                 </div>
                         </div>
@@ -331,7 +335,7 @@ function deleteImage(imageId) {
 </script>
 
 
-<input type="file" name="addMenu" id="adderMenu" style="display: none;">
+<input type="file" name="menu" id="adderMenu" style="display: none;">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="aa">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#agam2" aria-expanded="false" aria-controls="collapseTwo">
@@ -342,8 +346,8 @@ function deleteImage(imageId) {
                         </h2>
                         <div id="agam2" class="accordion-collapse collapse" aria-labelledby="aa" data-bs-target="#aa">
                             <div class="accordion-body" style="display: flex; flex-wrap: wrap;">
-{% for j in rr.restaurantmenu_set.all %}
-                                    <input type="hidden" name="menyu">
+{% for j in restaurant.restaurantmenu_set.all %}
+
                                 <img src="{{j.menu_images.url}}" class="form-control" style="height: 200px; width: 200px;" alt="">
                                 <button style="height: 40px; width: 40px;" class="btn btn-danger">Sil</button>
 
@@ -360,7 +364,7 @@ function deleteImage(imageId) {
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                <input type="text" name="name" class="form-control" value="{{rr.name}}">
+                                <input type="text" name="name" class="form-control" value="{{restaurant.name}}">
                             </div>
                         </div>
                     </div>
@@ -373,7 +377,7 @@ function deleteImage(imageId) {
                         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <select id="country-dropdown" name="rcountry" class="form-select" aria-label="Default select example" >
-                      <option selected>{{rr.country_of_restaurant.name}}</option>
+                      <option selected>{{restaurant.country_of_restaurant.name}}</option>
 {% for country in countries %}
                       <option value="{{country.name}}" id="{{country.id}}">{{ country.name }}</option>
                       {% endfor %}
@@ -389,7 +393,7 @@ function deleteImage(imageId) {
                         </h2>
                         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                <input type="text" name="name" class="form-control" value="{{rr.city}}" id="">
+                                <input type="text" name="city" class="form-control" value="{{restaurant.city}}" id="">
                             </div>
                         </div>
                     </div>
@@ -402,7 +406,7 @@ function deleteImage(imageId) {
                         <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                  <select name="rtype" class="form-select" aria-label="Default select example">
-  <option selected>{{rr.type_r}}</option>
+  <option selected>{{restaurant.type_r}}</option>
 
 {% for i, j in types %}
   <option value="{{i}}" id="{{i}}">{{i}}</option>
@@ -421,7 +425,7 @@ function deleteImage(imageId) {
                         </h2>
                         <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                <div class="form-control">{{rr.rating}} &#9733;</div>
+                                <div class="form-control" name="rating">{{restaurant.rating}} &#9733;</div>
                             </div>
                         </div>
                     </div>
@@ -433,7 +437,7 @@ function deleteImage(imageId) {
                         </h2>
                         <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                <input type="tel" class="form-control" name="" value="{{rr.number}}" id="">
+                                <input type="tel" class="form-control" name="phone" value="{{restaurant.number}}" id="">
                                 </div>
                         </div>
                     </div>
@@ -445,7 +449,7 @@ function deleteImage(imageId) {
                         </h2>
                         <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                <input type="text" class="form-control" name="" value="{{rr.location}}" id="">
+                                <input type="text" class="form-control" name="location" value="{{restaurant.location}}" id="">
                             </div>
                         </div>
                     </div>
@@ -457,7 +461,7 @@ function deleteImage(imageId) {
                         </h2>
                         <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                <input type="text" class="form-control" value="{{rr.description}}">
+                                <input type="text" name="description" class="form-control" value="{{restaurant.description}}">
                             </div>
                         </div>
                     </div>
@@ -469,14 +473,15 @@ function deleteImage(imageId) {
                         </h2>
                         <div id="collapseNine" class="accordion-collapse collapse" aria-labelledby="headingNine" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                <input type="number" name="" class="form-control" value="{{rr.available_seats}}" id="">
+                                <input type="number" name="available_seats" class="form-control" value="{{restaurant.available_seats}}" id="">
                             </div>
                         </div>
                     </div>
 
-                    {% endfor %}
 
+                        <button type="submit" class="btn btn-success">AEEEEE</button>
 
+</form>
                 </div>
             </div>
         </section>
