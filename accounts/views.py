@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-from .models import MyUser as User
+from .models import MyUser as User # it is better to use absolute imports
 from django.contrib import messages
 from booking.models import Countries
 from django.core.mail import send_mail
 from booking.models import Restaurants, RestaurantMenu, RestaurantImages
 from services.generator import Generator
 from django.conf import settings
-from .forms import ProfilePhoto
+from .forms import ProfilePhoto # same as mentioned above
 
 
 def login_user_view(request):
@@ -28,15 +28,15 @@ def login_user_view(request):
     return render(request, "loginuser.html", context)
 
 
-from django.http import HttpResponseServerError
+from django.http import HttpResponseServerError # all imports should be at file beginning 
 
 
 def registration_user_view(request):
     if request.method == "POST":
 
         user = User.objects.create(
-            name=request.POST.get("firstname"),
-            surname=request.POST.get("lastname"),
+            name=request.POST.get("firstname"), # what if request body doesnt have fistname field? username is not nullable in User model
+            surname=request.POST.get("lastname"), # think about validation before you pass these params to .create method, try to use django forms to handle it
             email=request.POST.get("email"),
             gender=request.POST.get("gender"),
             phone=request.POST.get("number"),
@@ -44,6 +44,9 @@ def registration_user_view(request):
         )
         user.set_password(request.POST.get("password"))
         user.save()
+
+        # better to separate user creation and send message logic into different functions
+        # in accordance with (S)OLID principles 
 
         # send activation part
         activation_code = Generator.create_activation_code(size=6, model_=User)
@@ -59,7 +62,7 @@ def registration_user_view(request):
                 subject, message, from_mail, to_mail, fail_silently=False
             )
         except Exception as e:
-            print(e)
+            print(e) # use logger instead of prints
             return HttpResponseServerError("Failed to send activation email.")
 
         return redirect("accounts:activate", slug=user.slug)
@@ -199,7 +202,7 @@ def registration_for_owner(request):
         if pass_2 == pass_1:
             user = User.objects.create(
                 name=request.POST.get("ownername"),
-                surname='Sahibkar',
+                surname='Sahibkar', # seems as every user to have same surname
                 email=request.POST.get("ownermail"),
                 phone=request.POST.get("ownerphone"),
                 is_active=False,
@@ -211,7 +214,7 @@ def registration_for_owner(request):
 
                 owner=user,
                 name=request.POST.get("rname"),
-                country_of_restaurant=Countries.objects.get(name=request.POST.get("rcountry")),
+                country_of_restaurant=Countries.objects.get(name=request.POST.get("rcountry")), # what if country does not exist?
                 city=request.POST.get("rcity"),
                 type_r=request.POST.get("rtype"),
                 number=request.POST.get("rphone"),
@@ -240,7 +243,7 @@ def registration_for_owner(request):
         else:
             context['info'] = "Parollar uyğun deyil"
 
-    context['types'] = CHOICES
+    context['types'] = CHOICES # choices could be set as ChoiceField in django forms 
     context['countries'] = countries
 
     return render(request, "registrationowner.html", context)
