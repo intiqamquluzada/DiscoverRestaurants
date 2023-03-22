@@ -129,9 +129,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER = "quluzadintiqam@gmail.com"
-EMAIL_HOST_PASSWORD = "demeremHA"
-EMAIL_PORT = 465
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
+

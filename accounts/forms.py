@@ -4,6 +4,12 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
 User = get_user_model()
+CHOICES = (
+    ("Kişi", "Kişi"),
+    ("Qadın", "Qadın")
+
+)
+
 
 
 # -----------------------   Admin Forms  ---------------------------------------------------
@@ -47,9 +53,29 @@ class UserAdminChangeForm(forms.ModelForm):
         return self.initial["password"]
 
 
-class ProfilePhoto(forms.ModelForm):
-    pp = forms.CharField(widget=forms.TextInput(attrs={"class": "btn main-btn main-btn-red", "type": "button"}))
+class RegistrationUserForm(forms.ModelForm):
+    password1 = forms.CharField(label='Şifrə', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Təkrar şifrə', widget=forms.PasswordInput)
+    gender = forms.ChoiceField(label='Cinsiyyət',choices=CHOICES,)
 
     class Meta:
         model = User
-        fields = ("pp",)
+        fields = ("name", "surname", "email", "phone", "gender", "password1", "password2")
+
+    def __init__(self, *args, **kwargs):
+        super(RegistrationUserForm, self).__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({"class": "form-control form-control-lg"})
+
+    def clean(self):
+        email = self.cleaned_data.get("email")
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+
+        if not (password1 and password2 and password1 == password2):
+            raise forms.ValidationError("Parollar uygun deyil")
+
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError("Bu e-poçtla hesab mövcuddur")
+
+        return self.cleaned_data

@@ -7,12 +7,11 @@ from django.core.mail import send_mail
 from booking.models import Restaurants, RestaurantMenu, RestaurantImages
 from services.generator import Generator
 from django.conf import settings
-from django.http import HttpResponseServerError
+from .forms import RegistrationUserForm
 from django.contrib.auth.hashers import check_password
 from booking.models import RestaurantImages
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
-
 
 CHOICES = (
     ('Fast-food', 'Fast-food'),
@@ -45,41 +44,36 @@ def login_user_view(request):
 
 
 def registration_user_view(request):
+    context = {}
+    form = RegistrationUserForm()
     if request.method == "POST":
+        form = RegistrationUserForm(request.POST or None)
 
-        user = User.objects.create(
-            name=request.POST.get("firstname"),
-            surname=request.POST.get("lastname"),
-            email=request.POST.get("email"),
-            gender=request.POST.get("gender"),
-            phone=request.POST.get("number"),
-            is_active=False,
-        )
-        user.set_password(request.POST.get("password"))
-        user.save()
+        if form.is_valid():
+            new_user = form.save(commit=False)
+            new_user.set_password(form.cleaned_data.get("password1"))
+            new_user.is_active = False
 
-        # send activation part
-        activation_code = Generator.create_activation_code(size=6, model_=User)
-        user.activation_code = activation_code
-        user.save()
-        subject = "Activation message"
-        message = f"Recovery code: {activation_code}"
-        from_mail = settings.EMAIL_HOST_USER
-        to_mail = [user.email]
+            # send activation message
+            activation_code = Generator.create_activation_code(size=6, model_=User)
+            new_user.activation_code = activation_code
+            new_user.save()
 
-        try:
+            subject = "Activation Message"
+            message = f"CODE: {activation_code}"
+            from_mail = settings.EMAIL_HOST_USER
+            to_mail = [new_user.email]
+
             send_mail(
                 subject, message, from_mail, to_mail, fail_silently=False
             )
-        except Exception as e:
-            print(e)
-            return HttpResponseServerError("Failed to send activation email.")
 
-        return redirect("accounts:activate", slug=user.slug)
+            return redirect("accounts:activate", slug=new_user.slug)
+        else:
+            print(form.errors)
 
-    context = {
+    context["form"] = form
 
-    }
     return render(request, "registrationuser.html", context)
 
 
@@ -166,7 +160,6 @@ def restaurant_account(request, slug):
     countries = Countries.objects.all()
 
     if request.method == "POST":
-
         name = request.POST.get("name")
         photo = request.FILES.getlist("photo")
         menu = request.FILES.getlist("menu")
@@ -179,9 +172,6 @@ def restaurant_account(request, slug):
         description = request.POST.get("description")
         available_seats = request.POST.get("available_seats")
         print(photo, menu)
-
-
-
 
     context = {
         "types": CHOICES,
@@ -210,9 +200,6 @@ def login_for_owner(request):
     return render(request, "loginowner.html", context)
 
 
-
-
-
 @require_POST
 def delete_image(request):
     image_id = request.POST.get('image_id')
@@ -224,14 +211,6 @@ def delete_image(request):
         return JsonResponse({'success': False, 'error': 'Image not found'})
     except Exception as e:
         return JsonResponse({'success': False, 'error': str(e)})
-
-
-
-
-
-
-
-
 
 
 def registration_for_owner(request):
@@ -299,10 +278,3 @@ def forget_password_owner(request):
     }
 
     return render(request, "forget-password-owner.html", context)
-
-
-
-
-
-
-
