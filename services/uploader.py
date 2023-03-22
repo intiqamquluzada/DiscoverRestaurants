@@ -1,3 +1,7 @@
+# it is good approach to separate all business logic into the so called services
+# instead of spreading across views. Try to stick "Layered Architecture" approach,
+# as an example you can see here https://github.com/edodo1337/django-react/tree/master/backend/billing/logic
+
 class Uploader:
 
     @staticmethod
