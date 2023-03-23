@@ -58,11 +58,12 @@ class Restaurants(DateMixin, SlugMixin):
     type_r = models.CharField(max_length=100, choices=CHOICES, null=True, blank=True)
     rating = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)], default=0, editable=False,
                                  null=True, blank=True)
-    number = models.TextField()
-    location = models.TextField()
+    number = models.CharField(max_length=200)
+    location = models.CharField(max_length=200)
     description = models.TextField()
     available_seats = models.IntegerField(null=True, blank=True, default=0)
     wishlist = models.ManyToManyField(User, blank=True, related_name="wishlist", )
+    has_permission = models.BooleanField(default=False)
 
     class Meta:
         ordering = ("-created_at",)

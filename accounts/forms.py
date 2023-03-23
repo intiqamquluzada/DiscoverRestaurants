@@ -1,7 +1,7 @@
 from django import forms
-from django.contrib.auth import authenticate, login, get_user_model
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from booking.models import Restaurants, RestaurantMenu, RestaurantImages
 
 User = get_user_model()
 CHOICES = (
@@ -9,7 +9,6 @@ CHOICES = (
     ("Qadın", "Qadın")
 
 )
-
 
 
 # -----------------------   Admin Forms  ---------------------------------------------------
@@ -54,9 +53,11 @@ class UserAdminChangeForm(forms.ModelForm):
 
 
 class RegistrationUserForm(forms.ModelForm):
-    password1 = forms.CharField(label='Şifrə', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Təkrar şifrə', widget=forms.PasswordInput)
-    gender = forms.ChoiceField(label='Cinsiyyət',choices=CHOICES,)
+    password1 = forms.CharField(label='Şifrə', widget=forms.PasswordInput(attrs={"placeholder": "Şifrə"}))
+    password2 = forms.CharField(label='Təkrar şifrə', widget=forms.PasswordInput(attrs={"placeholder": "Təkrar şifrə"}))
+    gender = forms.ChoiceField(label='Cinsiyyət', choices=CHOICES, )
+    phone = forms.CharField(label="Əlaqə nömrəsi",
+                            widget=forms.TextInput(attrs={"type": "tel", "placeholder": "+994XXXXXXXXX"}))
 
     class Meta:
         model = User
@@ -66,16 +67,63 @@ class RegistrationUserForm(forms.ModelForm):
         super(RegistrationUserForm, self).__init__(*args, **kwargs)
         for field in self.fields:
             self.fields[field].widget.attrs.update({"class": "form-control form-control-lg"})
+            self.fields[field].required = True
+        self.fields["name"].widget.attrs.update({"placeholder": "Adınızı daxil edin"})
+        self.fields["surname"].widget.attrs.update({"placeholder": "Soyadınızı daxil edin"})
+        self.fields["email"].widget.attrs.update({"placeholder": "E-poçtunuzu daxil edin"})
+        self.fields["phone"].widget.attrs.update({"placeholder": "Əlaqə nömrənizi daxil edin"})
 
     def clean(self):
         email = self.cleaned_data.get("email")
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")
+        phone = self.cleaned_data.get("phone")
+
+        for n in phone:
+            if n.isalpha():
+                raise forms.ValidationError("Nömrəni düzgün daxil edin")
 
         if not (password1 and password2 and password1 == password2):
-            raise forms.ValidationError("Parollar uygun deyil")
+            raise forms.ValidationError("Şifrələr uyğun deyil")
+
+        if len(password1) < 8:
+            raise forms.ValidationError("Şifrənin uzunluğu minimum 8 simvoldan ibarət olmalıdır.")
 
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError("Bu e-poçtla hesab mövcuddur")
 
         return self.cleaned_data
+
+
+class RegisterOwnerForm(forms.ModelForm):
+    restaurant_images = forms.FileField(label="Restoran şəkilləri əlavə et",
+                                        widget=forms.ClearableFileInput(attrs={"multiple": True}))
+    menu_images = forms.FileField(label="Menyu şəkilləri əlavə et", widget=forms.ClearableFileInput(attrs={"multiple": True}))
+
+    class Meta:
+        model = Restaurants
+        fields = ("name", "type_r", "country_of_restaurant",
+                  "city", "number", "location",
+                  "available_seats", "description", )
+
+    def __init__(self, *args, **kwargs):
+        super(RegisterOwnerForm, self).__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].required = True
+            self.fields[field].widget.attrs.update({"class": "form-control"})
+        self.fields['name'].label = "Restoranın adı"
+        self.fields['name'].widget.attrs.update({"placeholder": "Restoranın adı"})
+        self.fields['type_r'].label = "Restoranın tipi"
+        self.fields['country_of_restaurant'].label = "Restoranın yerləşdiyi ölkə"
+        self.fields['city'].label = "Restoranın yerləşdiyi şəhər"
+        self.fields['city'].widget.attrs.update({"placeholder": "Bakı, Ganja və s."})
+        self.fields['number'].label = "Restoranın əlaqə nömrəsi"
+        self.fields['number'].widget.attrs.update({"placeholder": "Əlaqə nömrəsi, məs: +994XXXXXXXXX"})
+        self.fields['location'].label = "Ünvan"
+        self.fields['location'].widget.attrs.update({"placeholder": "Nakchivani 10"})
+        self.fields['available_seats'].label = "Uyğun yerlər"
+        self.fields['description'].label = "Restoran haqqında məlumat"
+        self.fields['description'].widget.attrs.update({
+            "placeholder": "Restoranımızın özünə məxsus bir sıra üstünlükləri vardır. Eyvan və şəhər görünümlü yerləşim qonaqlarımızın bizi tərcih etməyinin birinci səbəbidir və s......"})
+
+

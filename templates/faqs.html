@@ -276,212 +276,106 @@
             </div>
             <div class="container">
                 <div class="section-title">
-                    <small>Sizin restorannız</small>
-                    <h2>Elə indicə restoranının vəziyyətinə bax</h2>
+                    <small>Sizin restoranınız</small>
+                    <h2>Restoranın hal-hazırki detalları</h2>
                 </div>
                 <div class="accordion box-width-680 m-auto" id="accordionExample">
                     <form method="post" enctype="multipart/form-data">
 
+{% if messages %}
 
+                    {% for message in messages %}
 
-                      <div class="accordion-item">
-                        <h2 class="accordion-header" id="aga">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#agam" aria-expanded="false" aria-controls="collapseTwo">
-                                Restoranın şəkilləri &nbsp;&nbsp;&nbsp;
-
-                                <input type="file" id="image-input" name="photo" style="display: none;" multiple>
-                                <label for="image-input" class="btn btn-outline-danger">Şəkil seç</label>
-
-                            </button>
-                        </h2>
-
-                        <div id="agam" class="accordion-collapse collapse" aria-labelledby="aga" data-bs-target="#aga">
-                            <div  id="productImageDiv-{{ productimage.id }}" class="accordion-body" style="display: flex; flex-wrap: wrap;">
-
-
-                                {% for i in restaurant.restaurantimages_set.all %}
-                                <div method="post" id="delete-form-{{ i.id }}">
-                                    {% csrf_token %}
-
-                                <img src="{{i.images.url}}" id="{{i.images.url}}" class="form-control" style="height: 200px; width: 200px;" alt="">
-                                <button type="submit" onclick="deleteImage({{ i.id }})" style="height: 40px; width: 40px;" class="btn btn-danger">Sil</button>
-</div>
-                                    {% endfor %}
-                                </div>
-                        </div>
+                    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{message.tags}}{% endif %}" role="alert">
+                        {{message}}
                     </div>
-
-                    <script>
-function deleteImage(imageId) {
-  if (confirm("Restoranın şəklini silməyə əminsiniz?")) {
-    // Send AJAX request to delete the image
-    $.ajax({
-      url: "{% url 'accounts:delete-image' %}",
-      type: "POST",
-      data: {
-        'image_id': imageId,
-        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
-      },
-      success: function() {
-        // Remove the image from the DOM
-        $('#delete-form-' + imageId).remove();
-      },
-      error: function(xhr, textStatus, errorThrown) {
-        alert("Silmək alınmadı: " + errorThrown);
-      }
-    });
-  }
-}
-</script>
-
-
-<input type="file" name="menu" id="adderMenu" style="display: none;">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="aa">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#agam2" aria-expanded="false" aria-controls="collapseTwo">
-                                Menyu
-                                &nbsp; &nbsp; &nbsp; &nbsp; <label class="btn btn-outline-warning" for="adderMenu">
-                                Menyuya hissə əlavə et</label>
-                            </button>
-                        </h2>
-                        <div id="agam2" class="accordion-collapse collapse" aria-labelledby="aa" data-bs-target="#aa">
-                            <div class="accordion-body" style="display: flex; flex-wrap: wrap;">
-{% for j in restaurant.restaurantmenu_set.all %}
-
-                                <img src="{{j.menu_images.url}}" class="form-control" style="height: 200px; width: 200px;" alt="">
-                                <button style="height: 40px; width: 40px;" class="btn btn-danger">Sil</button>
-
-                                    {% endfor %}
-                                </div>
-                        </div>
-                    </div>
-                        <input type="hidden" name="total">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                Restoranın adı
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <input type="text" name="name" class="form-control" value="{{restaurant.name}}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                Yerləşdiyi ölkə
-                            </button>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <select id="country-dropdown" name="rcountry" class="form-select" aria-label="Default select example" >
-                      <option selected>{{restaurant.country_of_restaurant.name}}</option>
-{% for country in countries %}
-                      <option value="{{country.name}}" id="{{country.id}}">{{ country.name }}</option>
-                      {% endfor %}
-                  </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseTwo">
-                                Yerləşdiyi şəhər
-                            </button>
-                        </h2>
-                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <input type="text" name="city" class="form-control" value="{{restaurant.city}}" id="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingFour">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseTwo">
-                                Tip
-                            </button>
-                        </h2>
-                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                 <select name="rtype" class="form-select" aria-label="Default select example">
-  <option selected>{{restaurant.type_r}}</option>
-
-{% for i, j in types %}
-  <option value="{{i}}" id="{{i}}">{{i}}</option>
                     {% endfor %}
-
-</select>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingFive">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseTwo">
-                                Reytinq
-                            </button>
-                        </h2>
-                        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <div class="form-control" name="rating">{{restaurant.rating}} &#9733;</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingSix">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseTwo">
-                                Restoran əlaqə nömrəsi
-                            </button>
-                        </h2>
-                        <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <input type="tel" class="form-control" name="phone" value="{{restaurant.number}}" id="">
-                                </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingSeven">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseTwo">
-                                Ünvan
-                            </button>
-                        </h2>
-                        <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <input type="text" class="form-control" name="location" value="{{restaurant.location}}" id="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingEight">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseTwo">
-                                Haqqında
-                            </button>
-                        </h2>
-                        <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <input type="text" name="description" class="form-control" value="{{restaurant.description}}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingNine">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNine" aria-expanded="false" aria-controls="collapseTwo">
-                                Boş yerlər
-                            </button>
-                        </h2>
-                        <div id="collapseNine" class="accordion-collapse collapse" aria-labelledby="headingNine" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <input type="number" name="available_seats" class="form-control" value="{{restaurant.available_seats}}" id="">
-                            </div>
-                        </div>
-                    </div>
+                    {% endif %}
 
 
-                        <button type="submit" class="btn btn-success">AEEEEE</button>
+                      <form class="authentication-form" method="post" enctype="multipart/form-data">
+                            {% for field in form %}
+                            {% csrf_token %}
+                          {{field.label}}
+                            <div class="input-group input-group-bg mb-20">
+                          {{field}}
+                            </div>
 
-</form>
+
+                            {% endfor %}
+                          <img src="{{restaurant.restaurantimages}}" alt="" >
+                          {{ form.media }}
+<h4>Restoran şəkilləri</h4>
+
+                          <input type="hidden" name="delete_image_ids" id="delete_image_ids">
+                          
+                          {% for img in restaurant.restaurantimages_set.all %}
+  {% if forloop.counter0|divisibleby:3 %}
+    <div class="row mb-20">
+  {% endif %}
+  <div class="col-md-4">
+    <div class="input-group input-group-bg" id="restaurantİmageDiv-{{img.id}}">
+      <img src="{{img.images.url}}" id="{{img.id}}" style="height: 100px; width: 100px;"> &nbsp;&nbsp;
+      <a onclick="deleteImageObj('{{ img.id }}')" class="btn btn-danger" style="height: 40px; width: 50px;">X</a>
+    </div>
+  </div>
+  {% if forloop.counter0|add:1|divisibleby:3 or forloop.last %}
+    </div>
+  {% endif %}
+{% endfor %}
+                          <script>
+                              function deleteImageObj(id) {
+    // Send a DELETE request to the delete_image view
+    $.ajax({
+        type: 'POST',
+        url: '/delete_image/',
+        data: {
+            'image_id': id,
+            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+        },
+        success: function(response) {
+            if (response.success) {
+                // If the image was deleted successfully, remove the image element from the DOM
+                $('#restaurantİmageDiv-' + id).remove();
+            } else {
+                // If there was an error deleting the image, display an error message
+                console.log(response.error);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.log(error);
+        }
+    });
+}
+
+
+                          </script>
+
+<h4>Menyu şəkilləri</h4>
+                          {% for img in restaurant.restaurantmenu_set.all %}
+  {% if forloop.counter0|divisibleby:3 %}
+    <div class="row mb-20">
+  {% endif %}
+  <div class="col-md-4">
+    <div class="input-group input-group-bg">
+      <img src="{{img.menu_images.url}}" style="height: 100px; width: 100px;"> &nbsp;&nbsp;
+    </div>
+  </div>
+  {% if forloop.counter0|add:1|divisibleby:3 or forloop.last %}
+    </div>
+  {% endif %}
+{% endfor %}
+
+
+                            <button type="submit" class="btn main-btn main-btn-secondary full-width">Təsdiqlə</button>
+                        </form>
+
+
+
+
+
+
+
                 </div>
             </div>
         </section>
