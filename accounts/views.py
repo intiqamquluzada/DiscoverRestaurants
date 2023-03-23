@@ -150,7 +150,7 @@ def restaurant_account(request, slug):
                         menu_images=mimg
                     )
             form.save()
-
+            print(4857348573784378)
             return redirect("accounts:my_account_user", slug=slug)
     else:
         form = OwnerUpdateForm(instance=restaurant)
