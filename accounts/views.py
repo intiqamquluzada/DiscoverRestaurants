@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from .models import MyUser as User
 from django.contrib import messages
-from booking.models import Countries
 from django.core.mail import send_mail
 from booking.models import Restaurants, RestaurantMenu, RestaurantImages
 from services.generator import Generator
@@ -11,7 +10,6 @@ from .forms import RegistrationUserForm
 from django.contrib.auth.hashers import check_password
 from booking.models import RestaurantImages
 from django.http import JsonResponse
-from django.views.decorators.http import require_POST, require_http_methods
 from .forms import RegisterOwnerForm, OwnerUpdateForm
 
 CHOICES = (
@@ -70,12 +68,86 @@ def logout_user(request):
     return redirect("booking:home")
 
 
-def forget_password_user(request):
+def password_reset(request, slug):
+    context = {}
+
+    return render(request, "password-reset.html", context)
+
+
+def verify_reset(request, slug):
+    context = {}
+    user = get_object_or_404(User, slug=slug)
+
+    if request.method == "POST":
+        code = request.POST.get("code", None)
+        if code == user.password_reset_code:
+            return redirect("accounts:password_reset", slug=user.slug)
+            # return redirect("accounts:password_reset", slug=slug)
+    return render(request, "verify-reset.html", context)
+
+
+def forget_page(request):
+
+
+
+    if request.method == "POST":
+        email = request.POST.get("email")
+        if email:
+            user = get_object_or_404(User, email=email)
+        print(user.email)
+        password_reset_code = Generator.create_activation_code(size=6, model_=User)
+
+        subject = "Activation Message"
+        message = f"Hesabınızı bərpa etmək üçün saytda göstərilən xanaya doğru şəkildə daxil edin: *{password_reset_code}*"
+        from_mail = settings.EMAIL_HOST_USER
+        to_mail = [email]
+        if user.exists():
+            send_mail(
+                subject, message, from_mail, to_mail, fail_silently=False
+            )
+        return redirect("accounts:verify_reset", slug=user.slug)
+    else:
+        messages.error(request, "Belə bir istifadəçi hesabı yoxdur")
+
     context = {
 
     }
 
-    return render(request, "forget-password.html", context)
+    return render(request, "forget.html", context)
+
+
+def registration_user_view(request):
+    context = {}
+    form = RegistrationUserForm()
+    if request.method == "POST":
+        form = RegistrationUserForm(request.POST or None)
+
+        if form.is_valid():
+            new_user = form.save(commit=False)
+            new_user.set_password(form.cleaned_data.get("password1"))
+            new_user.is_active = False
+
+            # send activation message
+            activation_code = Generator.create_activation_code(size=6, model_=User)
+            new_user.activation_code = activation_code
+            new_user.save()
+
+            subject = "Activation Message"
+            message = f"CODE: {activation_code}"
+            from_mail = settings.EMAIL_HOST_USER
+            to_mail = [new_user.email]
+
+            send_mail(
+                subject, message, from_mail, to_mail, fail_silently=False
+            )
+
+            return redirect("accounts:activate", slug=new_user.slug)
+        else:
+            print(form.errors)
+
+    context["form"] = form
+
+    return render(request, "registrationuser.html", context)
 
 
 def my_account_for_user(request, slug):
@@ -123,8 +195,6 @@ def my_account_for_user(request, slug):
     return render(request, "my-account.html", context)
 
 
-
-
 def restaurant_account(request, slug):
     user = get_object_or_404(User, slug=slug)
     restaurant = Restaurants.objects.get(owner=user)
@@ -150,7 +220,7 @@ def restaurant_account(request, slug):
                         menu_images=mimg
                     )
             form.save()
-            print(4857348573784378)
+
             return redirect("accounts:my_account_user", slug=slug)
     else:
         form = OwnerUpdateForm(instance=restaurant)
@@ -199,6 +269,7 @@ def delete_menu_image(request, menu_image_id):
         return JsonResponse({'success': True})
     except RestaurantMenu.DoesNotExist:
         return JsonResponse({'success': False, 'error': 'Image does not exist'})
+
 
 def registration_for_owner(request):
     context = {}
@@ -262,45 +333,3 @@ def registration_person_r(request):
     context['form'] = form
 
     return render(request, "owner-regi.html", context)
-
-
-def registration_user_view(request):
-    context = {}
-    form = RegistrationUserForm()
-    if request.method == "POST":
-        form = RegistrationUserForm(request.POST or None)
-
-        if form.is_valid():
-            new_user = form.save(commit=False)
-            new_user.set_password(form.cleaned_data.get("password1"))
-            new_user.is_active = False
-
-            # send activation message
-            activation_code = Generator.create_activation_code(size=6, model_=User)
-            new_user.activation_code = activation_code
-            new_user.save()
-
-            subject = "Activation Message"
-            message = f"CODE: {activation_code}"
-            from_mail = settings.EMAIL_HOST_USER
-            to_mail = [new_user.email]
-
-            send_mail(
-                subject, message, from_mail, to_mail, fail_silently=False
-            )
-
-            return redirect("accounts:activate", slug=new_user.slug)
-        else:
-            print(form.errors)
-
-    context["form"] = form
-
-    return render(request, "registrationuser.html", context)
-
-
-def forget_password_owner(request):
-    context = {
-
-    }
-
-    return render(request, "forget-password-owner.html", context)
