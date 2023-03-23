@@ -12,7 +12,7 @@ from django.contrib.auth.hashers import check_password
 from booking.models import RestaurantImages
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST, require_http_methods
-from .forms import RegisterOwnerForm
+from .forms import RegisterOwnerForm, OwnerUpdateForm
 
 CHOICES = (
     ('Fast-food', 'Fast-food'),
@@ -123,31 +123,40 @@ def my_account_for_user(request, slug):
     return render(request, "my-account.html", context)
 
 
+
+
 def restaurant_account(request, slug):
     user = get_object_or_404(User, slug=slug)
     restaurant = Restaurants.objects.get(owner=user)
-    countries = Countries.objects.all()
-    form = RegisterOwnerForm(instance=restaurant)
+    form = OwnerUpdateForm(instance=restaurant)
 
     if request.method == "POST":
-        pass
-        # name = request.POST.get("name")
-        # photo = request.FILES.getlist("photo")
-        # menu = request.FILES.getlist("menu")
-        # rcountry = request.POST.get("rcountry")
-        # city = request.POST.get("city")
-        # rtype = request.POST.get("rtype")
-        # rating = str(request.POST.get("rating")).split(" ")[0]
-        # phone = request.POST.get("phone")
-        # location = request.POST.get("location")
-        # description = request.POST.get("description")
-        # available_seats = request.POST.get("available_seats")
-        # print(photo, menu)
+        print(request.FILES)
+        form = OwnerUpdateForm(request.POST, request.FILES or None, instance=restaurant)
+        restaurant_images = request.FILES.getlist("rim")
+        menu_images = request.FILES.getlist("mim")
+        if form.is_valid():
+            form.save(commit=False)
+            if restaurant_images:
+                for rimg in restaurant_images:
+                    RestaurantImages.objects.create(
+                        restaurant=restaurant,
+                        images=rimg
+                    )
+            if menu_images:
+                for mimg in menu_images:
+                    RestaurantMenu.objects.create(
+                        restaurant=restaurant,
+                        menu_images=mimg
+                    )
+            form.save()
 
+            return redirect("accounts:my_account_user", slug=slug)
+    else:
+        form = OwnerUpdateForm(instance=restaurant)
     context = {
         "types": CHOICES,
         "restaurant": restaurant,
-        'countries': countries,
         'form': form,
         "restaurant_images": restaurant.restaurantimages_set.all(),  # get all the images related to the restaurant
         "menu_images": restaurant.restaurantmenu_set.all(),
@@ -173,34 +182,23 @@ def login_for_owner(request):
 
     return render(request, "loginowner.html", context)
 
-from django.views.decorators.csrf import csrf_exempt
 
-@csrf_exempt
-def delete_image(request):
-    if request.method == 'POST':
-        image_id = request.POST.get('image_id')
-        print(image_id)
-        try:
-            image_obj = RestaurantImages.objects.get(id=image_id)
-            image_obj.delete()
-            return JsonResponse({'success': True})
-        except RestaurantImages.DoesNotExist:
-            return JsonResponse({'success': False, 'error': 'Image does not exist.'})
-    else:
-        return JsonResponse({'success': False, 'error': 'Invalid request method.'})
-
-@require_POST
-def delete_menu_image(request):
-    image_id = request.POST.get('menu_image_id')
+def delete_image(request, image_id):
     try:
-        image = RestaurantMenu.objects.get(id=image_id)
+        image = get_object_or_404(RestaurantImages, id=image_id)
+        image.delete()
+        return JsonResponse({'success': True})
+    except RestaurantImages.DoesNotExist:
+        return JsonResponse({'success': False, 'error': 'Image does not exist'})
+
+
+def delete_menu_image(request, menu_image_id):
+    try:
+        image = get_object_or_404(RestaurantMenu, id=menu_image_id)
         image.delete()
         return JsonResponse({'success': True})
     except RestaurantMenu.DoesNotExist:
-        return JsonResponse({'success': False, 'error': 'Image not found'})
-    except Exception as e:
-        return JsonResponse({'success': False, 'error': str(e)})
-
+        return JsonResponse({'success': False, 'error': 'Image does not exist'})
 
 def registration_for_owner(request):
     context = {}
@@ -306,6 +304,3 @@ def forget_password_owner(request):
     }
 
     return render(request, "forget-password-owner.html", context)
-
-
-

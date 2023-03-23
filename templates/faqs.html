@@ -303,62 +303,75 @@
 
 
                             {% endfor %}
-                          <img src="{{restaurant.restaurantimages}}" alt="" >
-                          {{ form.media }}
-<h4>Restoran şəkilləri</h4>
+<input type="file" name="rim"  id="rim" style="display: none;" multiple>
 
-                          <input type="hidden" name="delete_image_ids" id="delete_image_ids">
+<h4>Restoran şəkilləri &nbsp; <label class="btn btn-warning" for="rim">Əlavə et</label></h4> <br>
+
+
                           
-                          {% for img in restaurant.restaurantimages_set.all %}
+                         {% for img in restaurant.restaurantimages_set.all %}
   {% if forloop.counter0|divisibleby:3 %}
     <div class="row mb-20">
   {% endif %}
   <div class="col-md-4">
     <div class="input-group input-group-bg" id="restaurantİmageDiv-{{img.id}}">
       <img src="{{img.images.url}}" id="{{img.id}}" style="height: 100px; width: 100px;"> &nbsp;&nbsp;
-      <a onclick="deleteImageObj('{{ img.id }}')" class="btn btn-danger" style="height: 40px; width: 50px;">X</a>
+      {% if restaurant.restaurantimages_set.count > 3 %}
+        <a onclick="deleteImageObj('{{ img.id }}')" class="btn btn-danger" style="height: 40px; width: 50px;">X</a>
+      {% endif %}
     </div>
   </div>
   {% if forloop.counter0|add:1|divisibleby:3 or forloop.last %}
     </div>
   {% endif %}
 {% endfor %}
+
+
                           <script>
-                              function deleteImageObj(id) {
-    // Send a DELETE request to the delete_image view
-    $.ajax({
-        type: 'POST',
-        url: '/delete_image/',
-        data: {
-            'image_id': id,
-            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
-        },
-        success: function(response) {
-            if (response.success) {
-                // If the image was deleted successfully, remove the image element from the DOM
-                $('#restaurantİmageDiv-' + id).remove();
-            } else {
-                // If there was an error deleting the image, display an error message
-                console.log(response.error);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.log(error);
-        }
-    });
+
+
+
+    function deleteImageObj(imageId) {
+        var say = "{{restaurant.restaurantimages_set.count}}";
+
+
+            $.ajax({
+                url: '/accounts/delete-image/' + imageId + '/',
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function (response) {
+                    say--;
+                        console.log(say);
+                    if (response.success) {
+                        $('#restaurantİmageDiv-' + imageId).remove();
+
+                    } else {
+                        console.log('Error deleting image');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+
 }
 
 
                           </script>
-
-<h4>Menyu şəkilləri</h4>
-                          {% for img in restaurant.restaurantmenu_set.all %}
+<input class="btn btn-warning" type="file" name="mim"  id="mim" style="display: none;" multiple>
+<h4>Menyu şəkilləri &nbsp; <label class="btn btn-warning" for="mim">Əlavə et</label></h4> <br>
+                         {% for img in restaurant.restaurantmenu_set.all %}
   {% if forloop.counter0|divisibleby:3 %}
-    <div class="row mb-20">
+    <div class="row mb-20" id="menuDiv-{{img.id}}">
   {% endif %}
-  <div class="col-md-4">
-    <div class="input-group input-group-bg">
+  <div class="col-md-4" >
+    <div class="input-group input-group-bg" id="menuİmageDiv-{{img.id}}">
       <img src="{{img.menu_images.url}}" style="height: 100px; width: 100px;"> &nbsp;&nbsp;
+      {% if restaurant.restaurantmenu_set.count > 3 %}
+        <a onclick="deleteMenuImageObj('{{ img.id }}')" class="btn btn-danger" style="height: 40px; width: 50px;">X</a>
+      {% endif %}
     </div>
   </div>
   {% if forloop.counter0|add:1|divisibleby:3 or forloop.last %}
@@ -370,7 +383,32 @@
                             <button type="submit" class="btn main-btn main-btn-secondary full-width">Təsdiqlə</button>
                         </form>
 
+<script>
+    function deleteMenuImageObj(imageId) {
 
+    $.ajax({
+      url: '/accounts/delete-menu-image/' + imageId + '/',
+      type: 'POST',
+      data: {
+        'csrfmiddlewaretoken': '{{ csrf_token }}'
+      },
+      success: function(response) {
+        if (response.success) {
+          $('#menuİmageDiv-' + imageId).remove();
+        }  else {
+          console.log('Error deleting image');
+        }
+      },
+      error: function(xhr, status, error) {
+        console.error(xhr.responseText);
+      }
+    });
+
+}
+
+
+
+                          </script>
 
 
 

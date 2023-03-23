@@ -127,3 +127,33 @@ class RegisterOwnerForm(forms.ModelForm):
             "placeholder": "Restoranımızın özünə məxsus bir sıra üstünlükləri vardır. Eyvan və şəhər görünümlü yerləşim qonaqlarımızın bizi tərcih etməyinin birinci səbəbidir və s......"})
 
 
+class OwnerUpdateForm(forms.ModelForm):
+
+
+    class Meta:
+        model = Restaurants
+        fields = ("name", "type_r", "country_of_restaurant",
+                  "city", "number", "location",
+                  "available_seats", "description", )
+
+    def __init__(self, *args, **kwargs):
+        super(OwnerUpdateForm, self).__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({"class": "form-control"})
+            self.fields[field].required = True
+        self.fields['name'].label = "Restoranın adı"
+        self.fields['name'].widget.attrs.update({"placeholder": "Restoranın adı"})
+        self.fields['type_r'].label = "Restoranın tipi"
+        self.fields['country_of_restaurant'].label = "Restoranın yerləşdiyi ölkə"
+        self.fields['city'].label = "Restoranın yerləşdiyi şəhər"
+        self.fields['city'].widget.attrs.update({"placeholder": "Bakı, Ganja və s."})
+        self.fields['number'].label = "Restoranın əlaqə nömrəsi"
+        self.fields['number'].widget.attrs.update({"placeholder": "Əlaqə nömrəsi, məs: +994XXXXXXXXX"})
+        self.fields['location'].label = "Ünvan"
+        self.fields['location'].widget.attrs.update({"placeholder": "Nakchivani 10"})
+        self.fields['available_seats'].label = "Uyğun yerlər"
+        self.fields['description'].label = "Restoran haqqında məlumat"
+        self.fields['description'].widget.attrs.update({
+            "placeholder": "Restoranımızın özünə məxsus bir sıra üstünlükləri vardır. Eyvan və şəhər görünümlü yerləşim qonaqlarımızın bizi tərcih etməyinin birinci səbəbidir və s......"})
+
+
