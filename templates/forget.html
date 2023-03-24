@@ -110,9 +110,11 @@
                     <div class="authentication-box-inner">
                         <form class="authentication-form" method="post">
                             {% csrf_token %}
+                            {% for field in form %}
                             <div class="input-group input-group-bg mb-20">
-                                <input type="email" name="email" class="form-control" placeholder="E-poçt:" aria-label="Email">
+                                {{ field }}
                             </div>
+                            {% endfor %}
                             <button type="submit" class="btn main-btn main-btn-secondary full-width">Təsdiqlə</button>
                             <br>
 

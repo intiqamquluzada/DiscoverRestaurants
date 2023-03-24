@@ -98,13 +98,14 @@ class RegistrationUserForm(forms.ModelForm):
 class RegisterOwnerForm(forms.ModelForm):
     restaurant_images = forms.FileField(label="Restoran şəkilləri əlavə et",
                                         widget=forms.ClearableFileInput(attrs={"multiple": True}))
-    menu_images = forms.FileField(label="Menyu şəkilləri əlavə et", widget=forms.ClearableFileInput(attrs={"multiple": True}))
+    menu_images = forms.FileField(label="Menyu şəkilləri əlavə et",
+                                  widget=forms.ClearableFileInput(attrs={"multiple": True}))
 
     class Meta:
         model = Restaurants
         fields = ("name", "type_r", "country_of_restaurant",
                   "city", "number", "location",
-                  "available_seats", "description", )
+                  "available_seats", "description",)
 
     def __init__(self, *args, **kwargs):
         super(RegisterOwnerForm, self).__init__(*args, **kwargs)
@@ -128,13 +129,11 @@ class RegisterOwnerForm(forms.ModelForm):
 
 
 class OwnerUpdateForm(forms.ModelForm):
-
-
     class Meta:
         model = Restaurants
         fields = ("name", "type_r", "country_of_restaurant",
                   "city", "number", "location",
-                  "available_seats", "description", )
+                  "available_seats", "description",)
 
     def __init__(self, *args, **kwargs):
         super(OwnerUpdateForm, self).__init__(*args, **kwargs)
@@ -157,3 +156,22 @@ class OwnerUpdateForm(forms.ModelForm):
             "placeholder": "Restoranımızın özünə məxsus bir sıra üstünlükləri vardır. Eyvan və şəhər görünümlü yerləşim qonaqlarımızın bizi tərcih etməyinin birinci səbəbidir və s......"})
 
 
+class UserForgetEmail(forms.Form):
+
+    email = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control", "type": "email", "placeholder":"E-poçt:"}))
+
+
+class PasswordResetForm(forms.Form):
+    password1 = forms.CharField(label='Yeni şifrə', widget=forms.PasswordInput(attrs={"placeholder": "Yeni şifrə:", "class": "form-control"}))
+    password2 = forms.CharField(label='Təkrar şifrə', widget=forms.PasswordInput(attrs={"placeholder": "Təkrar yeni şifrə:", "class": "form-control"}))
+
+    def clean(self):
+
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+
+        if not (password1 and password2 and password1 == password2):
+            raise forms.ValidationError("Şifrələr uyğun deyil")
+
+        if len(password1) < 8:
+            raise forms.ValidationError("Şifrənin uzunluğu minimum 8 simvoldan ibarət olmalıdır.")

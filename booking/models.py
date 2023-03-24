@@ -51,7 +51,7 @@ class Cities(models.Model):
 
 
 class Restaurants(DateMixin, SlugMixin):
-    owner = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE, related_name='owner')
+    owner = models.OneToOneField(User, blank=True, null=True, on_delete=models.CASCADE, related_name='owner')
     name = models.CharField(max_length=200, )
     country_of_restaurant = models.ForeignKey(Countries, on_delete=models.CASCADE, null=True, blank=True)
     city = models.CharField(max_length=200, )

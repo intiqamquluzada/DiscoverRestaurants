@@ -8,9 +8,8 @@ from services.generator import Generator
 from django.conf import settings
 from .forms import RegistrationUserForm
 from django.contrib.auth.hashers import check_password
-from booking.models import RestaurantImages
 from django.http import JsonResponse
-from .forms import RegisterOwnerForm, OwnerUpdateForm
+from .forms import RegisterOwnerForm, OwnerUpdateForm, PasswordResetForm, UserForgetEmail
 
 CHOICES = (
     ('Fast-food', 'Fast-food'),
@@ -69,7 +68,23 @@ def logout_user(request):
 
 
 def password_reset(request, slug):
-    context = {}
+    user = get_object_or_404(User, slug=slug)
+    form = PasswordResetForm()
+
+    if request.method == "POST":
+        form = PasswordResetForm(request.POST or None)
+
+        if form.is_valid():
+            new_password = form.cleaned_data['password1']
+            user.set_password(new_password)
+            user.save()
+            messages.success(request, "Yeni şifrəniz uğurla təyin edildi")
+            login(request, user)
+            return redirect("accounts:my_account_user", slug=user.slug)
+
+    context = {
+        'form': form
+    }
 
     return render(request, "password-reset.html", context)
 
@@ -79,38 +94,42 @@ def verify_reset(request, slug):
     user = get_object_or_404(User, slug=slug)
 
     if request.method == "POST":
-        code = request.POST.get("code", None)
-        if code == user.password_reset_code:
-            return redirect("accounts:password_reset", slug=user.slug)
-            # return redirect("accounts:password_reset", slug=slug)
+        code = request.POST.get("code")
+        if user.password_reset_code == code:
+            return redirect("accounts:password_reset", slug=slug)
+
     return render(request, "verify-reset.html", context)
 
 
 def forget_page(request):
-
-
-
+    form = UserForgetEmail()
     if request.method == "POST":
-        email = request.POST.get("email")
-        if email:
-            user = get_object_or_404(User, email=email)
-        print(user.email)
-        password_reset_code = Generator.create_activation_code(size=6, model_=User)
+        form = UserForgetEmail(request.POST or None)
 
-        subject = "Activation Message"
-        message = f"Hesabınızı bərpa etmək üçün saytda göstərilən xanaya doğru şəkildə daxil edin: *{password_reset_code}*"
-        from_mail = settings.EMAIL_HOST_USER
-        to_mail = [email]
-        if user.exists():
+        if form.is_valid():
+            print('salaaam')
+            email = form.cleaned_data['email']
+            user = get_object_or_404(User, email=email)
+            password_reset_code = Generator.create_reset_code(size=8, model_=User)
+            user.password_reset_code = password_reset_code
+            user.save()
+
+            subject = "Activation Message"
+            message = f"CODE: {password_reset_code}"
+            from_mail = settings.EMAIL_HOST_USER
+            to_mail = [email]
+
             send_mail(
                 subject, message, from_mail, to_mail, fail_silently=False
             )
-        return redirect("accounts:verify_reset", slug=user.slug)
-    else:
-        messages.error(request, "Belə bir istifadəçi hesabı yoxdur")
+
+            return redirect("accounts:verify_reset", slug=user.slug)
+        else:
+            print(form.errors)
+            form = UserForgetEmail()
 
     context = {
-
+        'form': form
     }
 
     return render(request, "forget.html", context)
@@ -297,7 +316,7 @@ def registration_for_owner(request):
                     menu_images=menu_image
                 )
                 menu_images.save()
-            return redirect("booking:home ")
+            return redirect("booking:home")
 
     context['form'] = form
 

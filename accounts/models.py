@@ -77,7 +77,6 @@ class MyUser(AbstractBaseUser):
 
 
 
-# class CheckRestaurant(DateMixin, SlugMixin):
 
 
 

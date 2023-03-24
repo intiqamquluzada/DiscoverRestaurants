@@ -21,7 +21,7 @@ class UserAdmin(BaseUserAdmin):
                     'activation_code', 'slug', 'password_reset_code', 'is_restaurant_owner')
     list_filter = ('is_active', 'is_superuser')
     fieldsets = (
-        (None, {'fields': ('email', 'name', 'surname', 'password', 'pp')}),
+        (None, {'fields': ('email', 'name', 'surname', 'password', 'pp', 'password_reset_code')}),
         # ('Full name', {'fields': ()}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'is_restaurant_owner')}),
     )

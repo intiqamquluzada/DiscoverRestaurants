@@ -94,7 +94,7 @@
             <div class="container">
                 <div class="sub-section-title text-center">
                     <p><h2>Sahibkar üçün qeydiyyat</h2> <br> Bütün xanaları diqqətlə doldurmağınız xahiş olunur</p>
-
+{% csrf_token %}
                     {% if messages %}
 
                     {% for message in messages %}
