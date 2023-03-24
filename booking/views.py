@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import redirect
-from .models import Restaurants, CooperationCompanies, Countries, Comment, Likes, Rating, Reserve
+from .models import Restaurants, CooperationCompanies, Countries, Comment, Likes, Rating, Reserve, BlogModel
 import requests
 import json
 import datetime
@@ -10,6 +10,9 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from .forms import CommentForm, ReserveForm
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
+from django.db.models import Max
+from django.db.models.functions import Substr
+
 
 api_key = "5117dbe9476548a6834433afd9b63554"
 
@@ -31,7 +34,9 @@ User = MyUser()
 
 def home_view(request):
     companies_corporation = CooperationCompanies.objects.all()
-
+    max_likers = Comment.objects.annotate(max_likes=Max('likers'))
+    max_likers = max_likers.order_by('-max_likes')
+    comments_with_max_likes = max_likers[:10]
     popular_restaurants = Restaurants.objects.filter(rating=5)
     countries_list = Countries.objects.all()
 
@@ -91,6 +96,7 @@ def home_view(request):
         'region': region,
         'companies': companies_corporation,
         'popular': popular_restaurants,
+        'popular_comments': comments_with_max_likes,
 
     }
     return render(request, "index.html", context)
@@ -174,8 +180,17 @@ def list_view(request):
 
 
 def blog_view(request):
-    print('blogu bugun hell ele')
+
+    data = BlogModel.objects.all()
+    data_1 = data[::2]
+    data_2 = data[1::2]
+    print(data_1)
+    print(data_2)
+
+
     context = {
+        'data_1': data_1,
+        'data_2': data_2,
 
     }
 

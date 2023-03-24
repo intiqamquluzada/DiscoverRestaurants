@@ -61,45 +61,7 @@
         </div>
         <!-- .end preloader -->
         <!-- Topbar -->
-        <div class="topbar">
-            <div class="container position-relative z-index-1">
-                <div class="row align-items-center">
-                    <div class="topbar-item topbar-item-left">
-                        <ul class="social-list">
-                            <li>
-                                <a href="https://www.facebook.com/" target="_blank"><i class="flaticon-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.instagram.com/" target="_blank"><i class="flaticon-instagram"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/" target="_blank"><i class="flaticon-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://linkedin.com/" target="_blank"><i class="flaticon-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="topbar-item justify-content-end">
-                        <ul class="topbar-action">
-                            <!-- <li>
-                                <i class="flaticon-mail"></i>
-                                <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#79111c151516390d0b181009571a1614"><span class="__cf_email__" data-cfemail="3e565b5252517e4a4c5f574e105d5153">[email&#160;protected]</span></a>
-                            </li> -->
-                            <li>
-                                <i class="flaticon-telephone"></i>
-                                <a href="tel:+44-5346-338">+99470XXXXXXX</a>
-                            </li>
-                            <li>
-                                <i class="flaticon-address"></i>
-                                Coders Azerbaijan. Naxçıvani 10.
-                            </li>
-                        </ul>
 
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- Topbar -->
         <!-- Navbar -->
         <div class="fixed-top">
@@ -159,7 +121,6 @@
                                             <span class="option-badge">2</span>
                                         </a>
                                     </li>
-
                                     <li class="d-none d-md-inline-block">
                                         <a href="authentication.html">
                                             <i class="flaticon-user-1"></i>
@@ -179,8 +140,6 @@
                     <div class="container">
                         <nav class="navbar navbar-expand-md navbar-light">
                             <a class="navbar-brand" href="index.html">
-                                <img src="{% static 'assets/images/logo.png' %}" alt="logo" class="logo default-logo">
-                                <img src="{% static 'assets/images/logo-default-color.png' %}" alt="logo" class="sticky-logo">
                             </a>
                             <div class="collapse navbar-collapse mean-menu " id="navbarSupportedContent">
                                 <ul class="navbar-nav mx-auto">
@@ -188,6 +147,14 @@
                                         <a href="{% url 'booking:home' %}" class="nav-link  active">Ana səhifə</a>
 
                                     </li>
+                                    {% if user.is_restaurant_owner == True %}
+                                    {% if user.restaurant %}
+                                    <li class="nav-item">
+                                        <a href="{% url 'accounts:registration_user' %}" class="nav-link  active">Qeydiyyat sahibkar</a>
+
+                                    </li>
+{% endif %}
+                                    {% endif %}
 
                                     <li class="nav-item">
                                         <a href="{% url 'booking:list' %}" class="nav-link">Restoranlar</a>
@@ -230,28 +197,59 @@
 <!--                                                <i class="flaticon-searching"></i>-->
 <!--                                            </a>-->
 <!--                                        </li>-->
+                                        {% if user.is_authenticated and user.is_restaurant_owner == False %}
                                         <li>
                                             <a href="{% url 'booking:reserved' %}">
-                                                <i class="flaticon-shopping-bag"></i>
-                                                <span class="option-badge">2</span>
+                                                <i class="fa-solid fa-person-military-to-person fa-shake"></i>
+
                                             </a>
                                         </li>
                                           <li>
                                             <a href="{% url 'booking:saved' %}">
-                                                <i class="fa-solid fa-bookmark"></i>
-                                                <span class="option-badge">2</span>
+                                                <i class="fa-solid fa-bookmark fa-spin"></i>
+
                                             </a>
                                         </li>
+                                        {% endif %}
                                     </ul>
                                 </div>
-    
-                                 <div class="navbar-option-item">
-                                    <a href="{% url 'accounts:login_user' %}" class="btn btn-primary">Qonaq kimi giriş
-                                        <i class="flaticon-right-arrow"></i></a>
-                                </div> &nbsp; &nbsp; &nbsp; &nbsp;
-                                 <div class="navbar-option-item">
-                                    <a href="{% url 'accounts:login_owner' %}" class="btn btn-warning">Sahibkar kimi giriş <i class="flaticon-right-arrow"></i></a>
+
+                                  {% if not user.is_authenticated %}
+<button id="login-btn" class="btn btn-primary" style="margin-right: 10px;">Giriş</button>
+
+<div id="login-options" style="display: none;">
+    <div class="navbar-option-item" style="margin-bottom: 10px;">
+        <a href="{% url 'accounts:login_user' %}" class="btn btn-primary">Qonaq kimi giriş <i class="flaticon-right-arrow"></i></a>
+    </div>
+    <div class="navbar-option-item">
+        <a href="{% url 'accounts:login_owner' %}" class="btn btn-warning">Sahibkar kimi giriş <i class="flaticon-right-arrow"></i></a>
+    </div>
+</div>
+
+<script>
+    var loginBtn = document.getElementById("login-btn");
+    var loginOptions = document.getElementById("login-options");
+
+    loginBtn.addEventListener("click", function() {
+        if (loginOptions.style.display === "none") {
+            loginOptions.style.display = "block";
+        } else {
+            loginOptions.style.display = "none";
+        }
+    });
+</script>
+
+
+                                {% endif %}
+
+                                {% if user.is_authenticated  %}
+                                <div class="navbar-option-item">
+                                    <a href="{% url 'accounts:logout_user' %}" class="btn btn-info">Çıxış <i class="flaticon-right-arrow"></i></a>
+                                </div> &nbsp;&nbsp;&nbsp;
+                                <div class="navbar-option-item">
+                                    <a href="{% url 'accounts:my_account_user' user.slug %}" class="btn btn-outline-success">Hesab: {{user.email}} </a>
                                 </div>
+                                {% endif %}
                             </div>
                         </nav>
                     </div>
@@ -265,11 +263,11 @@
             <!-- header-content -->
             <div class="container">
                 <div class="header-content m-auto">
-                    <h1>Blogs</h1>
+                    <h1>Bloqlar</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Blogs</li>
+                            <li class="breadcrumb-item"><a href="index.html">Ana səhifə</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Bloqlar</li>
                         </ol>
                     </nav>
                 </div>
@@ -288,242 +286,61 @@
             </div>
             <div class="container">
                 <div class="section-title">
-                    <small>To Get More Tips And Tricks</small>
-                    <h2>Read Our Daily Blog</h2>
+                    <small>Buradan faydalı məlumatlar əldə edə bilərsən</small>
+                    <h2>Bloqları gündəlik oxumağınızı tövsiyyə edirik :)</h2>
                 </div>
                 <div class="row load-more-gallery">
+{% for data in data_1 %}
                     <div class="col-md-6 pb-30 more-col-item desk-pad-right-20">
                         <div class="blog-card">
                             <div class="blog-card-image">
                                 <a href="single-blog.html">
-                                    <img src="{% static 'assets/images/blogs/blog-lg-3.jpg' %}" alt="blog" class="blog-default-image">
-                                    <img src="{% static 'assets/images/blogs/blog-lg-4.jpg' %}" alt="blog" class="blog-hover-image">
+                                    <img style="width: 636px; height: 424px;" src="{{data.image.url}}" alt="blog" class="blog-default-image">
+                                    <img style="width: 636px; height: 424px;" src="{{data.image.url}}" alt="blog" class="blog-hover-image">
                                 </a>
                             </div>
                             <div class="blog-card-content">
                                 <ul class="blog-entry">
-                                    <li>
-                                        <i class="flaticon-calendar"></i>
-                                        04 Feb
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-user-1"></i>
-                                        John Anderson
-                                    </li>
+
                                 </ul>
                                 <h3>
-                                    <a href="single-blog.html">Hidden gems you must visit while exploring Greece </a>
+                                    <a href="single-blog.html">{{data.name}}</a>
                                 </h3>
-                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.</p>
+                                <p>{{data.description|truncatewords:20}}</p>
                                 <div class="blog-redirect-link">
-                                    <a href="single-blog.html">Read Article <i class="flaticon-export"></i></a>
+                                    <a href="single-blog.html">Oxu... <i class="flaticon-export"></i></a>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+{% endfor %}
+{% for data in data_2 %}
+
                     <div class="col-md-6 pb-30 more-col-item desk-pad-left-20">
                         <div class="blog-card">
                             <div class="blog-card-image">
                                 <a href="single-blog.html">
-                                    <img src="{% static 'assets/images/blogs/blog-lg-1.jpg' %}" alt="blog" class="blog-default-image">
-                                    <img src="{% static 'assets/images/blogs/blog-lg-2.jpg' %}" alt="blog" class="blog-hover-image">
+                                    <img style="width: 636px; height: 424px;" src="{{data.image.url}}" alt="blog" class="blog-default-image">
+                                    <img style="width: 636px; height: 424px;" src="{{data.image.url}}" alt="blog" class="blog-hover-image">
                                 </a>
                             </div>
                             <div class="blog-card-content">
                                 <ul class="blog-entry">
-                                    <li>
-                                        <i class="flaticon-calendar"></i>
-                                        05 Feb
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-user-1"></i>
-                                        John Anderson
-                                    </li>
+
+
                                 </ul>
                                 <h3>
-                                    <a href="single-blog.html">How To Choose The Best Rope For Hiking</a>
+                                    <a href="single-blog.html">{{data.name}}</a>
                                 </h3>
-                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.</p>
+                                <p>{{data.description|truncatewords:20}}</p>
                                 <div class="blog-redirect-link">
-                                    <a href="single-blog.html">Read Article <i class="flaticon-export"></i></a>
+                                    <a href="single-blog.html">Oxu ...<i class="flaticon-export"></i></a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 pb-30 more-col-item desk-pad-right-20">
-                        <div class="blog-card">
-                            <div class="blog-card-image">
-                                <a href="single-blog.html">
-                                    <img src="{% static 'assets/images/blogs/blog-lg-5.jpg' %}" alt="blog" class="blog-default-image">
-                                    <img src="{% static 'assets/images/blogs/blog-lg-6.jpg' %}" alt="blog" class="blog-hover-image">
-                                </a>
-                            </div>
-                            <div class="blog-card-content">
-                                <ul class="blog-entry">
-                                    <li>
-                                        <i class="flaticon-calendar"></i>
-                                        03 Feb
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-user-1"></i>
-                                        Richard Moris
-                                    </li>
-                                </ul>
-                                <h3>
-                                    <a href="single-blog.html">How To Choose The Best Backpack For Travel </a>
-                                </h3>
-                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.</p>
-                                <div class="blog-redirect-link">
-                                    <a href="single-blog.html">Read Article <i class="flaticon-export"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 pb-30 more-col-item desk-pad-left-20">
-                        <div class="blog-card">
-                            <div class="blog-card-image">
-                                <a href="single-blog.html">
-                                    <img src="{% static 'assets/images/blogs/blog-lg-7.jpg' %}" alt="blog" class="blog-default-image">
-                                    <img src="{% static 'assets/images/blogs/blog-lg-8.jpg' %}" alt="blog" class="blog-hover-image">
-                                </a>
-                            </div>
-                            <div class="blog-card-content">
-                                <ul class="blog-entry">
-                                    <li>
-                                        <i class="flaticon-calendar"></i>
-                                        02 Feb
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-user-1"></i>
-                                        John Anderson
-                                    </li>
-                                </ul>
-                                <h3>
-                                    <a href="single-blog.html">The Best Places To Visit With Family </a>
-                                </h3>
-                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.</p>
-                                <div class="blog-redirect-link">
-                                    <a href="single-blog.html">Read Article <i class="flaticon-export"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 pb-30 more-col-item desk-pad-right-20">
-                        <div class="blog-card">
-                            <div class="blog-card-image">
-                                <a href="single-blog.html">
-                                    <img src="{% static 'assets/images/blogs/blog-lg-9.jpg' %}" alt="blog" class="blog-default-image">
-                                    <img src="{% static 'assets/images/blogs/blog-lg-10.jpg' %}" alt="blog" class="blog-hover-image">
-                                </a>
-                            </div>
-                            <div class="blog-card-content">
-                                <ul class="blog-entry">
-                                    <li>
-                                        <i class="flaticon-calendar"></i>
-                                        01 Feb
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-user-1"></i>
-                                        Moris Johnson
-                                    </li>
-                                </ul>
-                                <h3>
-                                    <a href="single-blog.html">What Things You Should Do When You Visit An Island</a>
-                                </h3>
-                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.</p>
-                                <div class="blog-redirect-link">
-                                    <a href="single-blog.html">Read Article <i class="flaticon-export"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 pb-30 more-col-item desk-pad-left-20">
-                        <div class="blog-card">
-                            <div class="blog-card-image">
-                                <a href="single-blog.html">
-                                    <img src="{% static 'assets/images/blogs/blog-lg-11.jpg' %}" alt="blog" class="blog-default-image">
-                                    <img src="{% static 'assets/images/blogs/blog-lg-12.jpg' %}" alt="blog" class="blog-hover-image">
-                                </a>
-                            </div>
-                            <div class="blog-card-content">
-                                <ul class="blog-entry">
-                                    <li>
-                                        <i class="flaticon-calendar"></i>
-                                        31 Jan
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-user-1"></i>
-                                        Moris Johnson
-                                    </li>
-                                </ul>
-                                <h3>
-                                    <a href="single-blog.html">How To Take A Best Photo When Travelling</a>
-                                </h3>
-                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.</p>
-                                <div class="blog-redirect-link">
-                                    <a href="single-blog.html">Read Article <i class="flaticon-export"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 pb-30 more-col-item desk-pad-right-20">
-                        <div class="blog-card">
-                            <div class="blog-card-image">
-                                <a href="single-blog.html">
-                                    <img src="{% static 'assets/images/blogs/blog-lg-13.jpg' %}" alt="blog" class="blog-default-image">
-                                    <img src="{% static 'assets/images/blogs/blog-lg-14.jpg' %}" alt="blog" class="blog-hover-image">
-                                </a>
-                            </div>
-                            <div class="blog-card-content">
-                                <ul class="blog-entry">
-                                    <li>
-                                        <i class="flaticon-calendar"></i>
-                                        30 Jan
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-user-1"></i>
-                                        Moris Johnson
-                                    </li>
-                                </ul>
-                                <h3>
-                                    <a href="single-blog.html">How To Spend A Perfect Weekend In Asia Together</a>
-                                </h3>
-                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.</p>
-                                <div class="blog-redirect-link">
-                                    <a href="single-blog.html">Read Article <i class="flaticon-export"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 pb-30 more-col-item desk-pad-left-20">
-                        <div class="blog-card">
-                            <div class="blog-card-image">
-                                <a href="single-blog.html">
-                                    <img src="{% static 'assets/images/blogs/blog-lg-15.jpg' %}" alt="blog" class="blog-default-image">
-                                    <img src="{% static 'assets/images/blogs/blog-lg-16.jpg' %}" alt="blog" class="blog-hover-image">
-                                </a>
-                            </div>
-                            <div class="blog-card-content">
-                                <ul class="blog-entry">
-                                    <li>
-                                        <i class="flaticon-calendar"></i>
-                                        29 Jan
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-user-1"></i>
-                                        Moris Johnson
-                                    </li>
-                                </ul>
-                                <h3>
-                                    <a href="single-blog.html">How Not To Get Lost In Foreign Country</a>
-                                </h3>
-                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.</p>
-                                <div class="blog-redirect-link">
-                                    <a href="single-blog.html">Read Article <i class="flaticon-export"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+{% endfor %}
                 </div>
 
                 <!-- Load More -->

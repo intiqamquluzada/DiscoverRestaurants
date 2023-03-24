@@ -139,7 +139,6 @@ class CooperationCompanies(DateMixin, SlugMixin):
 
 class BlogModel(DateMixin, SlugMixin):
     name = models.CharField(max_length=200)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="userblog")
     image = models.ImageField(upload_to=Uploader.upload_images_for_blog)
     description = models.TextField()
 
@@ -151,6 +150,10 @@ class BlogModel(DateMixin, SlugMixin):
         verbose_name = "Blog Model"
         verbose_name_plural = "Blog models"
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = Generator.create_slug_shortcode(size=15, model_=Comment)
+        super(BlogModel, self).save(*args, **kwargs)
 
 class Comment(MPTTModel, DateMixin, SlugMixin):
     restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE, null=True, blank=True,

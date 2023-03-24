@@ -609,7 +609,7 @@
                     </div>
                     <div class="col-lg-6 pb-30">
                         <div class="about-content-image text-center">
-                            <img src="{% static 'assets/images/tour-about.png' %}" alt="about">
+                            <img src="{% static 'assets/images/tour-about.png' %}" style="height: 700px;" alt="about">
                         </div>
                     </div>
                 </div>
@@ -726,82 +726,25 @@
                     </h2>
                 </div>
                 <div class="testimonial-carousel owl-carousel owl-theme">
+
+                    {% for comment in popular_comments %}
                     <div class="item">
                         <div class="testimonial-card text-center">
                             <div class="testimoial-quote">
                                 <i class="flaticon-left-quote"></i>
                             </div>
-                            <p class="testimonial-feedback">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
+                            <p class="testimonial-feedback">{{comment.body}}</p>
                             <div class="testimonial-client-info">
-                                <img src="{% static 'assets/images/clients/client-1.jpg' %}" alt="client">
+                                <img src="{{comment.user.pp.url}}" alt="client">
                                 <ul class="review-star">
-                                    <li class="full-star"><i class="flaticon-star"></i></li>
-                                    <li class="full-star"><i class="flaticon-star"></i></li>
-                                    <li class="full-star"><i class="flaticon-star"></i></li>
-                                    <li class="full-star"><i class="flaticon-star"></i></li>
-                                    <li class="full-star"><i class="flaticon-star"></i></li>
+                                    <li class="full-star">{{comment.likers.count}} bəyənmə</li>
+
                                 </ul>
-                                <h3 class="testimonial-name">Amrita Roy</h3>
+                                <h3 class="testimonial-name">{{comment.user.name}} &nbsp; {{comment.user.surname}}</h3>
                             </div>
                         </div>
                     </div>
-                    <div class="item">
-                        <div class="testimonial-card text-center">
-                            <div class="testimoial-quote">
-                                <i class="flaticon-left-quote"></i>
-                            </div>
-                            <p class="testimonial-feedback">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
-                            <div class="testimonial-client-info">
-                                <img src="{% static 'assets/images/clients/client-2.jpg' %}" alt="client">
-                                <ul class="review-star">
-                                    <li class="full-star"><i class="flaticon-star"></i></li>
-                                    <li class="full-star"><i class="flaticon-star"></i></li>
-                                    <li class="full-star"><i class="flaticon-star"></i></li>
-                                    <li class="full-star"><i class="flaticon-star"></i></li>
-                                    <li class="full-star"><i class="flaticon-star"></i></li>
-                                </ul>
-                                <h3 class="testimonial-name">John Abril</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimonial-card text-center">
-                            <div class="testimoial-quote">
-                                <i class="flaticon-left-quote"></i>
-                            </div>
-                            <p class="testimonial-feedback">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
-                            <div class="testimonial-client-info">
-                                <img src="{% static 'assets/images/clients/client-3.jpg' %}" alt="client">
-                                <ul class="review-star">
-                                    <li class="full-star"><i class="flaticon-star"></i></li>
-                                    <li class="full-star"><i class="flaticon-star"></i></li>
-                                    <li class="full-star"><i class="flaticon-star"></i></li>
-                                    <li class="full-star"><i class="flaticon-star"></i></li>
-                                    <li class="full-star"><i class="flaticon-star"></i></li>
-                                </ul>
-                                <h3 class="testimonial-name">Jane Anderson</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimonial-card text-center">
-                            <div class="testimoial-quote">
-                                <i class="flaticon-left-quote"></i>
-                            </div>
-                            <p class="testimonial-feedback">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
-                            <div class="testimonial-client-info">
-                                <img src="{% static 'assets/images/clients/client-4.jpg' %}" alt="client">
-                                <ul class="review-star">
-                                    <li class="full-star"><i class="flaticon-star"></i></li>
-                                    <li class="full-star"><i class="flaticon-star"></i></li>
-                                    <li class="full-star"><i class="flaticon-star"></i></li>
-                                    <li class="full-star"><i class="flaticon-star"></i></li>
-                                    <li class="full-star"><i class="flaticon-star"></i></li>
-                                </ul>
-                                <h3 class="testimonial-name">Devit Kotlin</h3>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </section>
