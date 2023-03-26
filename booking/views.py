@@ -159,6 +159,7 @@ def list_view(request):
 
     if result.count() == 0:
         message = "Ölkəyə və yaxud axtarışa uyğun nəticə tapılmadı"
+        print(message)
 
     else:
         message = ""
