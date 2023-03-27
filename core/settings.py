@@ -99,15 +99,16 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-us' # varsayılan dil, İngilizce
+TIME_ZONE = 'UTC'
 
-TIME_ZONE = 'Asia/Baku'
-
-USE_I18N = True
-
+USE_I18N = True # yerelleştirme (internationalization) özelliğini etkinleştirin
 USE_L10N = True
-
 USE_TZ = True
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale') # çeviri dosyalarının bulunduğu dizin
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
@@ -128,5 +129,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
-
 

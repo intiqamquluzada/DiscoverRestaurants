@@ -351,13 +351,14 @@
             <!-- header-content -->
             <div class="container-fluid">
                 <div class="header-content">
-                    <h1>Bütün restoranlar bir ünvanda.
+                    <h2 style="color: whitesmoke;">Qoşulduğunuz region: {{ country }} , {{ region }}
 
-                    </h1>
 
-                    <span style="background-color: darkorange; width: 100%;">
-                        You are joining from {{ country }} , {{ region }} &nbsp;
-                    </span>
+                    </h2>
+
+                    <h4 style="background-color: darkorange; width: 100%;">
+                        Bütün restoranlar bir ünvanda.
+                    </h4>
                     <br>
                     <br>
                     <br>
@@ -735,7 +736,9 @@
                             </div>
                             <p class="testimonial-feedback">{{comment.body}}</p>
                             <div class="testimonial-client-info">
+                                {% if comment.user.pp %}
                                 <img src="{{comment.user.pp.url}}" alt="client">
+                                {% endif %}
                                 <ul class="review-star">
                                     <li class="full-star">{{comment.likers.count}} bəyənmə</li>
 

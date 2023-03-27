@@ -11,6 +11,9 @@ from .forms import CommentForm, ReserveForm, ContactForm
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.db.models import Max
+from django.utils.translation import gettext as _
+import pycountry
+from services.translator import countries
 
 
 api_key = "5117dbe9476548a6834433afd9b63554"
@@ -53,7 +56,14 @@ def home_view(request):
 
     geolocation_data = json.loads(geolocation_json)
 
-    country = geolocation_data["country"]
+    country_e = geolocation_data["country"]
+
+
+
+
+    country = countries.get(country_e)
+    print(country)
+
 
     region = geolocation_data["region"]
 
@@ -124,7 +134,12 @@ def list_view(request):
 
     geolocation_data = json.loads(geolocation_json)
 
-    country = geolocation_data["country"]
+    country_code = geolocation_data["country_code"]
+
+    country_name = pycountry.countries.get(alpha_2=country_code).name
+
+    country = countries.get(country_name)
+
 
     region = geolocation_data["region"]
     print(region)

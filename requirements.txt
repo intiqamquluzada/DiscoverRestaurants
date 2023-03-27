@@ -19,6 +19,7 @@ idna==3.4
 kombu==5.2.4
 Pillow==9.4.0
 prompt-toolkit==3.0.38
+pycountry==22.3.5
 pydantic==1.10.5
 PyMuPDF==1.21.1
 PyPDF2==3.0.1
