@@ -152,7 +152,7 @@ class BlogModel(DateMixin, SlugMixin):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = Generator.create_slug_shortcode(size=15, model_=Comment)
+            self.slug = Generator.create_slug_shortcode(size=15, model_=BlogModel)
         super(BlogModel, self).save(*args, **kwargs)
 
 class Comment(MPTTModel, DateMixin, SlugMixin):
@@ -248,4 +248,25 @@ class Reserve(DateMixin, SlugMixin):
 
         super(Reserve, self).save(*args, **kwargs)
 
+
+class Contact(DateMixin, SlugMixin):
+    name = models.CharField(max_length=200)
+    email = models.EmailField()
+    phone = models.CharField(max_length=200)
+    subject = models.CharField(max_length=100)
+    message = models.TextField()
+
+    def __str__(self):
+        return f"{self.name} -->>> {self.subject}"
+
+    class Meta:
+        ordering = ("-created_at", )
+        verbose_name = "Əlaqə yaratmaq istəyən şəxs"
+        verbose_name_plural = "Əlaqə yaratmaq istəyən şəxslər"
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = Generator.create_slug_shortcode(size=15, model_=Contact)
+
+        super(Contact, self).save(*args, **kwargs)
 

@@ -290,7 +290,7 @@
                     <h2>Bloqları gündəlik oxumağınızı tövsiyyə edirik :)</h2>
                 </div>
                 <div class="row load-more-gallery">
-{% for data in data_1 %}
+{% for data in p %}
                     <div class="col-md-6 pb-30 more-col-item desk-pad-right-20">
                         <div class="blog-card">
                             <div class="blog-card-image">
@@ -308,44 +308,70 @@
                                 </h3>
                                 <p>{{data.description|truncatewords:20}}</p>
                                 <div class="blog-redirect-link">
-                                    <a href="single-blog.html">Oxu... <i class="flaticon-export"></i></a>
+                                    <a href="{% url 'booking:singleBlog' data.slug %}">Oxu... <i class="flaticon-export"></i></a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
 {% endfor %}
-{% for data in data_2 %}
+<div class="d-flex justify-content-center">
 
-                    <div class="col-md-6 pb-30 more-col-item desk-pad-left-20">
-                        <div class="blog-card">
-                            <div class="blog-card-image">
-                                <a href="single-blog.html">
-                                    <img style="width: 636px; height: 424px;" src="{{data.image.url}}" alt="blog" class="blog-default-image">
-                                    <img style="width: 636px; height: 424px;" src="{{data.image.url}}" alt="blog" class="blog-hover-image">
-                                </a>
-                            </div>
-                            <div class="blog-card-content">
-                                <ul class="blog-entry">
+                <ul class="pagination">
+
+                    {% if p.number > 1 %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1">Baş</a>
+                </li>
+                    {% endif %}
+                    {% if p.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{p.previous_page_number}}">&laquo;</a></li>
+                    {% endif %}
+
+                {% if p.number > 1 %}
+                    <li class="page-item"><a class="page-link" href="?page={{p.number|add:'-1'}}">
+                        {{p.number|add:"-1"}}
+                        </a>
+                    </li>
+                    {% endif %}
 
 
-                                </ul>
-                                <h3>
-                                    <a href="single-blog.html">{{data.name}}</a>
-                                </h3>
-                                <p>{{data.description|truncatewords:20}}</p>
-                                <div class="blog-redirect-link">
-                                    <a href="single-blog.html">Oxu ...<i class="flaticon-export"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-{% endfor %}
+                    <li class="page-item active"><a  class="page-link" href="?page={{p.number}}">
+                        {{p.number}}
+                        </a>
+                    </li>
+                    {% if p.number < p.paginator.num_pages %}
+                    <li class="page-item"><a class="page-link" href="?page={{p.number|add:'1'}}">
+                        {{p.number|add:"1"}}
+                        </a>
+                    </li>
+                    {% endif %}
+
+
+
+
+
+
+
+                    {% if p.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{p.next_page_number}}">&raquo;</a></li>
+                    {% endif %}
+
+                    {% if p.number < p.paginator.num_pages %}
+                     <li class="page-item">
+                    <a class="page-link" href="?page={{p.paginator.num_pages}}">Son</a>
+                </li>
+                    {% endif %}
+
+
+
+                </ul>
+
+            </div>
                 </div>
 
                 <!-- Load More -->
                 <div class="text-center load-more">
-                    <button class="btn main-btn main-btn-arrow load-more-btn">Load More <i class="flaticon-right-arrow"></i></button>
                 </div>
                 <!-- Load More -->
             </div>

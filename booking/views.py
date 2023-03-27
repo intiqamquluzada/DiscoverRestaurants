@@ -7,11 +7,10 @@ import datetime
 from accounts.models import MyUser
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from .forms import CommentForm, ReserveForm
+from .forms import CommentForm, ReserveForm, ContactForm
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.db.models import Max
-from django.db.models.functions import Substr
 
 
 api_key = "5117dbe9476548a6834433afd9b63554"
@@ -128,6 +127,7 @@ def list_view(request):
     country = geolocation_data["country"]
 
     region = geolocation_data["region"]
+    print(region)
 
     cont = Countries.objects.filter(name=str(country)).values('slug')
 
@@ -171,6 +171,7 @@ def list_view(request):
     context = {
         'message': message,
         'p': p,
+        'paginator': paginator,
         'result': result,
         'country': country,
         'region': region,
@@ -181,25 +182,44 @@ def list_view(request):
 
 
 def blog_view(request):
+    datas = BlogModel.objects.all()
 
-    data = BlogModel.objects.all()
-    data_1 = data[::2]
-    data_2 = data[1::2]
-    print(data_1)
-    print(data_2)
-
+    paginator = Paginator(datas, 1)
+    page = request.GET.get('page', 1)
+    p = paginator.get_page(page)
 
     context = {
-        'data_1': data_1,
-        'data_2': data_2,
+        'datas': datas,
+        'p': p,
+        'paginator': paginator,
 
     }
 
     return render(request, "blog.html", context)
 
 
-def contact_view(request):
+def single_blog(request, slug):
+    blog = get_object_or_404(BlogModel, slug=slug)
+
     context = {
+        'blog': blog
+    }
+    return render(request, "single-blog.html", context)
+
+def contact_view(request):
+    form = ContactForm()
+
+    if request.method == "POST":
+        form = ContactForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+            return redirect("booking:contact")
+    else:
+        messages.error(request, "Nə isə doğru deyil...")
+
+
+    context = {
+        'form': form
 
     }
 

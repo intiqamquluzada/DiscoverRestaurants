@@ -1,6 +1,5 @@
 from django import forms
-from .models import Comment, Reserve
-
+from .models import Comment, Reserve, Contact
 
 
 class CommentForm(forms.ModelForm):
@@ -46,3 +45,20 @@ class ReserveForm(forms.ModelForm):
         self.fields["date"].required = True
 
         self.fields["passport_number"].required = True
+
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = "__all__"
+
+    def __init__(self, *args, **kwargs):
+        super(ContactForm, self).__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({"class": "form-control"})
+            self.fields[field].required = True
+        self.fields['name'].widget.attrs.update({"placeholder": "Adınız*"})
+        self.fields['email'].widget.attrs.update({"placeholder": "E-poçt ünvanınız*", "type": "email"})
+        self.fields['phone'].widget.attrs.update({"placeholder": "Əlaqə nömrəniz*", "type":"tel"})
+        self.fields['subject'].widget.attrs.update({"placeholder": "Başlıq*"})
+        self.fields['message'].widget.attrs.update({"placeholder": "Müraciətiniz*", "rows": 6})

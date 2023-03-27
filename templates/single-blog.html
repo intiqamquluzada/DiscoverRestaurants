@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="zxx">
     
@@ -9,32 +10,37 @@
         <meta name="author" content="EnvyTheme">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-        <title>Traip - Travel & Tour Booking HTML Template</title>
-        <link rel="icon" href="assets/images/favicon.png" type="image/png" sizes="16x16">
-
-        <!-- bootstrap css -->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css" media="all" />
+        <title>Restoran Rezervasiya Sistemi</title>
+        <link rel="icon" href="{% static 'assets/images/favicon.png' %}" type="image/png" sizes="16x16">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <!-- bootstrap css -->
+        <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" type="text/css" media="all" />
         <!-- animate css -->
-        <link rel="stylesheet" href="assets/css/animate.min.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}" type="text/css" media="all" />
         <!-- owl carousel css -->
-        <link rel="stylesheet" href="assets/css/owl.carousel.min.css"  type="text/css" media="all" />
-        <link rel="stylesheet" href="assets/css/owl.theme.default.min.css"  type="text/css" media="all" />
+        <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}"  type="text/css" media="all" />
+        <link rel="stylesheet" href="{% static 'assets/css/owl.theme.default.min.css' %}"  type="text/css" media="all" />
         <!-- meanmenu css -->
-        <link rel="stylesheet" href="assets/css/meanmenu.min.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="{% static 'assets/css/meanmenu.min.css' %}" type="text/css" media="all" />
         <!-- jquery ui css -->
-        <link rel="stylesheet" href="assets/css/jquery-ui.min.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="{% static 'assets/css/jquery-ui.min.css' %}" type="text/css" media="all" />
         <!-- selectize css -->
-        <link rel="stylesheet" href="assets/css/selectize.min.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="{% static 'assets/css/selectize.min.css' %}" type="text/css" media="all" />
         <!-- magnific popup css -->
-        <link rel="stylesheet" href="assets/css/magnific-popup.min.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.min.css' %}" type="text/css" media="all" />
         <!-- icofont css -->
-        <link rel='stylesheet' href='assets/css/icofont.min.css' type="text/css" media="all" />
+        <link rel='stylesheet' href="{% static 'assets/css/icofont.min.css' %}" type="text/css" media="all" />
         <!-- flaticon css -->
-        <link rel='stylesheet' href='assets/css/flaticon.css' type="text/css" media="all" />
+        <link rel='stylesheet' href="{% static 'assets/css/flaticon.css' %}" type="text/css" media="all" />
         <!-- style css -->
-        <link rel="stylesheet" href="assets/css/style.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" type="text/css" media="all" />
         <!-- responsive css -->
-        <link rel="stylesheet" href="assets/css/responsive.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}" type="text/css" media="all" />
+
+
+
+
     </head>
 
     <body>
@@ -56,64 +62,7 @@
         </div>
         <!-- .end preloader -->
         <!-- Topbar -->
-        <div class="topbar">
-            <div class="container position-relative z-index-1">
-                <div class="row align-items-center">
-                    <div class="topbar-item topbar-item-left">
-                        <ul class="social-list">
-                            <li>
-                                <a href="https://www.facebook.com/" target="_blank"><i class="flaticon-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.instagram.com/" target="_blank"><i class="flaticon-instagram"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/" target="_blank"><i class="flaticon-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://linkedin.com/" target="_blank"><i class="flaticon-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="topbar-item justify-content-end">
-                        <ul class="topbar-action">
-                            <li>
-                                <i class="flaticon-mail"></i>
-                                <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#a9c1ccc5c5c6e9dddbc8c0d987cac6c4"><span class="__cf_email__" data-cfemail="751d1019191a350107141c055b161a18">[email&#160;protected]</span></a>
-                            </li>
-                            <li>
-                                <i class="flaticon-telephone"></i>
-                                <a href="tel:+44-5346-338">+44 5346 338</a>
-                            </li>
-                            <li>
-                                <i class="flaticon-address"></i>
-                                3 Edgar Buildings, England, BA1 2FJ.
-                            </li>
-                        </ul>
-                        <div class="dropdown language-option"> <!-- "language-option" class is used for language switcher -->
-                            <button class="dropdown-toggle" type="button" id="language1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="flaticon-worldwide"></i>
-                                <span class="lang-name"></span>  <!-- "lang-name" class is used for language switcher -->
-                            </button>
-                            <div class="dropdown-menu language-dropdown-menu" aria-labelledby="language1">  <!-- "language-dropdown-menu" class is used for language switcher -->
-                                <a class="dropdown-item" href="#">
-                                    <img src="assets/images/uk.png" alt="flag">
-                                    English
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <img src="assets/images/china.png" alt="flag">
-                                    简体中文
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <img src="assets/images/uae.png" alt="flag">
-                                    العربيّة
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <!-- Topbar -->
         <!-- Navbar -->
         <div class="fixed-top">
@@ -121,8 +70,8 @@
                 <div class="container">
                     <div class="mobile-nav">
                         <a href="index.html" class="mobile-brand">
-                            <img src="assets/images/logo.png" alt="logo" class="logo default-logo">
-                            <img src="assets/images/logo-default-color.png" alt="logo" class="sticky-logo">
+                            <img src="{% static 'assets/images/logo.png' %}" alt="logo" class="logo default-logo">
+                            <img src="{% static 'assets/images/logo-default-color.png' %}" alt="logo" class="sticky-logo">
                         </a>
                         <div class="navbar-option">
                             <div class="navbar-option-item">
@@ -134,28 +83,7 @@
                                         <!-- "mobile-option-dropdown" class is used for all options -->
                                         <div class="mobile-option-dropdown">
                                             <ul class="navbar-option-list">
-                                                <li>
-                                                    <div class="navbar-language dropdown language-option"> <!-- "language-option" class is used for language switcher -->
-                                                        <button class="dropdown-toggle" type="button" id="language2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="flaticon-worldwide"></i>
-                                                            <span class="lang-name"></span>  <!-- "lang-name" class is used for language switcher -->
-                                                        </button>
-                                                        <div class="dropdown-menu language-dropdown-menu" aria-labelledby="language2">  <!-- "language-dropdown-menu" class is used for language switcher -->
-                                                            <a class="dropdown-item" href="#">
-                                                                <img src="assets/images/uk.png" alt="flag">
-                                                                English
-                                                            </a>
-                                                            <a class="dropdown-item" href="#">
-                                                                <img src="assets/images/china.png" alt="flag">
-                                                                简体中文
-                                                            </a>
-                                                            <a class="dropdown-item" href="#">
-                                                                <img src="assets/images/uae.png" alt="flag">
-                                                                العربيّة
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </li>
+
                                                 <li>
                                                     <a href="#" class="page-search-btn">
                                                         <i class="flaticon-searching"></i>
@@ -180,20 +108,7 @@
                                                 <i class="flaticon-worldwide"></i>
                                                 <span class="lang-name"></span>  <!-- "lang-name" class is used for language switcher -->
                                             </button>
-                                            <div class="dropdown-menu language-dropdown-menu" aria-labelledby="language3">  <!-- "language-dropdown-menu" class is used for language switcher -->
-                                                <a class="dropdown-item" href="#">
-                                                    <img src="assets/images/uk.png" alt="flag">
-                                                    English
-                                                </a>
-                                                <a class="dropdown-item" href="#">
-                                                    <img src="assets/images/china.png" alt="flag">
-                                                    简体中文
-                                                </a>
-                                                <a class="dropdown-item" href="#">
-                                                    <img src="assets/images/uae.png" alt="flag">
-                                                    العربيّة
-                                                </a>
-                                            </div>
+
                                         </div>
                                     </li>
                                     <li class="d-none d-md-inline-block">
@@ -226,176 +141,116 @@
                     <div class="container">
                         <nav class="navbar navbar-expand-md navbar-light">
                             <a class="navbar-brand" href="index.html">
-                                <img src="assets/images/logo.png" alt="logo" class="logo default-logo">
-                                <img src="assets/images/logo-default-color.png" alt="logo" class="sticky-logo">
                             </a>
-                            <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+                            <div class="collapse navbar-collapse mean-menu " id="navbarSupportedContent">
                                 <ul class="navbar-nav mx-auto">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link dropdown-toggle">Home</a>
-                                        <ul class="dropdown-menu">
-                                            <li class="nav-item">
-                                                <a href="index.html" class="nav-link">Home Demo 1</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="index-2.html" class="nav-link">Home Demo 2</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="index-3.html" class="nav-link">Home Demo 3</a>
-                                            </li>
-                                        </ul>
+                                        <a href="{% url 'booking:home' %}" class="nav-link  active">Ana səhifə</a>
+
                                     </li>
+                                    {% if user.is_restaurant_owner == True %}
+                                    {% if user.restaurant %}
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link dropdown-toggle">Pages</a>
-                                        <ul class="dropdown-menu">
-                                            <li class="nav-item">
-                                                <a href="about-us.html" class="nav-link">About Us</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="faqs.html" class="nav-link">FAQ's</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="get-in-touch.html" class="nav-link">Get In Touch</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="#" class="nav-link dropdown-toggle">Products</a>
-                                                <ul class="dropdown-menu">
-                                                    <li class="nav-item">
-                                                        <a href="products.html" class="nav-link">Products</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="single-product.html" class="nav-link">Single Product</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="cart.html" class="nav-link">Cart</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="checkout.html" class="nav-link">Checkout</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="wishlist.html" class="nav-link">Wishlist</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="#" class="nav-link dropdown-toggle">Hotels</a>
-                                                <ul class="dropdown-menu">
-                                                    <li class="nav-item">
-                                                        <a href="hotels.html" class="nav-link">Hotels</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="single-hotel.html" class="nav-link">Single Hotel</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="team.html" class="nav-link">Our Team</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="who-we-are.html" class="nav-link">Who We Are</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="#" class="nav-link dropdown-toggle">Users</a>
-                                                <ul class="dropdown-menu">
-                                                    <li class="nav-item">
-                                                        <a href="authentication.html" class="nav-link">Authentication</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="forget.html" class="nav-link">Forget Password</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="my-account.html" class="nav-link">My Account</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="my-orders.html" class="nav-link">My Orders</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="my-addresses.html" class="nav-link">My Addresses</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="nav-item">
+                                        <a href="{% url 'accounts:registration_user' %}" class="nav-link  active">Qeydiyyat sahibkar</a>
+
+                                    </li>
+{% endif %}
+                                    {% endif %}
+
+                                    <li class="nav-item">
+                                        <a href="{% url 'booking:list' %}" class="nav-link">Restoranlar</a>
+
+                                            <!-- <li class="nav-item">
                                                 <a href="#" class="nav-link dropdown-toggle">Others</a>
-                                                <ul class="dropdown-menu">
-                                                    <li class="nav-item">
-                                                        <a href="404.html" class="nav-link">404 Error Page</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="coming-soon-page.html" class="nav-link">Coming Soon</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="terms-conditions.html" class="nav-link">Terms & Conditions</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="privacy-policy.html" class="nav-link">Privacy Policy</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="search-page.html" class="nav-link">Search Page</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
+
+
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link dropdown-toggle">Destinations</a>
-                                        <ul class="dropdown-menu">
-                                            <li class="nav-item">
-                                                <a href="destination.html" class="nav-link">Destinations</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="single-destination.html" class="nav-link">Single Destination</a>
-                                            </li>
-                                        </ul>
+                                        <a href="#" class="nav-link ">Rezervasiya</a>
+
                                     </li>
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                         <a href="#" class="nav-link dropdown-toggle">Tours</a>
                                         <ul class="dropdown-menu">
                                             <li class="nav-item">
-                                                <a href="tour.html" class="nav-link">Tours</a>
+                                                <a href="list.html" class="nav-link">Tours</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="single-tour.html" class="nav-link">Single Tour</a>
+                                                <a href="single-list.html" class="nav-link">Single Tour</a>
                                             </li>
                                         </ul>
-                                    </li>
+                                    </li> -->
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link dropdown-toggle active">Blogs</a>
-                                        <ul class="dropdown-menu">
-                                            <li class="nav-item">
-                                                <a href="blogs-two-column.html" class="nav-link">Blogs Two Column</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="blogs-full.html" class="nav-link">Blogs Full</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="single-blog.html" class="nav-link active">Single Blog</a>
-                                            </li>
-                                        </ul>
+                                        <a href="{% url 'booking:blog' %}" class="nav-link ">Blog</a>
+
                                     </li>
+
                                     <li class="nav-item">
-                                        <a href="contact.html" class="nav-link">Contact</a>
+                                        <a href="{% url 'booking:contact' %}" class="nav-link">Əlaqə</a>
                                     </li>
                                 </ul>
                             </div>
                             <div class="navbar-option">
                                 <div class="navbar-option-item">
                                     <ul class="navbar-option-list">
+<!--                                        <li>-->
+<!--                                            <a href="#" class="page-search-btn">-->
+<!--                                                <i class="flaticon-searching"></i>-->
+<!--                                            </a>-->
+<!--                                        </li>-->
+                                        {% if user.is_authenticated and user.is_restaurant_owner == False %}
                                         <li>
-                                            <a href="#" class="page-search-btn">
-                                                <i class="flaticon-searching"></i>
+                                            <a href="{% url 'booking:reserved' %}">
+                                                <i class="fa-solid fa-person-military-to-person fa-shake"></i>
+
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="cart.html">
-                                                <i class="flaticon-shopping-bag"></i>
-                                                <span class="option-badge">2</span>
+                                          <li>
+                                            <a href="{% url 'booking:saved' %}">
+                                                <i class="fa-solid fa-bookmark fa-spin"></i>
+
                                             </a>
                                         </li>
+                                        {% endif %}
                                     </ul>
                                 </div>
+
+                                  {% if not user.is_authenticated %}
+<button id="login-btn" class="btn btn-primary" style="margin-right: 10px;">Giriş</button>
+
+<div id="login-options" style="display: none;">
+    <div class="navbar-option-item" style="margin-bottom: 10px;">
+        <a href="{% url 'accounts:login_user' %}" class="btn btn-primary">Qonaq kimi giriş <i class="flaticon-right-arrow"></i></a>
+    </div>
+    <div class="navbar-option-item">
+        <a href="{% url 'accounts:login_owner' %}" class="btn btn-warning">Sahibkar kimi giriş <i class="flaticon-right-arrow"></i></a>
+    </div>
+</div>
+
+<script>
+    var loginBtn = document.getElementById("login-btn");
+    var loginOptions = document.getElementById("login-options");
+
+    loginBtn.addEventListener("click", function() {
+        if (loginOptions.style.display === "none") {
+            loginOptions.style.display = "block";
+        } else {
+            loginOptions.style.display = "none";
+        }
+    });
+</script>
+
+
+                                {% endif %}
+
+                                {% if user.is_authenticated  %}
                                 <div class="navbar-option-item">
-                                    <a href="authentication.html" class="btn main-btn main-btn-arrow">Registration <i class="flaticon-right-arrow"></i></a>
+                                    <a href="{% url 'accounts:logout_user' %}" class="btn btn-info">Çıxış <i class="flaticon-right-arrow"></i></a>
+                                </div> &nbsp;&nbsp;&nbsp;
+                                <div class="navbar-option-item">
+                                    <a href="{% url 'accounts:my_account_user' user.slug %}" class="btn btn-outline-success">Hesab: {{user.email}} </a>
                                 </div>
+                                {% endif %}
                             </div>
                         </nav>
                     </div>
@@ -412,9 +267,9 @@
                     <h1>Blog Details</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li class="breadcrumb-item"><a href="blogs-two-column.html">Blogs</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Blog Details</li>
+                            <li class="breadcrumb-item"><a href="index.html">Ana səhifə</a></li>
+                            <li class="breadcrumb-item"><a href="blogs-two-column.html">Bloqlar</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{blog.name}}</li>
                         </ol>
                     </nav>
                 </div>
@@ -425,359 +280,41 @@
         <div class="blog-section pt-100 pb-70 position-relative">
             <div class="map-shapes">
                 <div class="map-shape map-shape-1 map-shape-top">
-                    <img src="assets/images/shapes/map-1.png" alt="shape">
+                    <img src="{% static 'assets/images/shapes/map-1.png' %}" alt="shape">
                 </div>
                 <div class="map-shape map-shape-2 map-shape-vertical-center">
-                    <img src="assets/images/shapes/map-2.png" alt="shape">
+                    <img src="{% static 'assets/images/shapes/map-2.png' %}" alt="shape">
                 </div>
             </div>
             <div class="container">
                 <div class="forum-main-image">
-                    <img src="assets/images/blogs/blog-details-lg-1.jpg" alt="blog">
+                    <img style="width: 1342px; height: 514px;" src="{{blog.image.url}}" alt="blog">
                     <ul class="blog-entry">
                         <li>
                             <i class="flaticon-calendar"></i>
-                            04 Feb
+                            {{blog.created_at}}
                         </li>
-                        <li>
-                            <i class="flaticon-user-1"></i>
-                            John Anderson
-                        </li>
-                        <li>
-                            <i class="flaticon-message"></i>
-                            02 Comments
-                        </li>
+
                     </ul>
                 </div>
                 <div class="row">
                     <div class="col-lg-9 pb-30 desk-pad-right-40">
                         <article>
                             <div class="forum-details">
-                                <h3>Hidden Gems You Must Visit While Exploring Greece</h3>
-                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-                                <div class="row">
-                                    <div class="col-6 col-sm-4 col-lg-4">
-                                        <div class="forum-details-inner-image">
-                                            <img src="assets/images/destinations/destination-12.jpg" alt="destination">
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-sm-4 col-lg-4">
-                                        <div class="forum-details-inner-image">
-                                            <img src="assets/images/destinations/destination-2.jpg" alt="destination">
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-sm-4 col-lg-4 offset-3 offset-sm-0">
-                                        <div class="forum-details-inner-image">
-                                            <img src="assets/images/destinations/destination-5.jpg" alt="destination">
-                                        </div>
-                                    </div>
-                                </div>
-                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                                <blockquote>
-                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing.</p>
-                                </blockquote>
-                                <h4>Best Reason To Choose This Place</h4>
-                                <ul>
-                                    <li>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.</li>
-                                    <li>Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna. aliquyam erat.</li>
-                                    <li>Dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.</li>
-                                    <li>Sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna. aliquyam erat, sed diam voluptua.</li>
-                                    <li>Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna. aliquyam erat, sed diam voluptua. </li>
-                                </ul>
-                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
+                                <h3>{{blog.name}}</h3>
+<p>{{blog.description}}</p>
+
+
                             </div>
-                            <div class="blog-article-actions">
-                                <div class="blog-article-action-item">
-                                    <span>
-                                        <i class="flaticon-tag"></i>
-                                    </span>
-                                    <ul class="sidebar-tag">
-                                        <li>
-                                            <a href="blogs-two-column.html">Europe</a>
-                                        </li>
-                                        <li>
-                                            <a href="blogs-two-column.html">Trendy</a>
-                                        </li>
-                                        <li>
-                                            <a href="blogs-two-column.html">Popular Tour</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="blog-article-action-item">
-                                    <ul class="social-list">
-                                        <li>
-                                            <a href="https://www.facebook.com/" target="_blank"><i class="flaticon-facebook"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="https://www.instagram.com/" target="_blank"><i class="flaticon-instagram"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="https://twitter.com/" target="_blank"><i class="flaticon-twitter"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="https://linkedin.com/" target="_blank"><i class="flaticon-linkedin"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+
                         </article>
 
-                        <!-- Recent Post -->
-                        <div class="recent-post">
-                            <div class="recent-post-item">
-                                <p class="recent-post-redirect">
-                                    <a href="single-blog.html">
-                                        <i class="flaticon-left-arrow"></i>
-                                        Previous Article
-                                    </a>
-                                </p>
-                                <div class="recent-post-card">
-                                    <div class="recent-post-thumb">
-                                        <a href="single-blog.html">
-                                            <img src="assets/images/blogs/blog-lg-1.jpg" alt="blog">
-                                        </a>
-                                    </div>
-                                    <div class="recent-post-content">
-                                        <h3>
-                                            <a href="single-blog.html">How To Choose The Best Rope For Hiking</a>
-                                        </h3>
-                                        <ul class="blog-entry">
-                                            <li>
-                                                <i class="flaticon-calendar"></i>
-                                                05 Feb
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="recent-post-item recent-post-item-right">
-                                <p class="recent-post-redirect">
-                                    <a href="single-blog.html">
-                                        Next Article
-                                        <i class="flaticon-right-arrow-angle"></i>
-                                    </a>
-                                </p>
-                                <div class="recent-post-card">
-                                    <div class="recent-post-thumb">
-                                        <a href="single-blog.html">
-                                            <img src="assets/images/blogs/blog-lg-7.jpg" alt="blog">
-                                        </a>
-                                    </div>
-                                    <div class="recent-post-content">
-                                        <h3>
-                                            <a href="single-blog.html">The Best Places To Visit With Family</a>
-                                        </h3>
-                                        <ul class="blog-entry">
-                                            <li>
-                                                <i class="flaticon-calendar"></i>
-                                                04 Feb
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Recent Post -->
 
-                        <!-- Comments -->
-                        <div class="comment-area">
-                            <div class="sub-section-title">
-                                <h3 class="sub-section-title-heading"><span>02</span> Comments</h3>
-                            </div>
-                            <div class="comment-feedback mb-30">
-                                <div class="comment-feedback-item">
-                                    <div class="comment-feedback-reply">
-                                        <div class="comment-reply-thumb">
-                                            <img src="assets/images/users/user-1.jpg" alt="user">
-                                        </div>
-                                        <div class="comment-reply-content">
-                                            <div class="comment-reply-header">
-                                                <div class="comment-reply-info">
-                                                    <h4>Jane Anderson</h4>
-                                                    <p>February 07,2021 - 08:18 AM</p>
-                                                </div>
-                                                <div class="comment-reply-btn">
-                                                    <a href="#">Reply <i class="flaticon-right-arrow"></i></a>
-                                                </div>
-                                            </div>
-                                            <p class="comment-reply-para">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                                        </div>
-                                    </div>
-                                    <div class="comment-feedback-reply comment-feedback-reply-back"> <!-- "comment-feedback-reply-back" class is used for the reply of comment. -->
-                                        <div class="comment-reply-thumb">
-                                            <img src="assets/images/users/user-2.jpg" alt="user">
-                                        </div>
-                                        <div class="comment-reply-content">
-                                            <div class="comment-reply-header">
-                                                <div class="comment-reply-info">
-                                                    <h4>Alenna Disuza</h4>
-                                                    <p>January 07,2021 - 08:20 AM</p>
-                                                </div>
-                                                <div class="comment-reply-btn">
-                                                    <a href="#">Reply <i class="flaticon-right-arrow"></i></a>
-                                                </div>
-                                            </div>
-                                            <p class="comment-reply-para">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="comment-feedback-item">
-                                    <div class="comment-feedback-reply">
-                                        <div class="comment-reply-thumb">
-                                            <img src="assets/images/users/user-3.jpg" alt="user">
-                                        </div>
-                                        <div class="comment-reply-content">
-                                            <div class="comment-reply-header">
-                                                <div class="comment-reply-info">
-                                                    <h4>Jane Anderson</h4>
-                                                    <p>February 05,2021 - 10:21 PM</p>
-                                                </div>
-                                                <div class="comment-reply-btn">
-                                                    <a href="#">Reply <i class="flaticon-right-arrow"></i></a>
-                                                </div>
-                                            </div>
-                                            <p class="comment-reply-para">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="sub-section-title">
-                                <h3 class="sub-section-title-heading">Leave A Comment</h3>
-                            </div>
-                            
-                            <form class="blog-contact-form">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group mb-20">
-                                            <input type="text" name="name" id="name" class="form-control" placeholder="Your Name*" required/>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group mb-20">
-                                            <input type="text" name="email" id="email" class="form-control" placeholder="Your Email*" required/>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group mb-20">
-                                            <textarea name="message" class="form-control" id="message" rows="6" placeholder="Your Comment*"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="input-checkbox mb-20">
-                                    <input type="checkbox" id="check1">
-                                    <label for="check1">Save my name and email in this browser for the next time I comment.</label>
-                                </div>
-                                <div class="form-button">
-                                    <button class="btn main-btn main-btn-arrow" type="submit">Send A Comment <i class="flaticon-right-arrow"></i></button>
-                                    <!-- <div id="msgSubmit"></div> -->
-                                </div>
-                            </form>
-                        </div>
-                        <!-- Comments -->
+
+
                     </div>
                     
-                    <div class="col-lg-3 pb-30">
-                        <div class="sidebar-item sidebar-search">
-                            <form>
-                                <div class="form-input-group">
-                                    <input type="text" placeholder="Search" class="form-control">
-                                    <button type="submit">
-                                        <i class="flaticon-searching"></i>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="sidebar-item">
-                            <h3>Categories</h3>
-                            <ul class="sidebar-category">
-                                <li>
-                                    <a href="blogs-two-column.html">Europe (09)</a>
-                                </li>
-                                <li>
-                                    <a href="blogs-two-column.html">Latest (15)</a>
-                                </li>
-                                <li>
-                                    <a href="blogs-two-column.html">New York (11)</a>
-                                </li>
-                                <li>
-                                    <a href="blogs-two-column.html">Popular Tour (21)</a>
-                                </li>
-                                <li>
-                                    <a href="blogs-two-column.html">Trendy (12)</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="sidebar-item">
-                            <h3>Latest Article</h3>
-                            <div class="sidebar-recent-post">
-                                <div class="recent-post-card">
-                                    <div class="recent-post-thumb">
-                                        <a href="single-blog.html">
-                                            <img src="assets/images/blogs/blog-lg-9.jpg" alt="blog">
-                                        </a>
-                                    </div>
-                                    <div class="recent-post-content">
-                                        <h3>
-                                            <a href="single-blog.html">What Things You Should Do When You Visit An Island</a>
-                                        </h3>
-                                        <ul class="blog-entry">
-                                            <li>
-                                                <i class="flaticon-calendar"></i>
-                                                04 Feb
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="recent-post-card">
-                                    <div class="recent-post-thumb">
-                                        <a href="single-blog.html">
-                                            <img src="assets/images/blogs/blog-lg-11.jpg" alt="blog">
-                                        </a>
-                                    </div>
-                                    <div class="recent-post-content">
-                                        <h3>
-                                            <a href="single-blog.html">How To Take A Best Photo When Travelling</a>
-                                        </h3>
-                                        <ul class="blog-entry">
-                                            <li>
-                                                <i class="flaticon-calendar"></i>
-                                                03 Feb
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="sidebar-item">
-                            <h3>Tags</h3>
-                            <ul class="sidebar-tag">
-                                <li>
-                                    <a href="blogs-two-column.html">Europe</a>
-                                </li>
-                                <li>
-                                    <a href="blogs-two-column.html">Trendy</a>
-                                </li>
-                                <li>
-                                    <a href="blogs-two-column.html">Popular Tour</a>
-                                </li>
-                                <li>
-                                    <a href="blogs-two-column.html">Unique Places</a>
-                                </li>
-                                <li>
-                                    <a href="blogs-two-column.html">America</a>
-                                </li>
-                                <li>
-                                    <a href="blogs-two-column.html">Travel</a>
-                                </li>
-                                <li>
-                                    <a href="blogs-two-column.html">Popular City</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -1008,26 +545,26 @@
 
 
         <!-- essential js -->
-        <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.6.0.min.js"></script>
-        <script src="assets/js/bootstrap.bundle.min.js"></script>
+        <script data-cfasync="false" src="{% static '../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js' %}"></script><script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+        <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
         <!-- jquery ui js -->
-        <script src="assets/js/jquery-ui.js"></script>
+        <script src="{% static 'assets/js/jquery-ui.js' %}"></script>
         <!-- selectize js -->
-        <script src="assets/js/selectize.min.js"></script>
+        <script src="{% static 'assets/js/selectize.min.js' %}"></script>
         <!-- magnific popup js -->
-        <script src="assets/js/jquery.magnific-popup.min.js"></script>
+        <script src="{% static 'assets/js/jquery.magnific-popup.min.js' %}"></script>
         <!-- owl carousel js -->
-        <script src="assets/js/owl.carousel.min.js"></script>
+        <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
         <!-- form ajazchimp js -->
-        <script src="assets/js/jquery.ajaxchimp.min.js"></script>
+        <script src="{% static 'assets/js/jquery.ajaxchimp.min.js' %}"></script>
         <!-- form validator js  -->
-        <script src="assets/js/form-validator.min.js"></script>
+        <script src="{% static 'assets/js/form-validator.min.js' %}"></script>
         <!-- contact form js -->
-        <script src="assets/js/contact-form-script.js"></script>
+        <script src="{% static 'assets/js/contact-form-script.js' %}"></script>
         <!-- meanmenu js -->
-        <script src="assets/js/jquery.meanmenu.min.js"></script>
+        <script src="{% static 'assets/js/jquery.meanmenu.min.js' %}"></script>
         <!-- main js -->
-        <script src="assets/js/script.js"></script>
+        <script src="{% static 'assets/js/script.js' %}"></script>
     </body>
 
 <!-- Mirrored from templates.envytheme.com/traip/default/single-blog.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Feb 2023 21:33:02 GMT -->

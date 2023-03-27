@@ -276,12 +276,7 @@
         <!-- Contact -->
         <div class="contact-section pt-100 pb-70 position-relative">
             <div class="map-shapes">
-                <div class="map-shape map-shape-1 map-shape-top">
-                    <img src="assets/images/shapes/map-1.png" alt="shape">
-                </div>
-                <div class="map-shape map-shape-2 map-shape-bottom">
-                    <img src="assets/images/shapes/map-2.png" alt="shape">
-                </div>
+
             </div>
             <div class="container">
                 <div class="row mb-30">
@@ -294,110 +289,29 @@
                                 <small>Bizimlə əlaqə saxla</small>
                                 <h2>Sizi tanımaq bizim üçün çox xoş olar</h2>
                             </div>
-                            <form class="contact-form" id="contactForm">
+                            <form class="contact-form" method="post">
+                                {% csrf_token %}
+                                {% for field in form %}
                                 <div class="form-group mb-20">
-                                    <input type="text" name="name" id="name" class="form-control" placeholder="Name*" required data-error="Please Enter Your Name" />
+                                    {{field}}
                                     <div class="help-block with-errors"></div>
                                 </div>
-                                <div class="form-group mb-20">
-                                    <input type="text" name="email" id="email" class="form-control" placeholder="Email Address*" required data-error="Please Enter Your Email" />
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                                <div class="form-group mb-20">
-                                    <input type="text" name="phone" id="phone" class="form-control" placeholder="Phone No." />
-                                </div>
-                                <div class="form-group mb-20">
-                                    <input type="text" name="subject" id="subject" class="form-control" placeholder="Email Subject*" required data-error="Please Enter Your Subject" />
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                                <div class="form-group mb-20">
-                                    <textarea name="message" class="form-control" id="message" rows="6" placeholder="Your Message"></textarea>
-                                </div>
-                                <div class="input-checkbox mb-20">
-                                    <input type="checkbox" id="check1">
-                                    <label for="check1">I have read all <a href="terms-condition.html">terms & condition</a> & <a href="privacy-policy.html">privacy policy</a>.</label>
-                                </div>
+                               {% endfor %}
+
                                 <div class="col-12">
-                                    <button class="btn main-btn main-btn-arrow" type="submit">Send Message <i class="flaticon-right-arrow"></i></button>
+                                    <button class="btn main-btn main-btn-arrow" type="submit">Göndər <i class="flaticon-right-arrow"></i></button>
                                     <div id="msgSubmit"></div>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-6 col-lg-4 pb-30">
-                        <div class="contact-info-item desk-pad-right-10">
-                            <small>Address Of</small>
-                            <h2>Paris</h2>
-                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-                            <ul>
-                                <li>
-                                    <i class="flaticon-mail"></i>
-                                    <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#19717c7575767f6b78777a71596d6b787069377a7674"><span class="__cf_email__" data-cfemail="81e9e4ededeee7f3e0efe2e9c1f5f3e0e8f1afe2eeec">[email&#160;protected]</span></a>
-                                </li>
-                                <li>
-                                    <i class="flaticon-telephone"></i>
-                                    <a href="tel:+33-5346-337">+33 5346 337</a>
-                                </li>
-                                <li>
-                                    <i class="flaticon-address"></i>
-                                    2 Twistar Buildings, Franch, CH2 5GT.
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4 pb-30">
-                        <div class="contact-info-item desk-pad-left-10 desk-pad-right-10">
-                            <small>Address Of</small>
-                            <h2>London</h2>
-                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-                            <ul>
-                                <li>
-                                    <i class="flaticon-mail"></i>
-                                    <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#670f020b0b080b0809030809271315060e174904080a"><span class="__cf_email__" data-cfemail="f8909d9494979497969c9796b88c8a999188d69b9795">[email&#160;protected]</span></a>
-                                </li>
-                                <li>
-                                    <i class="flaticon-telephone"></i>
-                                    <a href="tel:+44-5346-337">+44 5346 338</a>
-                                </li>
-                                <li>
-                                    <i class="flaticon-address"></i>
-                                    3 Edgar Buildings, England, BA1 2FJ.
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4 pb-30 offset-sm-3 offset-lg-0">
-                        <div class="contact-info-item desk-pad-left-20">
-                            <small>Address Of</small>
-                            <h2>New York</h2>
-                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-                            <ul>
-                                <li>
-                                    <i class="flaticon-mail"></i>
-                                    <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#78101d1414171601380c0a191108561b1715"><span class="__cf_email__" data-cfemail="bfd7dad3d3d0d1c6ffcbcdded6cf91dcd0d2">[email&#160;protected]</span></a>
-                                </li>
-                                <li>
-                                    <i class="flaticon-telephone"></i>
-                                    <a href="tel:+1-5346-337">+1 5346 338</a>
-                                </li>
-                                <li>
-                                    <i class="flaticon-address"></i>
-                                    4 Bell Jeorge Road, New York, 10001.
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
         <!-- Contact -->
         <!-- Iframe -->
-        <div class="contact-map-iframe mb-100">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d317718.69319292053!2d-0.3817765050863085!3d51.528307984912544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2sLondon%2C%20UK!5e0!3m2!1sen!2sbd!4v1616569012897!5m2!1sen!2sbd"></iframe>
-        </div>
-        <!-- Iframe -->
+
         <!-- Footer -->
         <footer class="footer footer-bg">
             <div class="footer-upper pb-70 position-relative">
