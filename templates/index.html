@@ -197,6 +197,7 @@
                     <div class="container">
                         <nav class="navbar navbar-expand-md navbar-light">
                             <a class="navbar-brand" href="index.html">
+                                <i class="fa-solid fa-earth-americas fa-spin fa-2xl"></i>
                             </a>
                             <div class="collapse navbar-collapse mean-menu " id="navbarSupportedContent">
                                 <ul class="navbar-nav mx-auto">
@@ -238,6 +239,10 @@
                                     </li> -->
                                     <li class="nav-item">
                                         <a href="{% url 'booking:blog' %}" class="nav-link ">Blog</a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{% url 'booking:blog' %}" class="nav-link ">Haqqımızda</a>
 
                                     </li>
 
@@ -351,7 +356,7 @@
             <!-- header-content -->
             <div class="container-fluid">
                 <div class="header-content">
-                    <h2 style="color: whitesmoke;">Qoşulduğunuz region: {{ country }} , {{ region }}
+                    <h2 style="color: whitesmoke;">Qoşulduğunuz region: {{ country }}
 
 
                     </h2>
