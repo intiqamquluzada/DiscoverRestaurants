@@ -1,8 +1,8 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="zxx">
-    
-<!-- Mirrored from templates.envytheme.com/traip/default/privacy-policy.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Feb 2023 21:32:15 GMT -->
+
+<!-- Mirrored from templates.envytheme.com/traip/default/single-blog.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 21 Mar 2023 14:25:22 GMT -->
 <head>
         <meta charset="utf-8">
         <meta name="description" content="Traip">
@@ -141,6 +141,7 @@
                     <div class="container">
                         <nav class="navbar navbar-expand-md navbar-light">
                             <a class="navbar-brand" href="index.html">
+                                <i class="fa-solid fa-earth-americas fa-spin fa-2xl"></i>
                             </a>
                             <div class="collapse navbar-collapse mean-menu " id="navbarSupportedContent">
                                 <ul class="navbar-nav mx-auto">
@@ -148,6 +149,14 @@
                                         <a href="{% url 'booking:home' %}" class="nav-link  active">Ana səhifə</a>
 
                                     </li>
+                                    {% if user.is_restaurant_owner == True %}
+                                    {% if user.restaurant %}
+                                    <li class="nav-item">
+                                        <a href="{% url 'accounts:registration_user' %}" class="nav-link  active">Qeydiyyat sahibkar</a>
+
+                                    </li>
+{% endif %}
+                                    {% endif %}
 
                                     <li class="nav-item">
                                         <a href="{% url 'booking:list' %}" class="nav-link">Restoranlar</a>
@@ -174,6 +183,10 @@
                                     </li> -->
                                     <li class="nav-item">
                                         <a href="{% url 'booking:blog' %}" class="nav-link ">Blog</a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{% url 'booking:about' %}" class="nav-link ">Haqqımızda</a>
 
                                     </li>
 
@@ -256,20 +269,94 @@
             <!-- header-content -->
             <div class="container">
                 <div class="header-content m-auto">
-                    <h1>Mənim restoranım <i class="fa-solid fa-utensils fa-flip"></i></h1>
+                    <h1>Haqqımızda</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Privacy Policy</li>
+                            <li class="breadcrumb-item"><a href="index.html">Ana ssəhifə</a></li>
+                            <li class="breadcrumb-item"><a href="blogs-two-column.html">Haqqımızda</a></li>
+
                         </ol>
                     </nav>
                 </div>
             </div>
         </header>
         <!-- Header -->
-        <!-- Terms Policy -->
+        <!-- Blog -->
+        <div class="blog-section pt-100 pb-70 position-relative">
+            <div class="map-shapes">
+                <div class="map-shape map-shape-1 map-shape-top">
+                    <img src="{% static 'assets/images/shapes/map-1.png' %}" alt="shape">
+                </div>
+                <div class="map-shape map-shape-2 map-shape-vertical-center">
+                    <img src="{% static 'assets/images/shapes/map-2.png' %}" alt="shape">
+                </div>
+            </div>
+            <div class="container">
+                <div class="forum-main-image">
+                    <img src="{% static 'assets/images/blogs/a0.png' %}" alt="ee">
+                    <ul class="blog-entry">
 
-        <!-- Terms Policy -->
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col-lg-9 pb-30 desk-pad-right-40">
+                        <article>
+                            <div class="forum-details">
+                                <h3>Biz sizə nə, necə və nə üçün xidmət göstəririk ?</h3>
+                                <p>Bizim saytımız - bütün restoran, kafe, barların bir yerdə olması deməkdir. Restoranlar bir çox insanın həyatının əhəmiyyətli bir hissəsidir. Orada bir-birlərini tanıyır və ayrılırlar, həyatın əsas hadisələrini qeyd edirlər və ağır bir işdən sonra rahatlanırlar.
+
+Əgər əvvəllər bu cür müəssisələrə yalınız həftəsonu gediblər, özü də bütün ailə və ya böyük qrupla, indi hətta səhər yeməyi üçün restoranlara  gəlirlər. Və bəzi musiqi kollektivləri restoran salonunda yarı qapalı VIP konsertlər keçirmək üçün yeni dəbə ciddi şəkildə riayət edirlər, onları digər konsert yerlərindən üstün tuturlar.
+
+Bakıda yeni restoranlar, kafelər, barlar,
+                                    hətta ayrı ziyafət salonları açılır. Və onların
+                                    xidmətlərinin siyahısı da artır. Bu cür müxtəliflikdə
+                                    özünü itirmək asandır. Qərar vermək çətindir?
+                                    Sadəcə inbron.az-da bəyəndiyiniz məkana virtual gəzintiyə çıxın,
+                                    onun binalarının fotolarına baxın, ziyarətçilərin rəylərini oxuyun,
+                                    menyu səhifəsinə baxın. </p>
+<p>Evinizin yaxınlığında kafe axtarırsınız?
+                                    Buyurun. Məhdud büdcəniz var? Problem deyil. Yalnız ziyarətçilərin
+                                    rəylərinə inanırsınız? Bəli, burada onlar var.
+                                    Konkret mətbəx ilə maraqlanırsınız? və bu da mümkündür.</p>
+                                <div class="row">
+                                    <div class="col-6 col-sm-4 col-lg-4">
+                                        <div class="forum-details-inner-image">
+                                            <img style="width: 350px; height: 230px;" src="{% static 'assets/images/destinations/a1.png' %}" alt="destination">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-sm-4 col-lg-4">
+                                        <div class="forum-details-inner-image" >
+                                            <img style="width: 350px; height: 230px;" src="{% static 'assets/images/destinations/a2.png' %}" alt="destination">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-sm-4 col-lg-4 offset-3 offset-sm-0">
+                                        <div class="forum-details-inner-image">
+                                            <img style="width: 350px; height: 230px;" src="{% static 'assets/images/destinations/a3.png' %}" alt="destination">
+                                        </div>
+                                    </div>
+                                </div>
+                                <p>Siz bizim saytımız vasitəsilə öz ərazinizdə, həmçinin dünyanın müxtəlif yerlərində olan restoranları kəşf edə bilərsiniz. Bu xidmətlər sizin rahatlığınız üçün nəzərdə tutulmuşdur.</p>
+                                <p>Bəyəndiyiniz restoranları yadda saxlaya yaxud rezerv edə bilərsiniz. Həmçinin restoran haqqında bütün məlumatlar ilə də tanış ola bilərsiniz.</p>
+
+                                <blockquote>
+                                    <p>Saytımıza yerləşdirilən restoranlar xüsusi qaydada restoran sahibləri tərəfindən xüsusi yoxlanış ilə qeydiyyatdan keçirilir və həqiqiliyi təsdiq olunarsa qonaqlarımızın kəşf etməsinə şərait yaradılır. Bu platforma hər iki tərəf (Sahibkar və qonaq) üçün faydalı bir vasitədir.</p>
+                                </blockquote>
+                            </div>
+
+                        </article>
+
+                        <!-- Recent Post -->
+
+                        <!-- Recent Post -->
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <!-- Blog -->
         <!-- Footer -->
         <footer class="footer footer-bg">
             <div class="footer-upper pb-70 position-relative">
@@ -283,7 +370,7 @@
                                 <ul class="footer-details footer-address">
                                     <li>
                                         <i class="flaticon-mail"></i>
-                                        <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#c8a0ada4a4a788bcbaa9a1b8e6aba7a5"><span class="__cf_email__" data-cfemail="4129242d2d2e0135332028316f222e2c">[email&#160;protected]</span></a>
+                                        <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#dcb4b9b0b0b39ca8aebdb5acf2bfb3b1"><span class="__cf_email__" data-cfemail="e088858c8c8fa09492818990ce838f8d">[email&#160;protected]</span></a>
                                     </li>
                                     <li>
                                         <i class="flaticon-telephone"></i>
@@ -303,10 +390,10 @@
                                 </div>
                                 <ul class="footer-details footer-list">
                                     <li>
-                                        <a href="list.html">Popular Tour</a>
+                                        <a href="tour.html">Popular Tour</a>
                                     </li>
                                     <li>
-                                        <a href="blog.html">Blog</a>
+                                        <a href="blogs-two-column.html">Blog</a>
                                     </li>
                                     <li>
                                         <a href="products.html">Shop</a>
@@ -432,7 +519,7 @@
                         <ul class="topbar-sidebar-lists">
                             <li>
                                 <i class="flaticon-mail"></i>
-                                <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#264e434a4a49665254474f560845494b"><span class="__cf_email__" data-cfemail="f29a979e9e9db28680939b82dc919d9f">[email&#160;protected]</span></a>
+                                <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#4d25282121220d393f2c243d632e2220"><span class="__cf_email__" data-cfemail="38505d545457784c4a595148165b5755">[email&#160;protected]</span></a>
                             </li>
                             <li>
                                 <i class="flaticon-telephone"></i>
@@ -466,6 +553,7 @@
         </div>
         <!-- Top Sidebar -->
 
+
         <!-- Search Wrapper -->
         <div class="searchbar-wrapper">
             <div class="searchbar-body">
@@ -484,7 +572,7 @@
             </div>
         </div>
         <!-- Search Wrapper -->
-        
+
         <!-- Scroll-top -->
         <div class="scroll-top" id="scrolltop">
             <div class="scroll-top-inner">
@@ -517,5 +605,5 @@
         <script src="{% static 'assets/js/script.js' %}"></script>
     </body>
 
-<!-- Mirrored from templates.envytheme.com/traip/default/privacy-policy.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Feb 2023 21:32:16 GMT -->
+<!-- Mirrored from templates.envytheme.com/traip/default/single-blog.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 21 Mar 2023 14:25:24 GMT -->
 </html>

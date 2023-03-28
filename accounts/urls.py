@@ -3,7 +3,7 @@ from .views import (login_user_view, registration_user_view,
                     registration_for_owner, forget_page,
                     login_for_owner, logout_user, password_reset,
                     activate_user_view, my_account_for_user, restaurant_account,
-                    delete_image, registration_person_r, delete_menu_image, verify_reset)
+                    delete_image, registration_person_r, delete_menu_image, verify_reset, restaurant_reserves)
 
 app_name = 'accounts'
 
@@ -18,9 +18,11 @@ urlpatterns = [
     path("password-reset/<slug>/", password_reset, name='password_reset'),
     path("my-account-user/<slug>/", my_account_for_user, name='my_account_user'),
     path("restaurant-account/<slug>/", restaurant_account, name='restaurantchanging'),
+    path("owner/reserves/<slug>/", restaurant_reserves, name='reserves'),
     path('delete-image/<image_id>/', delete_image, name='delete_image'),
     path('delete-menu-image/<menu_image_id>/', delete_menu_image, name='delete_menu_image'),
     path('owner-regi/', registration_person_r, name='owner_reg'),
-    path("forget/", forget_page, name='forget')
+    path("forget/", forget_page, name='forget'),
+
 
 ]

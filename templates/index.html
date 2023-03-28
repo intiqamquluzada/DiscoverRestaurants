@@ -242,7 +242,7 @@
 
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{% url 'booking:blog' %}" class="nav-link ">Haqqımızda</a>
+                                        <a href="{% url 'booking:about' %}" class="nav-link ">Haqqımızda</a>
 
                                     </li>
 
@@ -427,14 +427,15 @@
                                         <img src="{{ restaurant.restaurantimages_set.first.images.url }}" style="height: 400px; width: 400px;" >
                                     </a>
                                     <ul class="card-1-entry">
-                                       <li>
-                                            <i class="flaticon-placeholder-point"></i>
-                                            {{restaurant.country}}
-                                        </li>
+
 
                                         <li>
                                             <i class="flaticon-placeholder-point"></i>
                                             {{restaurant.city}}
+                                        </li>
+                                        <li>
+                                            <i class="flaticon-placeholder-point"></i>
+                                            {{restaurant.location}}
                                         </li>
                                     </ul>
                                 </div>
@@ -448,11 +449,12 @@
                                 <div class="card-1-info">
                                     <h3>
                                         <a href="single-destination.html">{{restaurant.name}}</a>
-                                    </h3>
+                                    </h3> <br>
 
 
 
                                     <div class="card-1-reviews">
+
                                         <ul class="review-star">
                                             {% if restaurant.rating == 0 %}
                                            <li class="full-star"><small>Yeni restoran</small></li>
@@ -500,11 +502,12 @@
                                     </div>
                                 </div>
                                 <p>{{restaurant.description}}</p>
-                                <br>
+<br>
                                 <form action="" method="get">
 <!--                                <button type="submit" class="btn btn-success">Yadda saxla <i class="fa-sharp fa-solid fa-bookmark"></i></button>-->
 
                                   <a href="{% url 'booking:restaurant_detail' restaurant.slug %}" class="btn btn-danger">Nəzər yetir <i class="fa-solid fa-utensils"></i></a>
+                         <span style="padding-left: 90px;" class="text-danger">{{restaurant.comment_set.all.count}} rəy <i class="fa-solid fa-comment fa-bounce"></i></span>
                           </form>  </div>
 
                         </div>

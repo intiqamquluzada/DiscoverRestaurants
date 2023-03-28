@@ -352,3 +352,10 @@ def registration_person_r(request):
     context['form'] = form
 
     return render(request, "owner-regi.html", context)
+
+
+def restaurant_reserves(request,slug):
+    context = {}
+    restaurant = get_object_or_404(Restaurants, slug=slug)
+    context['restaurant'] = restaurant
+    return render(request, "restaurant-reserves.html", context)

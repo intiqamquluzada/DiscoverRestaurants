@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import redirect
-from .models import Restaurants, CooperationCompanies, Countries, Comment, Likes, Rating, Reserve, BlogModel
+from .models import (Restaurants, CooperationCompanies, Countries,
+                     Comment, Likes, Rating, Reserve, BlogModel, Cities)
 import requests
 import json
 import datetime
@@ -11,10 +12,8 @@ from .forms import CommentForm, ReserveForm, ContactForm
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.db.models import Max
-from django.utils.translation import gettext as _
 import pycountry
 from services.translator import countries
-
 
 api_key = "5117dbe9476548a6834433afd9b63554"
 
@@ -58,12 +57,8 @@ def home_view(request):
 
     country_e = geolocation_data["country"]
 
-
-
-
     country = countries.get(country_e)
     print(country)
-
 
     region = geolocation_data["region"]
 
@@ -140,7 +135,7 @@ def list_view(request):
 
     country = countries.get(country_name)
 
-
+    cities = Cities.objects.filter(country__name__icontains=country)
     region = geolocation_data["region"]
     print(region)
 
@@ -190,6 +185,7 @@ def list_view(request):
         'result': result,
         'country': country,
         'region': region,
+        'cities': cities,
 
     }
 
@@ -221,6 +217,7 @@ def single_blog(request, slug):
     }
     return render(request, "single-blog.html", context)
 
+
 def contact_view(request):
     form = ContactForm()
 
@@ -231,7 +228,6 @@ def contact_view(request):
             return redirect("booking:contact")
     else:
         messages.error(request, "Nə isə doğru deyil...")
-
 
     context = {
         'form': form

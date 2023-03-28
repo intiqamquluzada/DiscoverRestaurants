@@ -1,8 +1,8 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="zxx">
-    
-<!-- Mirrored from templates.envytheme.com/traip/default/faqs.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 21 Mar 2023 14:24:32 GMT -->
+
+<!-- Mirrored from templates.envytheme.com/traip/default/list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Feb 2023 21:32:36 GMT -->
 <head>
         <meta charset="utf-8">
         <meta name="description" content="Traip">
@@ -10,11 +10,22 @@
         <meta name="author" content="EnvyTheme">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-        <title>Restoran Rezervasiya Sistemi</title>
+        <title>Restoranlar</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<!-- Include the jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- Include the Bootstrap JavaScript library -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <link rel="icon" href="{% static 'assets/images/favicon.png' %}" type="image/png" sizes="16x16">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <!-- bootstrap css -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- Bootstrap CSS and JavaScript -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+        <!-- bootstrap css -->
         <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" type="text/css" media="all" />
         <!-- animate css -->
         <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}" type="text/css" media="all" />
@@ -37,10 +48,6 @@
         <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" type="text/css" media="all" />
         <!-- responsive css -->
         <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}" type="text/css" media="all" />
-
-
-
-
     </head>
 
     <body>
@@ -62,10 +69,48 @@
         </div>
         <!-- .end preloader -->
         <!-- Topbar -->
+        <div class="topbar">
+            <div class="container position-relative z-index-1">
+                <div class="row align-items-center">
+                    <div class="topbar-item topbar-item-left">
+                        <ul class="social-list">
+                            <li>
+                                <a href="{% static url 'https://www.facebook.com/' %}" target="_blank"><i class="flaticon-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href="{% static url 'https://www.instagram.com/' %}" target="_blank"><i class="flaticon-instagram"></i></a>
+                            </li>
+                            <li>
+                                <a href="{% static url 'https://twitter.com/' %}" target="_blank"><i class="flaticon-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="{% static url 'https://linkedin.com/' %}" target="_blank"><i class="flaticon-linkedin"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="topbar-item justify-content-end">
+                        <ul class="topbar-action">
+                            <!-- <li>
+                                <i class="flaticon-mail"></i>
+                                <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#79111c151516390d0b181009571a1614"><span class="__cf_email__" data-cfemail="3e565b5252517e4a4c5f574e105d5153">[email&#160;protected]</span></a>
+                            </li> -->
+                            <li>
+                                <i class="flaticon-telephone"></i>
+                                <a href="tel:+44-5346-338">+99470XXXXXXX</a>
+                            </li>
+                            <li>
+                                <i class="flaticon-address"></i>
+                                Coders Azerbaijan. Naxçıvani 10.
+                            </li>
+                        </ul>
 
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Topbar -->
         <!-- Navbar -->
-        <div class="fixed-top">
+       <div class="fixed-top">
             <div class="navbar-area">
                 <div class="container">
                     <div class="mobile-nav">
@@ -264,179 +309,84 @@
         </div>
         <!-- Navbar -->
         <!-- Header -->
-        <header class="inner-page-header inner-page-header-4">
+        <header class="inner-page-header inner-page-header-1">
             <div class="inner-header-shape"></div>
             <!-- header-content -->
             <div class="container">
                 <div class="header-content m-auto">
-                    <h1>Mənim restoranım <i class="fa-solid fa-utensils fa-spin"></i></h1>
+                    <h1>Rezervlər</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Ana səhifə</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Mənim restoranım </li>
+
+                            <li class="breadcrumb-item active" aria-current="page">Hal-hazırki rezervlər</li>
+                            <br> <br> <br> <br>
+                             <span style="background-color: darkorange; width: 100%;">
+
+                    </span>
                         </ol>
                     </nav>
                 </div>
+
             </div>
         </header>
         <!-- Header -->
-        <!-- Accordion -->
-        <section class="accordion-section pb-100 position-relative">
+        <!-- Tour -->
+        <section class="tour-section pb-100 position-relative">
             <div class="map-shapes">
-                <div class="map-shape map-shape-2 map-shape-top">
+                <div class="map-shape map-shape-1 map-shape-top">
+                    <img src="{% static 'assets/images/shapes/map-1.png' %}" alt="shape">
+                </div>
+                <div class="map-shape map-shape-2 map-shape-bottom">
                     <img src="{% static 'assets/images/shapes/map-2.png' %}" alt="shape">
                 </div>
             </div>
             <div class="container">
-                <div class="section-title">
-                    <small>Sizin restoranınız</small>
-                    <h2>Restoranın hal-hazırki detalları</h2>
-                    {% if not restaurant.has_permission %}
-                    <marquee class="btn btn-warning" behavior="" direction=""><h4>Sizin restoranınız yoxlanış mərhələsindədir</h4></marquee>
-                    {% endif %}
-                </div>
-                <div class="accordion box-width-680 m-auto" id="accordionExample">
-                    <form method="post" enctype="multipart/form-data">
+                <div class="section-title section-title-lg">
+                    <small>Restoranınızın rezervləri</small>
+                    <h2>
+                        <marquee behavior="" direction=""> Səhifəni tez-tez yeniləməyi tövsiyyə edirik.. :)</marquee>
 
-{% if messages %}
-
-                    {% for message in messages %}
-
-                    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{message.tags}}{% endif %}" role="alert">
-                        {{message}}
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-
-
-                      <form class="authentication-form" method="post" enctype="multipart/form-data">
-                            {% for field in form %}
-                            {% csrf_token %}
-                          {{field.label}}
-                            <div class="input-group input-group-bg mb-20">
-                          {{field}}
-                            </div>
-
-
-                            {% endfor %}
-<input type="file" name="rim"  id="rim" style="display: none;" multiple>
-
-<h4>Restoran şəkilləri &nbsp; <label class="btn btn-warning" for="rim">Əlavə et</label></h4> <br>
-
-
-                          
-                         {% for img in restaurant.restaurantimages_set.all %}
-  {% if forloop.counter0|divisibleby:3 %}
-    <div class="row mb-20">
-  {% endif %}
-  <div class="col-md-4">
-    <div class="input-group input-group-bg" id="restaurantİmageDiv-{{img.id}}">
-      <img src="{{img.images.url}}" id="{{img.id}}" style="height: 100px; width: 100px;"> &nbsp;&nbsp;
-      {% if restaurant.restaurantimages_set.count > 3 %}
-        <a onclick="deleteImageObj('{{ img.id }}')" class="btn btn-danger" style="height: 40px; width: 50px;">X</a>
-      {% endif %}
-    </div>
-  </div>
-  {% if forloop.counter0|add:1|divisibleby:3 or forloop.last %}
-    </div>
-  {% endif %}
-{% endfor %}
-
-
-                          <script>
-
-
-
-    function deleteImageObj(imageId) {
-        var say = "{{restaurant.restaurantimages_set.count}}";
-
-
-            $.ajax({
-                url: '/accounts/delete-image/' + imageId + '/',
-                type: 'POST',
-                data: {
-                    'csrfmiddlewaretoken': '{{ csrf_token }}'
-                },
-                success: function (response) {
-                    say--;
-                        console.log(say);
-                    if (response.success) {
-                        $('#restaurantİmageDiv-' + imageId).remove();
-
-                    } else {
-                        console.log('Error deleting image');
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
-            });
-
-}
-
-
-                          </script>
-<input class="btn btn-warning" type="file" name="mim"  id="mim" style="display: none;" multiple>
-<h4>Menyu şəkilləri &nbsp; <label class="btn btn-warning" for="mim">Əlavə et</label></h4> <br>
-                         {% for img in restaurant.restaurantmenu_set.all %}
-  {% if forloop.counter0|divisibleby:3 %}
-    <div class="row mb-20" id="menuDiv-{{img.id}}">
-  {% endif %}
-  <div class="col-md-4" >
-    <div class="input-group input-group-bg" id="menuİmageDiv-{{img.id}}">
-      <img src="{{img.menu_images.url}}" style="height: 100px; width: 100px;"> &nbsp;&nbsp;
-      {% if restaurant.restaurantmenu_set.count > 3 %}
-        <a onclick="deleteMenuImageObj('{{ img.id }}')" class="btn btn-danger" style="height: 40px; width: 50px;">X</a>
-      {% endif %}
-    </div>
-  </div>
-  {% if forloop.counter0|add:1|divisibleby:3 or forloop.last %}
-    </div>
-  {% endif %}
-{% endfor %}
-
-
-                            <button type="submit" class="btn main-btn main-btn-secondary full-width">Təsdiqlə</button>
-                        </form>
-
-<script>
-    function deleteMenuImageObj(imageId) {
-
-    $.ajax({
-      url: '/accounts/delete-menu-image/' + imageId + '/',
-      type: 'POST',
-      data: {
-        'csrfmiddlewaretoken': '{{ csrf_token }}'
-      },
-      success: function(response) {
-        if (response.success) {
-          $('#menuİmageDiv-' + imageId).remove();
-        }  else {
-          console.log('Error deleting image');
-        }
-      },
-      error: function(xhr, status, error) {
-        console.error(xhr.responseText);
-      }
-    });
-
-}
-
-
-
-                          </script>
-
-
-
-
+                    </h2>
 
                 </div>
+
+
+
+
+
+<ul class="list-group">
+  <li class="list-group-item">Rezervlər <i class="fa-solid fa-check fa-flip"></i></li>
+
+
+  <li class="list-group-item list-group-item-primary">This is a primary list group item</li>
+  <li class="list-group-item list-group-item-secondary">This is a secondary list group item</li>
+  <li class="list-group-item list-group-item-success">This is a success list group item</li>
+  <li class="list-group-item list-group-item-danger">This is a danger list group item</li>
+  <li class="list-group-item list-group-item-warning">This is a warning list group item</li>
+  <li class="list-group-item list-group-item-info">This is a info list group item</li>
+  <li class="list-group-item list-group-item-light">This is a light list group item</li>
+  <li class="list-group-item list-group-item-dark">This is a dark list group item</li>
+</ul>
+
+
+
+
+<!--no result -->
+
+
+
+
+
+
+
+
+
+                <!-- pagination -->
+
+
             </div>
         </section>
-
-
-
-        <!-- Accordion -->
+        <!-- Tour -->
         <!-- Footer -->
         <footer class="footer footer-bg">
             <div class="footer-upper pb-70 position-relative">
@@ -450,7 +400,7 @@
                                 <ul class="footer-details footer-address">
                                     <li>
                                         <i class="flaticon-mail"></i>
-                                        <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#264e434a4a49665254474f560845494b"><span class="__cf_email__" data-cfemail="1f777a7373705f6b6d7e766f317c7072">[email&#160;protected]</span></a>
+                                        <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#08606d646467487c7a696178266b6765"><span class="__cf_email__" data-cfemail="c3aba6afafac83b7b1a2aab3eda0acae">[email&#160;protected]</span></a>
                                     </li>
                                     <li>
                                         <i class="flaticon-telephone"></i>
@@ -470,10 +420,10 @@
                                 </div>
                                 <ul class="footer-details footer-list">
                                     <li>
-                                        <a href="tour.html">Popular Tour</a>
+                                        <a href="list.html">Popular Tour</a>
                                     </li>
                                     <li>
-                                        <a href="blogs-two-column.html">Blog</a>
+                                        <a href="blog.html">Blog</a>
                                     </li>
                                     <li>
                                         <a href="products.html">Shop</a>
@@ -520,27 +470,27 @@
                                     <ul class="footer-gallery">
                                         <li>
                                             <a href="https://www.instagram.com/">
-                                            <img src="assets/images/instafeed/instafeed-1.jpg" alt="insta"></a>
+                                            <img src="{% static 'assets/images/instafeed/instafeed-1.jpg' %}" alt="insta"></a>
                                         </li>
                                         <li>
                                             <a href="https://www.instagram.com/">
-                                            <img src="assets/images/instafeed/instafeed-2.jpg" alt="insta"></a>
+                                            <img src="{% static 'assets/images/instafeed/instafeed-2.jpg' %}" alt="insta"></a>
                                         </li>
                                         <li>
                                             <a href="https://www.instagram.com/">
-                                            <img src="assets/images/instafeed/instafeed-3.jpg" alt="insta"></a>
+                                            <img src="{% static 'assets/images/instafeed/instafeed-3.jpg' %}" alt="insta"></a>
                                         </li>
                                         <li>
                                             <a href="https://www.instagram.com/">
-                                            <img src="assets/images/instafeed/instafeed-4.jpg" alt="insta"></a>
+                                            <img src="{% static 'assets/images/instafeed/instafeed-4.jpg' %}" alt="insta"></a>
                                         </li>
                                         <li>
                                             <a href="https://www.instagram.com/">
-                                            <img src="assets/images/instafeed/instafeed-5.jpg" alt="insta"></a>
+                                            <img src="{% static 'assets/images/instafeed/instafeed-5.jpg' %}" alt="insta"></a>
                                         </li>
                                         <li>
                                             <a href="https://www.instagram.com/">
-                                            <img src="assets/images/instafeed/instafeed-6.jpg" alt="insta"></a>
+                                            <img src="{% static 'assets/images/instafeed/instafeed-6.jpg' %}" alt="insta"></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -586,7 +536,7 @@
                 <div class="top-sidebar-body">
                     <div class="topbar-sidebar-header">
                         <div class="topbar-sidebar-brand">
-                            <a href="index.html">
+                            <a href="#">
                                 <img src="{% static 'assets/images/logo-default-color.png' %}" alt="logo">
                             </a>
                         </div>
@@ -599,7 +549,7 @@
                         <ul class="topbar-sidebar-lists">
                             <li>
                                 <i class="flaticon-mail"></i>
-                                <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#3a525f5656557a4e485b534a14595557"><span class="__cf_email__" data-cfemail="5e363b3232311e2a2c3f372e703d3133">[email&#160;protected]</span></a>
+                                <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#e189848d8d8ea19593808891cf828e8c"><span class="__cf_email__" data-cfemail="a1c9c4cdcdcee1d5d3c0c8d18fc2cecc">[email&#160;protected]</span></a>
                             </li>
                             <li>
                                 <i class="flaticon-telephone"></i>
@@ -632,7 +582,7 @@
             </div>
         </div>
         <!-- Top Sidebar -->
-        
+
 
         <!-- Search Wrapper -->
         <div class="searchbar-wrapper">
@@ -652,7 +602,7 @@
             </div>
         </div>
         <!-- Search Wrapper -->
-        
+
         <!-- Scroll-top -->
         <div class="scroll-top" id="scrolltop">
             <div class="scroll-top-inner">
@@ -662,7 +612,7 @@
         <!-- Scroll-top -->
 
 
-         <!-- essential js -->
+        <!-- essential js -->
         <script data-cfasync="false" src="{% static '../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js' %}"></script><script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
         <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
         <!-- jquery ui js -->
@@ -685,5 +635,5 @@
         <script src="{% static 'assets/js/script.js' %}"></script>
     </body>
 
-<!-- Mirrored from templates.envytheme.com/traip/default/faqs.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 21 Mar 2023 14:24:32 GMT -->
+<!-- Mirrored from templates.envytheme.com/traip/default/list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Feb 2023 21:32:44 GMT -->
 </html>

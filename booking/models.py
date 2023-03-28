@@ -156,8 +156,7 @@ class BlogModel(DateMixin, SlugMixin):
         super(BlogModel, self).save(*args, **kwargs)
 
 class Comment(MPTTModel, DateMixin, SlugMixin):
-    restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE, null=True, blank=True,
-                                   related_name="commentrestaurant")
+    restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE, null=True, blank=True,)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='commentuser')
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
     body = models.TextField(null=True, blank=True)
