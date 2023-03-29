@@ -148,7 +148,7 @@ def list_view(request):
     rating = str(request.GET.get("rating")).split(" ")[0]
 
     city = request.GET.get("city")
-
+    print(city)
     r_type = request.GET.get("type")
 
     count = request.GET.get("count")
