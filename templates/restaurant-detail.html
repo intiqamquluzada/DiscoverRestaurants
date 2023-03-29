@@ -352,21 +352,34 @@
                                     <h4>Restoran haqqında</h4>
                                     <div class="details-card-info-list">
                                         <div class="details-card-list-item">
-                                            <div class="details-card-list-label">Location</div>
+                                            <div class="details-card-list-label">Ünvan</div>
                                             <div class="details-card-list-texts">{{restaurant.location}}</div>
                                         </div>
                                         <div class="details-card-list-item">
                                             <div class="details-card-list-label">Açılır</div>
-                                            <div class="details-card-list-texts">10:00 AM</div>
+                                            {% if restaurant.closed == None %}
+                                            <div class="details-card-list-texts"><i class="fa-solid fa-clock fa-spin"></i></div>
+                                            {% else %}
+                                            <div class="details-card-list-texts">{{restaurant.opened}} <i class="fa-solid fa-clock fa-spin"></i></div>
+                                            {% endif %}
                                         </div>
                                         <div class="details-card-list-item">
                                             <div class="details-card-list-label">Bağlanır</div>
-                                            <div class="details-card-list-texts">12:00 AM</div>
+                                            {% if restaurant.closed == None %}
+                                            <div class="details-card-list-texts"> <i class="fa-solid fa-clock fa-spin"></i></div>
+                                            {% else %}
+                                            <div class="details-card-list-texts">{{restaurant.closed}} <i class="fa-solid fa-clock fa-spin"></i></div>
+
+                                            {% endif %}
                                         </div>
 
                                         <div class="details-card-list-item">
                                             <div class="details-card-list-label">Xidmət</div>
-                                            <div class="details-card-list-texts">24 Saat</div>
+                                            {% if restaurant.closed == None %}
+                                            <div class="details-card-list-texts">24 saat &#8987;</div>
+                                            {% else %}
+                                            <div class="details-card-list-texts">Müəyyən saat aralığı &#8987;</div>
+                                            {% endif %}
                                         </div>
                                         <div class="details-card-list-item">
                                             <div class="details-card-list-label">Hal-hazırda boş yerlərin sayı</div>

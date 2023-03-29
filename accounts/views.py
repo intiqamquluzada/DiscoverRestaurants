@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from .models import MyUser as User
 from django.contrib import messages
 from django.core.mail import send_mail
-from booking.models import Restaurants, RestaurantMenu, RestaurantImages
+from booking.models import Restaurants, RestaurantMenu, RestaurantImages, Reserve
 from services.generator import Generator
 from django.conf import settings
 from .forms import RegistrationUserForm
@@ -171,6 +171,7 @@ def registration_user_view(request):
 
 def my_account_for_user(request, slug):
     user = get_object_or_404(User, slug=slug)
+    restaurant = Restaurants.objects.get(owner=user)
     if user.pp:
         if request.method == "POST" and ('form2_submit' in request.POST):
             user.pp.delete()
@@ -209,6 +210,7 @@ def my_account_for_user(request, slug):
                 messages.error(request, "Köhnə şifrəniz yalnışdır")
 
     context = {
+        'restaurant': restaurant
 
     }
     return render(request, "my-account.html", context)
@@ -354,8 +356,10 @@ def registration_person_r(request):
     return render(request, "owner-regi.html", context)
 
 
-def restaurant_reserves(request,slug):
+def restaurant_reserves(request, slug):
     context = {}
     restaurant = get_object_or_404(Restaurants, slug=slug)
+    reserves = Reserve.objects.filter(restaurant=restaurant)
     context['restaurant'] = restaurant
+    context['reserves'] = reserves
     return render(request, "restaurant-reserves.html", context)

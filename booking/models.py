@@ -8,6 +8,7 @@ from PIL import Image
 from accounts.models import MyUser
 from mptt.models import MPTTModel, TreeForeignKey
 from django.urls import reverse
+from django.core.validators import RegexValidator
 
 User = MyUser()
 
@@ -61,6 +62,8 @@ class Restaurants(DateMixin, SlugMixin):
     number = models.CharField(max_length=200)
     location = models.CharField(max_length=200)
     description = models.TextField()
+    opened = models.TimeField(null=True, blank=True, default='None')
+    closed = models.TimeField(null=True, blank=True, default='None')
     available_seats = models.IntegerField(null=True, blank=True, default=0)
     wishlist = models.ManyToManyField(User, blank=True, related_name="wishlist", )
     has_permission = models.BooleanField(default=False)

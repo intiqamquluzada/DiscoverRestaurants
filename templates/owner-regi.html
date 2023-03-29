@@ -94,7 +94,7 @@
             <div class="container">
                 <div class="sub-section-title text-center">
                     <p><h2>Sahibkar üçün qeydiyyat</h2> <br> Bütün xanaları diqqətlə doldurmağınız xahiş olunur</p>
-{% csrf_token %}
+
                     {% if messages %}
 
                     {% for message in messages %}
@@ -111,7 +111,8 @@
                         <form class="authentication-form" method="post">
                             {% csrf_token %}
                             {% for field in form %}
-                            <div class="input-group input-group-bg mb-20">
+                          <div class="input-group input-group-bg mb-20">
+
                                 {{field}}
                             </div>
                             {% endfor %}

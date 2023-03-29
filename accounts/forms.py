@@ -105,7 +105,11 @@ class RegisterOwnerForm(forms.ModelForm):
         model = Restaurants
         fields = ("name", "type_r", "country_of_restaurant",
                   "city", "number", "location",
-                  "available_seats", "description",)
+                  "available_seats", "description", "opened", "closed")
+        widgets = {
+            'opened': forms.TimeInput(attrs={'type': 'time'}),
+            'closed': forms.TimeInput(attrs={'type': 'time'}),
+        }
 
     def __init__(self, *args, **kwargs):
         super(RegisterOwnerForm, self).__init__(*args, **kwargs)
@@ -117,7 +121,7 @@ class RegisterOwnerForm(forms.ModelForm):
         self.fields['type_r'].label = "Restoranın tipi"
         self.fields['country_of_restaurant'].label = "Restoranın yerləşdiyi ölkə"
         self.fields['city'].label = "Restoranın yerləşdiyi şəhər"
-        self.fields['city'].widget.attrs.update({"placeholder": "Bakı, Ganja və s."})
+        self.fields['city'].widget.attrs.update({"placeholder": "Bakı, Gəncə və s."})
         self.fields['number'].label = "Restoranın əlaqə nömrəsi"
         self.fields['number'].widget.attrs.update({"placeholder": "Əlaqə nömrəsi, məs: +994XXXXXXXXX"})
         self.fields['location'].label = "Ünvan"
@@ -126,6 +130,7 @@ class RegisterOwnerForm(forms.ModelForm):
         self.fields['description'].label = "Restoran haqqında məlumat"
         self.fields['description'].widget.attrs.update({
             "placeholder": "Restoranımızın özünə məxsus bir sıra üstünlükləri vardır. Eyvan və şəhər görünümlü yerləşim qonaqlarımızın bizi tərcih etməyinin birinci səbəbidir və s......"})
+        self.fields['closed'].required = False
 
 
 class OwnerUpdateForm(forms.ModelForm):
@@ -157,13 +162,15 @@ class OwnerUpdateForm(forms.ModelForm):
 
 
 class UserForgetEmail(forms.Form):
-
-    email = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control", "type": "email", "placeholder":"E-poçt:"}))
+    email = forms.CharField(
+        widget=forms.TextInput(attrs={"class": "form-control", "type": "email", "placeholder": "E-poçt:"}))
 
 
 class PasswordResetForm(forms.Form):
-    password1 = forms.CharField(label='Yeni şifrə', widget=forms.PasswordInput(attrs={"placeholder": "Yeni şifrə:", "class": "form-control"}))
-    password2 = forms.CharField(label='Təkrar şifrə', widget=forms.PasswordInput(attrs={"placeholder": "Təkrar yeni şifrə:", "class": "form-control"}))
+    password1 = forms.CharField(label='Yeni şifrə', widget=forms.PasswordInput(
+        attrs={"placeholder": "Yeni şifrə:", "class": "form-control"}))
+    password2 = forms.CharField(label='Təkrar şifrə', widget=forms.PasswordInput(
+        attrs={"placeholder": "Təkrar yeni şifrə:", "class": "form-control"}))
 
     def clean(self):
 

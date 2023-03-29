@@ -14,6 +14,8 @@ from django.urls import reverse
 from django.db.models import Max
 import pycountry
 from services.translator import countries
+import datetime
+
 
 api_key = "5117dbe9476548a6834433afd9b63554"
 
@@ -77,6 +79,10 @@ def home_view(request):
     else:
         message = ""
 
+    now = datetime.datetime.now()
+
+
+
     paginator = Paginator(result, 4)
     page = request.GET.get('page', 1)
     p = paginator.get_page(page)
@@ -101,6 +107,7 @@ def home_view(request):
         'companies': companies_corporation,
         'popular': popular_restaurants,
         'popular_comments': comments_with_max_likes,
+        'now': now,
 
     }
     return render(request, "index.html", context)
@@ -195,7 +202,7 @@ def list_view(request):
 def blog_view(request):
     datas = BlogModel.objects.all()
 
-    paginator = Paginator(datas, 1)
+    paginator = Paginator(datas, 2)
     page = request.GET.get('page', 1)
     p = paginator.get_page(page)
 

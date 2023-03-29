@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'qr_code',
 
+
 ]
 
 MIDDLEWARE = [
@@ -99,15 +100,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'en-us' # varsayılan dil, İngilizce
+LANGUAGE_CODE = 'en-us'  # varsayılan dil, İngilizce
 TIME_ZONE = 'UTC'
 
-USE_I18N = True # yerelleştirme (internationalization) özelliğini etkinleştirin
+USE_I18N = True  # yerelleştirme (internationalization) özelliğini etkinleştirin
 USE_L10N = True
 USE_TZ = True
 
 LOCALE_PATHS = [
-    os.path.join(BASE_DIR, 'locale') # çeviri dosyalarının bulunduğu dizin
+    os.path.join(BASE_DIR, 'locale')  # çeviri dosyalarının bulunduğu dizin
 ]
 
 # Static files (CSS, JavaScript, Images)
@@ -129,5 +130,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
-
 

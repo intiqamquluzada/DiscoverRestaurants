@@ -360,7 +360,7 @@
 		  <div class="form-row">
 		    <div class="form-group col-md-6">
 		     <label for="city">Şəhər</label>
-		      <select name="city" id="city" class="form-control">
+		      <select name="city" id="city" class="form-control dropdown-toggle">
                 <option></option>
             {% for city in cities %}
                    <option>{{city}}</option>
@@ -454,7 +454,7 @@
                     {% for restaurants in p %}
                     {% if restaurants.has_permission %}
                     <div class="col-md-6 col-lg-4 pb-30">
-                        <div class="card-2">
+                        <div class="card-2" style="width: 460px; height: 720px;">
                             <div class="card-2-image">
                                 <img src="{{restaurants.restaurantimages_set.first.images.url}}" style="height: 400px; width: 400px;" alt="tour">
                             </div>
@@ -477,6 +477,9 @@
                                 <div class="card-2-footer">
                                     <div class="card-2-reviews">
                                         <ul class="review-star">
+                                            {% if restaurants.rating == 0 %}
+                                           <li class="full-star"><small>Yeni restoran</small></li>
+                                            {% endif %}
                                           {% if restaurants.rating == 1 %}
                                             <li class="full-star"><i class="flaticon-star"></i></li>
                                             {% endif %}
@@ -837,6 +840,7 @@
         <script src="{% static 'assets/js/jquery.meanmenu.min.js' %}"></script>
         <!-- main js -->
         <script src="{% static 'assets/js/script.js' %}"></script>
+
     </body>
 
 <!-- Mirrored from templates.envytheme.com/traip/default/list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Feb 2023 21:32:44 GMT -->

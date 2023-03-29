@@ -1,5 +1,4 @@
 {% load static %}
-{% load bootstrap_pagination %}
 <!DOCTYPE html>
 <html lang="zxx">
     
@@ -419,11 +418,11 @@
                     {% for restaurant in p %}
 {% if restaurant.has_permission %}
 
-                    <div class="col-sm-6 col-lg-4 col-xl-3 pb-30">
-                        <div class="card-1">
+                    <div class="col-sm-6 col-lg-4 col-xl-3 pb-30"  >
+                        <div class="card-1" style="width: 350px; height: 620px;">
                             <div class="card-1-image">
                                 <div class="card-1-overlay">
-                                    <a href="single-destination.html">
+                                    <a href="{% url 'booking:restaurant_detail' restaurant.slug %}">
                                         <img src="{{ restaurant.restaurantimages_set.first.images.url }}" style="height: 400px; width: 400px;" >
                                     </a>
                                     <ul class="card-1-entry">
@@ -437,10 +436,16 @@
                                             <i class="flaticon-placeholder-point"></i>
                                             {{restaurant.location}}
                                         </li>
+                                        <li>
+{% if restaurant.comment_set.all.count > 0 %}
+                        <span  class="text-danger">{{restaurant.comment_set.all.count}} rəy <i class="fa-solid fa-comment fa-bounce"></i></span>
+                                    {% else %}
+                               <span  class="text-danger">Rəy yoxdur <i class="fa-solid fa-comment fa-bounce"></i></span>
+                                    {% endif %}                                        </li>
                                     </ul>
                                 </div>
                                 <div class="card-1-redirect">
-                                    <a href="single-destination.html">
+                                    <a href="{% url 'booking:restaurant_detail' restaurant.slug %}">
                                         <i class="flaticon-export"></i>
                                     </a>
                                 </div>
@@ -448,7 +453,7 @@
                             <div class="card-1-content">
                                 <div class="card-1-info">
                                     <h3>
-                                        <a href="single-destination.html">{{restaurant.name}}</a>
+                                        <a href="{% url 'booking:restaurant_detail' restaurant.slug %}">{{restaurant.name}}</a>
                                     </h3> <br>
 
 
@@ -459,6 +464,7 @@
                                             {% if restaurant.rating == 0 %}
                                            <li class="full-star"><small>Yeni restoran</small></li>
                                             {% endif %}
+
                                             {% if restaurant.rating == 1 %}
                                             <li class="full-star"><i class="flaticon-star"></i></li>
                                             {% endif %}
@@ -501,15 +507,17 @@
 
                                     </div>
                                 </div>
-                                <p>{{restaurant.description}}</p>
+                                {% if restaurant.closed == None %}
+    <div class="full-star"><small class="text-success">24 saat açıqdır</small></div>
+                                {% endif %}
+
+
+
+                                <p><small>{{restaurant.description}}</small></p>
 <br>
-                                <form action="" method="get">
-<!--                                <button type="submit" class="btn btn-success">Yadda saxla <i class="fa-sharp fa-solid fa-bookmark"></i></button>-->
 
-                                  <a href="{% url 'booking:restaurant_detail' restaurant.slug %}" class="btn btn-danger">Nəzər yetir <i class="fa-solid fa-utensils"></i></a>
-                         <span style="padding-left: 90px;" class="text-danger">{{restaurant.comment_set.all.count}} rəy <i class="fa-solid fa-comment fa-bounce"></i></span>
-                          </form>  </div>
-
+                                  <a  href="{% url 'booking:restaurant_detail' restaurant.slug %}" class="btn btn-danger">Nəzər yetir <i class="fa-solid fa-utensils"></i></a>
+                           </div>
                         </div>
                     </div>
 {% endif %}
@@ -731,7 +739,7 @@
             <div class="container-fluid position-relative z-index-1">
                 <div class="section-title section-title-white">
                     <small>Bizi seçənlərin təəssüratları</small>
-                    <h2>Haqqımızda Bəzi Yaxşı Danışıqlar
+                    <h2>Bizim restoranların haqqında söylənilən dəyərli fikirlər
                     </h2>
                 </div>
                 <div class="testimonial-carousel owl-carousel owl-theme">
@@ -751,7 +759,8 @@
                                     <li class="full-star">{{comment.likers.count}} bəyənmə</li>
 
                                 </ul>
-                                <h3 class="testimonial-name">{{comment.user.name}} &nbsp; {{comment.user.surname}}</h3>
+                               <div> <small class="text-danger">{{comment.restaurant.name}} haqqında söylənilib</small></div>
+                              <br>  <h3 class="testimonial-name">{{comment.user.name}} &nbsp; {{comment.user.surname}}</h3>
                             </div>
                         </div>
                     </div>
