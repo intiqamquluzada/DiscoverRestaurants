@@ -509,9 +509,12 @@
                                 </div>
                                 {% if restaurant.closed == None %}
     <div class="full-star"><small class="text-success">24 saat açıqdır</small></div>
+
+{% elif restaurant.opened <= now and now <= restaurant.closed %}
+<div class="full-star"><small class="text-success">Açıqdır <i class="fa-solid fa-door-open fa-fade"></i></small></div>
+                                {% else %}
+                                <div class="full-star"><small class="text-danger">Bağlıdır <i class="fa-solid fa-door-closed fa-fade"></i></small></div>
                                 {% endif %}
-
-
 
                                 <p><small>{{restaurant.description}}</small></p>
 <br>

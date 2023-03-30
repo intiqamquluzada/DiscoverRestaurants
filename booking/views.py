@@ -4,7 +4,6 @@ from .models import (Restaurants, CooperationCompanies, Countries,
                      Comment, Likes, Rating, Reserve, BlogModel, Cities)
 import requests
 import json
-import datetime
 from accounts.models import MyUser
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -14,8 +13,7 @@ from django.urls import reverse
 from django.db.models import Max
 import pycountry
 from services.translator import countries
-import datetime
-
+from datetime import datetime
 
 api_key = "5117dbe9476548a6834433afd9b63554"
 
@@ -79,9 +77,10 @@ def home_view(request):
     else:
         message = ""
 
-    now = datetime.datetime.now()
-
-
+    now = datetime.now().time()
+    print(now)
+    x = Restaurants.objects.get(name="Boranı")
+    print(x.opened <= now <= x.closed, 'salaaam')
 
     paginator = Paginator(result, 4)
     page = request.GET.get('page', 1)
