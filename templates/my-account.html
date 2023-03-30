@@ -301,6 +301,10 @@
                                 <li><a href="{% url 'booking:reserved' %}">Mənim rezervlərim</a></li>
                                 {% else %}
                                 <li><a href="{% url 'accounts:restaurantchanging' user.slug %}">Mənim restoranım</a></li>
+                                {% endif %}
+
+                                {% if restaurant and user.is_restaurant_owner %}
+
                                 <li><a href="{% url 'accounts:reserves' restaurant.slug %}">Rezervlər</a></li>
 
                                 {% endif %}

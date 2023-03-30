@@ -42,6 +42,7 @@ height: 100%;
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
         <form method="post">
         {% csrf_token %}
+
           {% if error %}
 
           <div class="alert alert-danger">{{error}}</div>

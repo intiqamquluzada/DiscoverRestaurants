@@ -474,6 +474,16 @@
                                 </div>
                                 <p>{{restaurants.description}}</p>
                                 <small class="text-info"><i class="fa-solid fa-location-dot fa-flip"></i> {{restaurants.city}}, {{restaurants.location}}</small>
+                                <br>
+                                 {% if restaurants.closed == None %}
+    <div class="full-star"><small class="text-success">24 saat açıqdır</small></div>
+
+{% elif restaurants.opened <= now and now <= restaurants.closed %}
+<div class="full-star"><small class="text-success">Açıqdır <i class="fa-solid fa-door-open fa-fade"></i></small></div>
+                                {% else %}
+                                <div class="full-star"><small class="text-danger">Bağlıdır <i class="fa-solid fa-door-closed fa-fade"></i></small></div>
+                                {% endif %}
+
                                 <div class="card-2-footer">
                                     <div class="card-2-reviews">
                                         <ul class="review-star">

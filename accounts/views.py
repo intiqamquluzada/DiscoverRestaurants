@@ -170,8 +170,11 @@ def registration_user_view(request):
 
 
 def my_account_for_user(request, slug):
+    context = {}
     user = get_object_or_404(User, slug=slug)
-    restaurant = Restaurants.objects.get(owner=user)
+    if user.is_restaurant_owner == True:
+        restaurant = Restaurants.objects.get(owner=user)
+        context['restaurant'] = restaurant
     if user.pp:
         if request.method == "POST" and ('form2_submit' in request.POST):
             user.pp.delete()
@@ -209,10 +212,7 @@ def my_account_for_user(request, slug):
             else:
                 messages.error(request, "Köhnə şifrəniz yalnışdır")
 
-    context = {
-        'restaurant': restaurant
 
-    }
     return render(request, "my-account.html", context)
 
 

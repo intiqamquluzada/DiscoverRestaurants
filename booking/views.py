@@ -54,8 +54,10 @@ def home_view(request):
     geolocation_json = get_ip_geolocation_data(ip)
 
     geolocation_data = json.loads(geolocation_json)
-
-    country_e = geolocation_data["country"]
+    try:
+        country_e = geolocation_data["country"]
+    except:
+        KeyError("Api pulsuz ve keyfiyyetsizdi deye gelir bu menasiz error")
 
     country = countries.get(country_e)
     print(country)
@@ -80,7 +82,7 @@ def home_view(request):
     now = datetime.now().time()
     print(now)
     x = Restaurants.objects.get(name="Boranı")
-    print(x.opened <= now <= x.closed, 'salaaam')
+    print(x.opened <= now and now <= x.closed or x.opened >= now and now <= x.closed, x.opened, x.closed)
 
     paginator = Paginator(result, 4)
     page = request.GET.get('page', 1)
@@ -180,6 +182,8 @@ def list_view(request):
     else:
         message = ""
 
+    now = datetime.now().time()
+
     paginator = Paginator(result, 6)
     page = request.GET.get('page', 1)
     p = paginator.get_page(page)
@@ -192,6 +196,7 @@ def list_view(request):
         'country': country,
         'region': region,
         'cities': cities,
+        'now': now,
 
     }
 
