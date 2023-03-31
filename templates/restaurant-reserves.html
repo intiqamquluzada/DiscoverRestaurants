@@ -406,20 +406,20 @@
                         <div class="col-sm-6 col-md-6 col-lg-3">
                             <div class="footer-content-item">
                                 <div class="footer-logo">
-                                    <a href="index.html"><img src="{% static 'assets/images/logo-black.png' %}" alt="logo"></a>
+                                    <a href="{% url 'booking:home' %}"><img style="height: 120px; width: 120px;" src="{% static 'assets/images/logo-black.png' %}" alt="logo"></a>
                                 </div>
                                 <ul class="footer-details footer-address">
                                     <li>
                                         <i class="flaticon-mail"></i>
-                                        <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#08606d646467487c7a696178266b6765"><span class="__cf_email__" data-cfemail="c3aba6afafac83b7b1a2aab3eda0acae">[email&#160;protected]</span></a>
+                                        <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#08606d646467487c7a696178266b6765"><span class="__cf_email__" data-cfemail="c3aba6afafac83b7b1a2aab3eda0acae">restable@gmail.com</span></a>
                                     </li>
                                     <li>
                                         <i class="flaticon-telephone"></i>
-                                        <a href="tel:+44-5346-338">+44 5346 338</a>
+                                        <a href="tel:+994708281416">+994708281416</a>
                                     </li>
                                     <li>
                                         <i class="flaticon-address"></i>
-                                        3 Edgar Buildings, England, <br> BA1 2FJ.
+                                        Coders Azerbaijan, Naxçıvani, <br> 10.
                                     </li>
                                 </ul>
                             </div>
@@ -427,47 +427,45 @@
                         <div class="col-sm-6 col-md-6 col-lg-3">
                             <div class="footer-content-list footer-content-item desk-pad-left-70">
                                 <div class="footer-content-title">
-                                    <h3>Quick Links</h3>
+                                    <h3>Hesablar</h3>
                                 </div>
                                 <ul class="footer-details footer-list">
                                     <li>
-                                        <a href="list.html">Popular Tour</a>
+                                        <a href="{% url 'accounts:login_user' %}" class="text-info">İstifadəçi kimi giriş et</a>
                                     </li>
                                     <li>
-                                        <a href="blog.html">Blog</a>
+                                        <a href="{% url 'accounts:login_owner' %}" class="text-danger">Sahibkar kimi giriş et</a>
                                     </li>
                                     <li>
-                                        <a href="products.html">Shop</a>
+                                        <a href="{% url 'accounts:registration_user' %}" class="text-info">İstifadəçi kimi qeydiyyatdan keç</a>
                                     </li>
                                     <li>
-                                        <a href="faqs.html">FAQ's</a>
+                                        <a href="{% url 'accounts:owner_reg' %}" class="text-danger">Sahibkar kimi qeydiyyatdan keç</a>
                                     </li>
-                                    <li>
-                                        <a href="privacy-policy.html">Privacy Policy</a>
-                                    </li>
+
                                 </ul>
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-3">
                             <div class="footer-content-list footer-content-item desk-pad-left-70">
                                 <div class="footer-content-title">
-                                    <h3>Important Links</h3>
+                                    <h3>Keçidlər</h3>
                                 </div>
                                 <ul class="footer-details footer-list">
                                     <li>
-                                        <a href="destination.html">Destination</a>
+                                        <a href="{% url 'booking:home' %}">Ana səhifə</a>
                                     </li>
                                     <li>
-                                        <a href="get-in-touch.html">Get In Touch</a>
+                                        <a href="{% url 'booking:list' %}">Restoranlar</a>
                                     </li>
                                     <li>
-                                        <a href="who-we-are.html">Who We Are</a>
+                                        <a href="{% url 'booking:about' %}">Haqqımızda</a>
                                     </li>
                                     <li>
-                                        <a href="contact.html">Contact Us</a>
+                                        <a href="{% url 'booking:blog' %}">Bloqlar</a>
                                     </li>
                                     <li>
-                                        <a href="hotels.html">Hotels</a>
+                                        <a href="{% url 'booking:contact' %}">Əlaqə</a>
                                     </li>
                                 </ul>
                             </div>
@@ -475,33 +473,33 @@
                         <div class="col-sm-6 col-md-6 col-lg-3">
                             <div class="footer-content-list footer-content-item desk-pad-left-30">
                                 <div class="footer-content-title">
-                                    <h3>Instafeed</h3>
+                                    <h3>Qalereya</h3>
                                 </div>
                                 <div class="footer-details">
                                     <ul class="footer-gallery">
                                         <li>
                                             <a href="https://www.instagram.com/">
-                                            <img src="{% static 'assets/images/instafeed/instafeed-1.jpg' %}" alt="insta"></a>
+                                            <img style="height: 136.22px;" src="{% static 'assets/images/instafeed/instafeed-1.jpg' %}" alt="insta"></a>
                                         </li>
                                         <li>
                                             <a href="https://www.instagram.com/">
-                                            <img src="{% static 'assets/images/instafeed/instafeed-2.jpg' %}" alt="insta"></a>
+                                            <img style="height: 136.22px;" src="{% static 'assets/images/instafeed/instafeed-2.jpg' %}" alt="insta"></a>
                                         </li>
                                         <li>
                                             <a href="https://www.instagram.com/">
-                                            <img src="{% static 'assets/images/instafeed/instafeed-3.jpg' %}" alt="insta"></a>
+                                            <img style="height: 136.22px;" src="{% static 'assets/images/instafeed/instafeed-3.jpg' %}" alt="insta"></a>
                                         </li>
                                         <li>
                                             <a href="https://www.instagram.com/">
-                                            <img src="{% static 'assets/images/instafeed/instafeed-4.jpg' %}" alt="insta"></a>
+                                            <img style="height: 136.22px;" src="{% static 'assets/images/instafeed/instafeed-4.jpg' %}" alt="insta"></a>
                                         </li>
                                         <li>
                                             <a href="https://www.instagram.com/">
-                                            <img src="{% static 'assets/images/instafeed/instafeed-5.jpg' %}" alt="insta"></a>
+                                            <img style="height: 136.22px;" src="{% static 'assets/images/instafeed/instafeed-5.jpg' %}" alt="insta"></a>
                                         </li>
                                         <li>
                                             <a href="https://www.instagram.com/">
-                                            <img src="{% static 'assets/images/instafeed/instafeed-6.jpg' %}" alt="insta"></a>
+                                            <img style="height: 136.22px;" src="{% static 'assets/images/instafeed/instafeed-6.jpg' %}" alt="insta"></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -510,34 +508,7 @@
                     </div>
                 </div>
             </div>
-            <div class="footer-lower">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col footer-lower-item">
-                            <div class="footer-copyright-text">
-                                <p>Copyright ©2021 Traip. Designed & Developed By <a href="https://envytheme.com/" target="_blank">EnvyTheme</a></p>
-                            </div>
-                        </div>
-                        <div class="col footer-lower-item footer-lower-right">
-                            Follow:
-                            <ul class="social-list">
-                                <li>
-                                    <a href="https://www.facebook.com/" target="_blank"><i class="flaticon-facebook"></i></a>
-                                </li>
-                                <li>
-                                    <a href="https://www.instagram.com/" target="_blank"><i class="flaticon-instagram"></i></a>
-                                </li>
-                                <li>
-                                    <a href="https://twitter.com/" target="_blank"><i class="flaticon-twitter"></i></a>
-                                </li>
-                                <li>
-                                    <a href="https://linkedin.com/" target="_blank"><i class="flaticon-linkedin"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </footer>
         <!-- Footer -->
 

@@ -13,7 +13,7 @@ from django.urls import reverse
 from django.db.models import Max
 import pycountry
 from services.translator import countries
-from datetime import datetime
+import datetime
 from django.db.models import Q
 
 
@@ -81,7 +81,7 @@ def home_view(request):
     else:
         message = ""
 
-    now = datetime.now().time()
+    now = datetime.datetime.now().time()
     print(now)
     x = Restaurants.objects.get(name="Boranı")
     print(x.opened <= now and now <= x.closed or x.opened >= now and now <= x.closed, x.opened, x.closed)
@@ -184,7 +184,7 @@ def list_view(request):
     else:
         message = ""
 
-    now = datetime.now().time()
+    now = datetime.datetime.now().time()
 
     paginator = Paginator(result, 6)
     page = request.GET.get('page', 1)
@@ -357,7 +357,7 @@ def restaurant_detail_view(request, slug):
 
     #related restaurants
     related_restaurants = Restaurants.objects.exclude(name=restaurant.name).filter(Q(type_r=restaurant.type_r) & Q(city=restaurant.city) & Q(country_of_restaurant=restaurant.country_of_restaurant))
-    print(55555)
+
     context = {
         'restaurant': restaurant,
         'link': link,
