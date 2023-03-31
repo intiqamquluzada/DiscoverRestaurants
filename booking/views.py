@@ -357,7 +357,7 @@ def restaurant_detail_view(request, slug):
 
     #related restaurants
     related_restaurants = Restaurants.objects.exclude(name=restaurant.name).filter(Q(type_r=restaurant.type_r) & Q(city=restaurant.city) & Q(country_of_restaurant=restaurant.country_of_restaurant))
-
+    print(55555)
     context = {
         'restaurant': restaurant,
         'link': link,
