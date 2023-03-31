@@ -204,14 +204,7 @@
                                         <a href="{% url 'booking:home' %}" class="nav-link  active">Ana səhifə</a>
 
                                     </li>
-                                    {% if user.is_restaurant_owner == True %}
-                                    {% if user.restaurant %}
-                                    <li class="nav-item">
-                                        <a href="{% url 'accounts:registration_user' %}" class="nav-link  active">Qeydiyyat sahibkar</a>
 
-                                    </li>
-{% endif %}
-                                    {% endif %}
 
                                     <li class="nav-item">
                                         <a href="{% url 'booking:list' %}" class="nav-link">Restoranlar</a>
@@ -258,7 +251,7 @@
 <!--                                                <i class="flaticon-searching"></i>-->
 <!--                                            </a>-->
 <!--                                        </li>-->
-                                        {% if user.is_authenticated and user.is_restaurant_owner == False %}
+                                        {% if user.is_authenticated %}
                                         <li>
                                             <a href="{% url 'booking:reserved' %}">
                                                 <i class="fa-solid fa-person-military-to-person fa-shake"></i>
@@ -271,6 +264,20 @@
 
                                             </a>
                                         </li>
+                                        {% else %}
+                                         <li>
+                                            <a href="{% url 'accounts:login_user' %}">
+                                                <i class="fa-solid fa-person-military-to-person fa-shake"></i>
+
+                                            </a>
+                                        </li>
+                                          <li>
+                                            <a href="{% url 'accounts:login_user' %}">
+                                                <i class="fa-solid fa-bookmark fa-spin"></i>
+
+                                            </a>
+                                        </li>
+
                                         {% endif %}
                                     </ul>
                                 </div>
@@ -507,14 +514,19 @@
 
                                     </div>
                                 </div>
-                                {% if restaurant.closed == None %}
+                   {% if restaurant.closed == None %}
     <div class="full-star"><small class="text-success">24 saat açıqdır</small></div>
-
 {% elif restaurant.opened <= now and now <= restaurant.closed %}
-<div class="full-star"><small class="text-success">Açıqdır <i class="fa-solid fa-door-open fa-fade"></i></small></div>
-                                {% else %}
-                                <div class="full-star"><small class="text-danger">Bağlıdır <i class="fa-solid fa-door-closed fa-fade"></i></small></div>
+    <div class="full-star"><small class="text-success">Açıqdır <i class="fa-solid fa-door-open fa-fade"></i></small></div>
+{% elif restaurant.opened >= restaurant.closed %}
+                                {% if now <= restaurant.closed or now >= restaurant.opened %}
+                                <div class="full-star"><small class="text-success">Açıqdır <i class="fa-solid fa-door-open fa-fade"></i></small></div>
+
                                 {% endif %}
+{% else %}
+    <div class="full-star"><small class="text-danger">Bağlıdır <i class="fa-solid fa-door-closed fa-fade"></i></small></div>
+{% endif %}
+
 
                                 <p><small>{{restaurant.description}}</small></p>
 <br>

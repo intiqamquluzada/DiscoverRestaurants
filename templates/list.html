@@ -194,14 +194,7 @@
                                         <a href="{% url 'booking:home' %}" class="nav-link  active">Ana səhifə</a>
 
                                     </li>
-                                    {% if user.is_restaurant_owner == True %}
-                                    {% if user.restaurant %}
-                                    <li class="nav-item">
-                                        <a href="{% url 'accounts:registration_user' %}" class="nav-link  active">Qeydiyyat sahibkar</a>
 
-                                    </li>
-{% endif %}
-                                    {% endif %}
 
                                     <li class="nav-item">
                                         <a href="{% url 'booking:list' %}" class="nav-link">Restoranlar</a>
@@ -248,7 +241,7 @@
 <!--                                                <i class="flaticon-searching"></i>-->
 <!--                                            </a>-->
 <!--                                        </li>-->
-                                        {% if user.is_authenticated and user.is_restaurant_owner == False %}
+                                        {% if user.is_authenticated %}
                                         <li>
                                             <a href="{% url 'booking:reserved' %}">
                                                 <i class="fa-solid fa-person-military-to-person fa-shake"></i>
@@ -261,6 +254,20 @@
 
                                             </a>
                                         </li>
+                                        {% else %}
+                                         <li>
+                                            <a href="{% url 'accounts:login_user' %}">
+                                                <i class="fa-solid fa-person-military-to-person fa-shake"></i>
+
+                                            </a>
+                                        </li>
+                                          <li>
+                                            <a href="{% url 'accounts:login_user' %}">
+                                                <i class="fa-solid fa-bookmark fa-spin"></i>
+
+                                            </a>
+                                        </li>
+
                                         {% endif %}
                                     </ul>
                                 </div>
@@ -320,10 +327,10 @@
                             <li class="breadcrumb-item"><a href="index.html">Ana səhifə</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Restoranlar</li>
                             <br> <br> <br> <br>
-                             <span style="background-color: darkorange; width: 100%;">
+                             <h2 style="width: 100%; color: whitesmoke;">
 
-                        You are joining from {{ country }} , {{ region }} &nbsp;
-                    </span>
+                        Qoşulduğunuz region: {{ country }} &nbsp;
+                    </h2>
                         </ol>
                     </nav>
                 </div>
@@ -353,14 +360,13 @@
 
 
 
-    <button id="toggle-btn" class="btn btn-primary m-md-5">Filtrlə <i class="fa-solid fa-filter"></i></button>
-	<div id="form-container" style="display: none;">
+	<div id="form-container">
 <form method="get">
 
 		  <div class="form-row">
 		    <div class="form-group col-md-6">
 		     <label for="city">Şəhər</label>
-		      <select name="city" id="city" class="form-control dropdown-toggle">
+		      <select name="city" id="city" class="form-control dropdown-toggle bg-info">
                 <option></option>
             {% for city in cities %}
                    <option>{{city}}</option>
@@ -380,7 +386,7 @@
 
 		    <div class="form-group col-md-4">
 		      <label for="inputState">Reytinq</label>
-		      <select name="rating" id="inputState" class="form-control">
+		      <select name="rating" id="inputState" class="form-control bg-info">
 <option></option>
 
                   <option>5  &#9733;</option>
@@ -394,7 +400,7 @@
 		    </div>
                <div class="form-group col-md-4">
 		      <label for="inputState2">Restoranın tipi</label>
-		      <select name="type" id="inputState2" class="form-control">
+		      <select name="type" id="inputState2" class="form-control bg-info">
                 <option></option>
 
                    <option>Fast-food</option>
@@ -412,7 +418,7 @@
 		    </div>
 		    <div class="form-group col-md-2">
 		      <label for="inputZip">Qonaq sayı</label>
-		      <input type="number" name="count" class="form-control" id="inputZip">
+		      <input type="number" name="count" class="form-control bg-info" id="inputZip">
 		    </div>
 		  </div>
 		  <div class="form-group">
@@ -421,13 +427,7 @@
 		  <button type="submit" class="btn btn-primary m-md-3">Filtrlə</button>
 		</form>
 	</div>
-	<script>
-		// Add a click event listener to the button
-		$('#toggle-btn').click(function() {
-			// Toggle the visibility of the form container
-			$('#form-container').toggle();
-		});
-	</script>
+
 
 
 
@@ -475,14 +475,18 @@
                                 <p>{{restaurants.description}}</p>
                                 <small class="text-info"><i class="fa-solid fa-location-dot fa-flip"></i> {{restaurants.city}}, {{restaurants.location}}</small>
                                 <br>
-                                 {% if restaurants.closed == None %}
+                                  {% if restaurants.closed == None %}
     <div class="full-star"><small class="text-success">24 saat açıqdır</small></div>
-
 {% elif restaurants.opened <= now and now <= restaurants.closed %}
-<div class="full-star"><small class="text-success">Açıqdır <i class="fa-solid fa-door-open fa-fade"></i></small></div>
-                                {% else %}
-                                <div class="full-star"><small class="text-danger">Bağlıdır <i class="fa-solid fa-door-closed fa-fade"></i></small></div>
+    <div class="full-star"><small class="text-success">Açıqdır <i class="fa-solid fa-door-open fa-fade"></i></small></div>
+{% elif restaurants.opened >= restaurant.closed %}
+                                {% if now <= restaurants.closed or now >= restaurants.opened %}
+                                <div class="full-star"><small class="text-success">Açıqdır <i class="fa-solid fa-door-open fa-fade"></i></small></div>
+
                                 {% endif %}
+{% else %}
+    <div class="full-star"><small class="text-danger">Bağlıdır <i class="fa-solid fa-door-closed fa-fade"></i></small></div>
+{% endif %}
 
                                 <div class="card-2-footer">
                                     <div class="card-2-reviews">

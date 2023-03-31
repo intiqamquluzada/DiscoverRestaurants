@@ -14,6 +14,8 @@ from django.db.models import Max
 import pycountry
 from services.translator import countries
 from datetime import datetime
+from django.db.models import Q
+
 
 api_key = "5117dbe9476548a6834433afd9b63554"
 
@@ -353,6 +355,9 @@ def restaurant_detail_view(request, slug):
     total_rating = star(restaurant, request.user, request.GET.get("rate"))
     user = request.user
 
+    #related restaurants
+    related_restaurants = Restaurants.objects.exclude(name=restaurant.name).filter(Q(type_r=restaurant.type_r) & Q(city=restaurant.city) & Q(country_of_restaurant=restaurant.country_of_restaurant))
+
     context = {
         'restaurant': restaurant,
         'link': link,
@@ -360,7 +365,8 @@ def restaurant_detail_view(request, slug):
         'total_rating': total_rating,
         'comments': comments,
         'users': users,
-        'user': user
+        'user': user,
+        'related_restaurants': related_restaurants,
 
     }
 
