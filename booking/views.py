@@ -185,7 +185,7 @@ def list_view(request):
         message = ""
 
     now = datetime.datetime.now().time()
-    print(now)
+    
 
     paginator = Paginator(result, 6)
     page = request.GET.get('page', 1)
