@@ -185,7 +185,7 @@ def list_view(request):
         message = ""
 
     now = datetime.datetime.now().time()
-    
+
 
     paginator = Paginator(result, 6)
     page = request.GET.get('page', 1)
@@ -234,6 +234,7 @@ def single_blog(request, slug):
 
 def contact_view(request):
     form = ContactForm()
+    print(5555)
 
     if request.method == "POST":
         form = ContactForm(request.POST or None)
