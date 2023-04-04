@@ -234,7 +234,7 @@ def single_blog(request, slug):
 
 def contact_view(request):
     form = ContactForm()
-    print(5555)
+
 
     if request.method == "POST":
         form = ContactForm(request.POST or None)
