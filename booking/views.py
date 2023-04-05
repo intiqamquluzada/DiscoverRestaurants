@@ -178,6 +178,8 @@ def list_view(request):
             result = result.filter(rating__gte=rating)
         except ValueError:
             pass
+    else:
+        rating = ""
     if city:
         result = result.filter(city__icontains=city)
     if r_type:
@@ -208,6 +210,10 @@ def list_view(request):
         'region': region,
         'cities': cities,
         'now': now,
+        'name': name,
+        'rating': rating,
+        'r_type': r_type,
+        'count': count,
 
     }
 

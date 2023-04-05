@@ -386,6 +386,11 @@
 		      </select>
 		    </div>
 
+
+        <div class="form-group col-md-4">
+            <br> <br>
+            <a class="btn btn-danger" href="{% url 'booking:list' %}">Filtrləri sil</a>
+        </div>
 		  </div>
 
 		  <div class="form-group">
@@ -566,27 +571,27 @@
 
                     {% if p.number > 1 %}
                 <li class="page-item">
-                    <a class="page-link" href="?{% if search %}q={{search}}&{% endif %}page=1">Baş</a>
+                    <a class="page-link" href="?{% if name %}name={{name}}&{% endif %}{% if rating %}rating={{rating}}&{% endif %}{% if r_type %}r_type={{r_type}}&{% endif %}{% if city %}city={{city}}&{% endif %}{% if count %}count={{count}}&{% endif %}page=1">Baş</a>
                 </li>
                     {% endif %}
                     {% if p.has_previous %}
-                    <li class="page-item"><a class="page-link" href="?{% if search %}q={{search}}&{% endif %}page={{p.previous_page_number}}">&laquo;</a></li>
+                    <li class="page-item"><a class="page-link" href="?{% if name %}name={{name}}&{% endif %}{% if rating %}rating={{rating}}&{% endif %}{% if r_type %}r_type={{r_type}}&{% endif %}{% if city %}city={{city}}&{% endif %}{% if count %}count={{count}}&{% endif %}page={{p.previous_page_number}}">&laquo;</a></li>
                     {% endif %}
 
                 {% if p.number > 1 %}
-                    <li class="page-item"><a class="page-link" href="?{% if search %}q={{search}}&{% endif %}page={{p.number|add:'-1'}}">
+                    <li class="page-item"><a class="page-link" href="?{% if name %}name={{name}}&{% endif %}{% if rating %}rating={{rating}}&{% endif %}{% if r_type %}r_type={{r_type}}&{% endif %}{% if city %}city={{city}}&{% endif %}{% if count %}count={{count}}&{% endif %}page={{p.number|add:'-1'}}">
                         {{p.number|add:"-1"}}
                         </a>
                     </li>
                     {% endif %}
 
 
-                    <li class="page-item active"><a  class="page-link" href="?{% if search %}q={{search}}&{% endif %}page={{p.number}}">
+                    <li class="page-item active"><a  class="page-link" href="?{% if name %}name={{name}}&{% endif %}{% if rating %}rating={{rating}}&{% endif %}{% if r_type %}r_type={{r_type}}&{% endif %}{% if city %}city={{city}}&{% endif %}{% if count %}count={{count}}&{% endif %}page={{p.number}}">
                         {{p.number}}
                         </a>
                     </li>
                     {% if p.number < p.paginator.num_pages %}
-                    <li class="page-item"><a class="page-link" href="?{% if search %}q={{search}}&{% endif %}page={{p.number|add:'1'}}">
+                    <li class="page-item"><a class="page-link" href="?{% if name %}name={{name}}&{% endif %}{% if rating %}rating={{rating}}&{% endif %}{% if r_type %}r_type={{r_type}}&{% endif %}{% if city %}city={{city}}&{% endif %}{% if count %}count={{count}}&{% endif %}page={{p.number|add:'1'}}">
                         {{p.number|add:"1"}}
                         </a>
                     </li>
@@ -599,12 +604,12 @@
 
 
                     {% if p.has_next %}
-                    <li class="page-item"><a class="page-link" href="?{% if search %}q={{search}}&{% endif %}page={{p.next_page_number}}">&raquo;</a></li>
+                    <li class="page-item"><a class="page-link" href="?{% if name %}name={{name}}&{% endif %}{% if rating %}rating={{rating}}&{% endif %}{% if r_type %}r_type={{r_type}}&{% endif %}{% if city %}city={{city}}&{% endif %}{% if count %}count={{count}}&{% endif %}page={{p.next_page_number}}">&raquo;</a></li>
                     {% endif %}
 
                     {% if p.number < p.paginator.num_pages %}
                      <li class="page-item">
-                    <a class="page-link" href="?{% if search %}q={{search}}&{% endif %}page={{p.paginator.num_pages}}">Son</a>
+                    <a class="page-link" href="?{% if name %}name={{name}}&{% endif %}{% if rating %}rating={{rating}}&{% endif %}{% if r_type %}r_type={{r_type}}&{% endif %}{% if city %}city={{city}}&{% endif %}{% if count %}count={{count}}&{% endif %}page={{p.paginator.num_pages}}">Son</a>
                 </li>
                     {% endif %}
 
