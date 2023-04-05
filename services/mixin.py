@@ -14,4 +14,4 @@ class SlugMixin(models.Model):
 
     class Meta:
         abstract = True
-        print('test')
+        
