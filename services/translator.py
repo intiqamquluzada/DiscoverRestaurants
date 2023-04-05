@@ -20,6 +20,7 @@ countries = {
 "South Korea": "Cənubi Koreya",
 "Czech": "Çexiya",
 "Chile": "Çili",
+'Canada': "Kanada",
 "Danimark": "Danimarka",
 "Georgia": "Gürcüstan",
 "İndia": "Hindistan",

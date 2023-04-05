@@ -16,7 +16,6 @@ from services.translator import countries
 import datetime
 from django.db.models import Q
 
-
 api_key = "5117dbe9476548a6834433afd9b63554"
 
 api_url = "https://ipgeolocation.abstractapi.com/v1/?api_key=" + api_key
@@ -141,11 +140,16 @@ def list_view(request):
 
     country_code = geolocation_data["country_code"]
 
+    print(pycountry.countries.get(alpha_2=country_code))
     country_name = pycountry.countries.get(alpha_2=country_code).name
 
     country = countries.get(country_name)
 
-    cities = Cities.objects.filter(country__name__icontains=country)
+    try:
+        cities = Cities.objects.filter(country__name__icontains=country)
+    except:
+        print()
+        raise ValueError("Yer təyin edən APİ-nizlə bağlı problem olur, bu tamamilə ödənişsiz olduğu üçün baş verir")
     region = geolocation_data["region"]
     print(region)
 
@@ -185,7 +189,6 @@ def list_view(request):
         message = ""
 
     now = datetime.datetime.now().time()
-
 
     paginator = Paginator(result, 6)
     page = request.GET.get('page', 1)
@@ -234,8 +237,6 @@ def single_blog(request, slug):
 
 def contact_view(request):
     form = ContactForm()
-    
-
 
     if request.method == "POST":
         form = ContactForm(request.POST or None)
@@ -358,8 +359,10 @@ def restaurant_detail_view(request, slug):
     total_rating = star(restaurant, request.user, request.GET.get("rate"))
     user = request.user
 
-    #related restaurants
-    related_restaurants = Restaurants.objects.exclude(name=restaurant.name).filter(Q(type_r=restaurant.type_r) & Q(city=restaurant.city) & Q(country_of_restaurant=restaurant.country_of_restaurant))
+    # related restaurants
+    related_restaurants = Restaurants.objects.exclude(name=restaurant.name).filter(
+        Q(type_r=restaurant.type_r) & Q(city=restaurant.city) & Q(
+            country_of_restaurant=restaurant.country_of_restaurant))
 
     context = {
         'restaurant': restaurant,
