@@ -159,6 +159,8 @@ def list_view(request):
 
     result = result.filter(owner__is_active=True)
 
+    name = request.GET.get("name")
+
     rating = str(request.GET.get("rating")).split(" ")[0]
 
     city = request.GET.get("city")
@@ -167,10 +169,13 @@ def list_view(request):
 
     count = request.GET.get("count")
 
+    if name:
+        result = result.filter(name__icontains=name)
+
     if rating:
         try:
             rating = int(rating)
-            result = result.filter(rating=rating)
+            result = result.filter(rating__gte=rating)
         except ValueError:
             pass
     if city:
