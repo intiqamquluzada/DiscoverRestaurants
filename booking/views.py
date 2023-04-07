@@ -168,6 +168,7 @@ def list_view(request):
     r_type = request.GET.get("type")
 
     count = request.GET.get("count")
+    print(555)
 
     if name:
         result = result.filter(name__icontains=name)
