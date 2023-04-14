@@ -256,7 +256,7 @@ def contact_view(request):
             form.save()
             return redirect("booking:contact")
     else:
-        messages.error(request, "Nə isə doğru deyil...")
+        messages.error(request, "Nə isə doğru deyil..")
 
     context = {
         'form': form
